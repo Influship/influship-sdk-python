@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .shared import ProfileSummary as ProfileSummary
 from .post_list_params import PostListParams as PostListParams
 from .post_list_response import PostListResponse as PostListResponse
 from .search_query_params import SearchQueryParams as SearchQueryParams
@@ -18,13 +19,3 @@ from .creator_retrieve_response import CreatorRetrieveResponse as CreatorRetriev
 from .creator_lookalike_response import CreatorLookalikeResponse as CreatorLookalikeResponse
 from .creator_autocomplete_params import CreatorAutocompleteParams as CreatorAutocompleteParams
 from .creator_autocomplete_response import CreatorAutocompleteResponse as CreatorAutocompleteResponse
-from .brand_safety_analyze_posts_params import BrandSafetyAnalyzePostsParams as BrandSafetyAnalyzePostsParams
-from .brand_safety_analyze_posts_response import BrandSafetyAnalyzePostsResponse as BrandSafetyAnalyzePostsResponse
-from .brand_safety_analyze_creators_params import BrandSafetyAnalyzeCreatorsParams as BrandSafetyAnalyzeCreatorsParams
-from .brand_safety_analyze_profiles_params import BrandSafetyAnalyzeProfilesParams as BrandSafetyAnalyzeProfilesParams
-from .brand_safety_analyze_creators_response import (
-    BrandSafetyAnalyzeCreatorsResponse as BrandSafetyAnalyzeCreatorsResponse,
-)
-from .brand_safety_analyze_profiles_response import (
-    BrandSafetyAnalyzeProfilesResponse as BrandSafetyAnalyzeProfilesResponse,
-)

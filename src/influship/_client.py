@@ -31,13 +31,12 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import posts, health, search, creators, profiles, brand_safety
+    from .resources import posts, health, search, creators, profiles
     from .resources.posts import PostsResource, AsyncPostsResource
     from .resources.health import HealthResource, AsyncHealthResource
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.creators import CreatorsResource, AsyncCreatorsResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
-    from .resources.brand_safety import BrandSafetyResource, AsyncBrandSafetyResource
 
 __all__ = [
     "Timeout",
@@ -135,12 +134,6 @@ class Influship(SyncAPIClient):
         from .resources.posts import PostsResource
 
         return PostsResource(self)
-
-    @cached_property
-    def brand_safety(self) -> BrandSafetyResource:
-        from .resources.brand_safety import BrandSafetyResource
-
-        return BrandSafetyResource(self)
 
     @cached_property
     def with_raw_response(self) -> InflushipWithRawResponse:
@@ -341,12 +334,6 @@ class AsyncInfluship(AsyncAPIClient):
         return AsyncPostsResource(self)
 
     @cached_property
-    def brand_safety(self) -> AsyncBrandSafetyResource:
-        from .resources.brand_safety import AsyncBrandSafetyResource
-
-        return AsyncBrandSafetyResource(self)
-
-    @cached_property
     def with_raw_response(self) -> AsyncInflushipWithRawResponse:
         return AsyncInflushipWithRawResponse(self)
 
@@ -495,12 +482,6 @@ class InflushipWithRawResponse:
 
         return PostsResourceWithRawResponse(self._client.posts)
 
-    @cached_property
-    def brand_safety(self) -> brand_safety.BrandSafetyResourceWithRawResponse:
-        from .resources.brand_safety import BrandSafetyResourceWithRawResponse
-
-        return BrandSafetyResourceWithRawResponse(self._client.brand_safety)
-
 
 class AsyncInflushipWithRawResponse:
     _client: AsyncInfluship
@@ -537,12 +518,6 @@ class AsyncInflushipWithRawResponse:
         from .resources.posts import AsyncPostsResourceWithRawResponse
 
         return AsyncPostsResourceWithRawResponse(self._client.posts)
-
-    @cached_property
-    def brand_safety(self) -> brand_safety.AsyncBrandSafetyResourceWithRawResponse:
-        from .resources.brand_safety import AsyncBrandSafetyResourceWithRawResponse
-
-        return AsyncBrandSafetyResourceWithRawResponse(self._client.brand_safety)
 
 
 class InflushipWithStreamedResponse:
@@ -581,12 +556,6 @@ class InflushipWithStreamedResponse:
 
         return PostsResourceWithStreamingResponse(self._client.posts)
 
-    @cached_property
-    def brand_safety(self) -> brand_safety.BrandSafetyResourceWithStreamingResponse:
-        from .resources.brand_safety import BrandSafetyResourceWithStreamingResponse
-
-        return BrandSafetyResourceWithStreamingResponse(self._client.brand_safety)
-
 
 class AsyncInflushipWithStreamedResponse:
     _client: AsyncInfluship
@@ -623,12 +592,6 @@ class AsyncInflushipWithStreamedResponse:
         from .resources.posts import AsyncPostsResourceWithStreamingResponse
 
         return AsyncPostsResourceWithStreamingResponse(self._client.posts)
-
-    @cached_property
-    def brand_safety(self) -> brand_safety.AsyncBrandSafetyResourceWithStreamingResponse:
-        from .resources.brand_safety import AsyncBrandSafetyResourceWithStreamingResponse
-
-        return AsyncBrandSafetyResourceWithStreamingResponse(self._client.brand_safety)
 
 
 Client = Influship

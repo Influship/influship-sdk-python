@@ -1,11 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal
 
 from .._models import BaseModel
+from .shared.profile_summary import ProfileSummary
 
-__all__ = ["CreatorLookalikeResponse", "Data", "DataCreator", "DataPrimaryProfile", "DataSimilarity", "Pagination"]
+__all__ = ["CreatorLookalikeResponse", "Data", "DataCreator", "DataSimilarity"]
 
 
 class DataCreator(BaseModel):
@@ -24,31 +24,6 @@ class DataCreator(BaseModel):
     """Creator display name"""
 
 
-class DataPrimaryProfile(BaseModel):
-    """Abbreviated profile information"""
-
-    id: str
-    """Profile unique identifier"""
-
-    engagement_rate: float
-    """Engagement rate as percentage"""
-
-    followers: int
-    """Follower count"""
-
-    is_verified: bool
-    """Whether the account is verified"""
-
-    platform: Literal["instagram"]
-    """Social media platform"""
-
-    url: str
-    """Profile URL"""
-
-    username: str
-    """Profile username"""
-
-
 class DataSimilarity(BaseModel):
     """Similarity information for lookalike match"""
 
@@ -63,14 +38,16 @@ class Data(BaseModel):
     creator: DataCreator
     """Basic creator information"""
 
-    primary_profile: DataPrimaryProfile
+    primary_profile: ProfileSummary
     """Abbreviated profile information"""
 
     similarity: DataSimilarity
     """Similarity information for lookalike match"""
 
 
-class Pagination(BaseModel):
+class CreatorLookalikeResponse(BaseModel):
+    data: List[Data]
+
     has_more: bool
     """Whether more results are available"""
 
@@ -79,9 +56,3 @@ class Pagination(BaseModel):
 
     total: Optional[int] = None
     """Total number of results"""
-
-
-class CreatorLookalikeResponse(BaseModel):
-    data: List[Data]
-
-    pagination: Pagination

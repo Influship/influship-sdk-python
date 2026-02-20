@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PostListResponse", "Data", "DataLocation", "DataMedia", "DataMetrics", "Pagination"]
+__all__ = ["PostListResponse", "Data", "DataLocation", "DataMedia", "DataMetrics"]
 
 
 class DataLocation(BaseModel):
@@ -94,8 +94,8 @@ class Data(BaseModel):
     """Post URL"""
 
 
-class Pagination(BaseModel):
-    """Cursor-based pagination metadata"""
+class PostListResponse(BaseModel):
+    data: List[Data]
 
     has_more: bool
     """Whether more results are available"""
@@ -105,10 +105,3 @@ class Pagination(BaseModel):
 
     total: Optional[int] = None
     """Total number of results (if available)"""
-
-
-class PostListResponse(BaseModel):
-    data: List[Data]
-
-    pagination: Pagination
-    """Cursor-based pagination metadata"""
