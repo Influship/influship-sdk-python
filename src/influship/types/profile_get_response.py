@@ -118,3 +118,9 @@ class Data(BaseModel):
 class ProfileGetResponse(BaseModel):
     data: Data
     """Full profile details"""
+
+    warning: Optional[str] = None
+    """
+    Present when partial results were returned because profile metrics/data were
+    skipped due to integrity issues.
+    """

@@ -1,36 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal
 
 from .._models import BaseModel
+from .shared.profile_summary import ProfileSummary
 
-__all__ = ["CreatorRetrieveResponse", "Data", "DataProfile"]
-
-
-class DataProfile(BaseModel):
-    """Abbreviated profile information"""
-
-    id: str
-    """Profile unique identifier"""
-
-    engagement_rate: float
-    """Engagement rate as percentage"""
-
-    followers: int
-    """Follower count"""
-
-    is_verified: bool
-    """Whether the account is verified"""
-
-    platform: Literal["instagram"]
-    """Social media platform"""
-
-    url: str
-    """Profile URL"""
-
-    username: str
-    """Profile username"""
+__all__ = ["CreatorRetrieveResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -54,10 +29,16 @@ class Data(BaseModel):
     name: str
     """Creator display name"""
 
-    profiles: Optional[List[DataProfile]] = None
+    profiles: Optional[List[ProfileSummary]] = None
     """Social profiles (only included when include=profiles)"""
 
 
 class CreatorRetrieveResponse(BaseModel):
     data: Data
     """Full creator details"""
+
+    warning: Optional[str] = None
+    """
+    Present when partial results were returned because one or more linked profiles
+    were skipped for data integrity reasons.
+    """

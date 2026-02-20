@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from influship.types import ProfileSummary
+```
+
 # Health
 
 Types:
@@ -66,21 +72,3 @@ from influship.types import PostListResponse
 Methods:
 
 - <code title="get /v1/posts">client.posts.<a href="./src/influship/resources/posts.py">list</a>(\*\*<a href="src/influship/types/post_list_params.py">params</a>) -> <a href="./src/influship/types/post_list_response.py">PostListResponse</a></code>
-
-# BrandSafety
-
-Types:
-
-```python
-from influship.types import (
-    BrandSafetyAnalyzeCreatorsResponse,
-    BrandSafetyAnalyzePostsResponse,
-    BrandSafetyAnalyzeProfilesResponse,
-)
-```
-
-Methods:
-
-- <code title="post /v1/brand-safety/creators">client.brand_safety.<a href="./src/influship/resources/brand_safety.py">analyze_creators</a>(\*\*<a href="src/influship/types/brand_safety_analyze_creators_params.py">params</a>) -> <a href="./src/influship/types/brand_safety_analyze_creators_response.py">BrandSafetyAnalyzeCreatorsResponse</a></code>
-- <code title="post /v1/brand-safety/posts">client.brand_safety.<a href="./src/influship/resources/brand_safety.py">analyze_posts</a>(\*\*<a href="src/influship/types/brand_safety_analyze_posts_params.py">params</a>) -> <a href="./src/influship/types/brand_safety_analyze_posts_response.py">BrandSafetyAnalyzePostsResponse</a></code>
-- <code title="post /v1/brand-safety/profiles">client.brand_safety.<a href="./src/influship/resources/brand_safety.py">analyze_profiles</a>(\*\*<a href="src/influship/types/brand_safety_analyze_profiles_params.py">params</a>) -> <a href="./src/influship/types/brand_safety_analyze_profiles_response.py">BrandSafetyAnalyzeProfilesResponse</a></code>
