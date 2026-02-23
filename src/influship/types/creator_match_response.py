@@ -3,9 +3,11 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
+from pydantic import Field as FieldInfo
+
 from .._models import BaseModel
 
-__all__ = ["CreatorMatchResponse", "Data", "DataCreator", "DataInput", "DataMatch"]
+__all__ = ["CreatorMatchResponse", "Data", "DataCreator", "DataInput", "DataMatch", "DataMatchReason"]
 
 
 class DataCreator(BaseModel):
@@ -25,15 +27,23 @@ class DataInput(BaseModel):
     username: Optional[str] = None
 
 
+class DataMatchReason(BaseModel):
+    text: str
+    """Human-readable reason for the match"""
+
+    fact_id: Optional[str] = FieldInfo(alias="factId", default=None)
+    """ID of the supporting fact, if applicable"""
+
+    source_post_id: Optional[str] = FieldInfo(alias="sourcePostId", default=None)
+    """ID of the source post, if applicable"""
+
+
 class DataMatch(BaseModel):
     decision: Literal["good", "neutral", "avoid"]
     """Match decision recommendation"""
 
-    evidence: List[str]
-    """Evidence supporting the decision"""
-
-    explanation: str
-    """Human-readable explanation"""
+    reasons: List[DataMatchReason]
+    """Structured reasons supporting the decision"""
 
     score: float
     """Match score (0-1)"""
