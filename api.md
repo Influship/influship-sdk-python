@@ -41,12 +41,12 @@ Methods:
 Types:
 
 ```python
-from influship.types import SearchQueryResponse
+from influship.types import SearchCreateResponse
 ```
 
 Methods:
 
-- <code title="post /v1/search">client.search.<a href="./src/influship/resources/search.py">query</a>(\*\*<a href="src/influship/types/search_query_params.py">params</a>) -> <a href="./src/influship/types/search_query_response.py">SearchQueryResponse</a></code>
+- <code title="post /v1/search">client.search.<a href="./src/influship/resources/search.py">create</a>(\*\*<a href="src/influship/types/search_create_params.py">params</a>) -> <a href="./src/influship/types/search_create_response.py">SearchCreateResponse</a></code>
 
 # Profiles
 
@@ -71,4 +71,38 @@ from influship.types import PostListResponse
 
 Methods:
 
-- <code title="get /v1/posts">client.posts.<a href="./src/influship/resources/posts.py">list</a>(\*\*<a href="src/influship/types/post_list_params.py">params</a>) -> <a href="./src/influship/types/post_list_response.py">PostListResponse</a></code>
+- <code title="get /v1/posts">client.posts.<a href="./src/influship/resources/posts.py">list</a>(\*\*<a href="src/influship/types/post_list_params.py">params</a>) -> <a href="./src/influship/types/post_list_response.py">SyncCursor[PostListResponse]</a></code>
+
+# Raw
+
+## Instagram
+
+Types:
+
+```python
+from influship.types.raw import InstagramGetProfileResponse
+```
+
+Methods:
+
+- <code title="get /v1/raw/instagram/profile/{username}">client.raw.instagram.<a href="./src/influship/resources/raw/instagram.py">get_profile</a>(username, \*\*<a href="src/influship/types/raw/instagram_get_profile_params.py">params</a>) -> <a href="./src/influship/types/raw/instagram_get_profile_response.py">InstagramGetProfileResponse</a></code>
+
+## Youtube
+
+Types:
+
+```python
+from influship.types.raw import (
+    YoutubeGetChannelResponse,
+    YoutubeGetChannelTranscriptsResponse,
+    YoutubeGetTranscriptResponse,
+    YoutubeSearchResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/raw/youtube/channel/{handle}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_channel</a>(handle, \*\*<a href="src/influship/types/raw/youtube_get_channel_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_channel_response.py">YoutubeGetChannelResponse</a></code>
+- <code title="get /v1/raw/youtube/channel-transcripts/{handle}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_channel_transcripts</a>(handle, \*\*<a href="src/influship/types/raw/youtube_get_channel_transcripts_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_channel_transcripts_response.py">YoutubeGetChannelTranscriptsResponse</a></code>
+- <code title="get /v1/raw/youtube/transcript/{video_id}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_transcript</a>(video_id, \*\*<a href="src/influship/types/raw/youtube_get_transcript_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_transcript_response.py">YoutubeGetTranscriptResponse</a></code>
+- <code title="get /v1/raw/youtube/search">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">search</a>(\*\*<a href="src/influship/types/raw/youtube_search_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_search_response.py">YoutubeSearchResponse</a></code>

@@ -31,10 +31,11 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import posts, health, search, creators, profiles
+    from .resources import raw, posts, health, search, creators, profiles
     from .resources.posts import PostsResource, AsyncPostsResource
     from .resources.health import HealthResource, AsyncHealthResource
     from .resources.search import SearchResource, AsyncSearchResource
+    from .resources.raw.raw import RawResource, AsyncRawResource
     from .resources.creators import CreatorsResource, AsyncCreatorsResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
 
@@ -134,6 +135,12 @@ class Influship(SyncAPIClient):
         from .resources.posts import PostsResource
 
         return PostsResource(self)
+
+    @cached_property
+    def raw(self) -> RawResource:
+        from .resources.raw import RawResource
+
+        return RawResource(self)
 
     @cached_property
     def with_raw_response(self) -> InflushipWithRawResponse:
@@ -334,6 +341,12 @@ class AsyncInfluship(AsyncAPIClient):
         return AsyncPostsResource(self)
 
     @cached_property
+    def raw(self) -> AsyncRawResource:
+        from .resources.raw import AsyncRawResource
+
+        return AsyncRawResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncInflushipWithRawResponse:
         return AsyncInflushipWithRawResponse(self)
 
@@ -482,6 +495,12 @@ class InflushipWithRawResponse:
 
         return PostsResourceWithRawResponse(self._client.posts)
 
+    @cached_property
+    def raw(self) -> raw.RawResourceWithRawResponse:
+        from .resources.raw import RawResourceWithRawResponse
+
+        return RawResourceWithRawResponse(self._client.raw)
+
 
 class AsyncInflushipWithRawResponse:
     _client: AsyncInfluship
@@ -518,6 +537,12 @@ class AsyncInflushipWithRawResponse:
         from .resources.posts import AsyncPostsResourceWithRawResponse
 
         return AsyncPostsResourceWithRawResponse(self._client.posts)
+
+    @cached_property
+    def raw(self) -> raw.AsyncRawResourceWithRawResponse:
+        from .resources.raw import AsyncRawResourceWithRawResponse
+
+        return AsyncRawResourceWithRawResponse(self._client.raw)
 
 
 class InflushipWithStreamedResponse:
@@ -556,6 +581,12 @@ class InflushipWithStreamedResponse:
 
         return PostsResourceWithStreamingResponse(self._client.posts)
 
+    @cached_property
+    def raw(self) -> raw.RawResourceWithStreamingResponse:
+        from .resources.raw import RawResourceWithStreamingResponse
+
+        return RawResourceWithStreamingResponse(self._client.raw)
+
 
 class AsyncInflushipWithStreamedResponse:
     _client: AsyncInfluship
@@ -592,6 +623,12 @@ class AsyncInflushipWithStreamedResponse:
         from .resources.posts import AsyncPostsResourceWithStreamingResponse
 
         return AsyncPostsResourceWithStreamingResponse(self._client.posts)
+
+    @cached_property
+    def raw(self) -> raw.AsyncRawResourceWithStreamingResponse:
+        from .resources.raw import AsyncRawResourceWithStreamingResponse
+
+        return AsyncRawResourceWithStreamingResponse(self._client.raw)
 
 
 Client = Influship

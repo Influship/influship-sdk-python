@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .raw import (
+    RawResource,
+    AsyncRawResource,
+    RawResourceWithRawResponse,
+    AsyncRawResourceWithRawResponse,
+    RawResourceWithStreamingResponse,
+    AsyncRawResourceWithStreamingResponse,
+)
 from .posts import (
     PostsResource,
     AsyncPostsResource,
@@ -72,4 +80,10 @@ __all__ = [
     "AsyncPostsResourceWithRawResponse",
     "PostsResourceWithStreamingResponse",
     "AsyncPostsResourceWithStreamingResponse",
+    "RawResource",
+    "AsyncRawResource",
+    "RawResourceWithRawResponse",
+    "AsyncRawResourceWithRawResponse",
+    "RawResourceWithStreamingResponse",
+    "AsyncRawResourceWithStreamingResponse",
 ]

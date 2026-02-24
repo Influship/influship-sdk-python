@@ -20,10 +20,7 @@ class DataGrowth(BaseModel):
     """Profile growth statistics"""
 
     followers_30d_pct: float
-    """Follower growth percentage over 30 days"""
-
-    monthly_rate: float
-    """Monthly growth rate"""
+    """Follower growth percentage over 30 days (e.g. 2.5 means +2.5%)"""
 
 
 class DataMetrics(BaseModel):
@@ -39,7 +36,7 @@ class DataMetrics(BaseModel):
     """Average views on recent posts (for video content)"""
 
     engagement_rate: float
-    """Engagement rate as percentage"""
+    """Engagement rate as a percentage (e.g. 3.5 means 3.5%)"""
 
     followers: int
     """Follower count"""

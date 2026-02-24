@@ -4,28 +4,22 @@ from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["ProfileLookupResponse", "Data", "DataActivity", "DataGrowth", "DataMetrics", "NotFound"]
+__all__ = ["InstagramGetProfileResponse", "Data", "DataActivity", "DataGrowth", "DataMetrics", "DataPost"]
 
 
 class DataActivity(BaseModel):
-    """Profile activity information"""
-
     last_post_at: Optional[datetime] = None
     """Timestamp of last post"""
 
 
 class DataGrowth(BaseModel):
-    """Profile growth statistics"""
-
     followers_30d_pct: float
     """Follower growth percentage over 30 days (e.g. 2.5 means +2.5%)"""
 
 
 class DataMetrics(BaseModel):
-    """Profile performance metrics"""
-
     avg_comments_recent: float
     """Average comments on recent posts"""
 
@@ -33,7 +27,7 @@ class DataMetrics(BaseModel):
     """Average likes on recent posts"""
 
     avg_views_recent: Optional[float] = None
-    """Average views on recent posts (for video content)"""
+    """Average views on recent posts"""
 
     engagement_rate: float
     """Engagement rate as a percentage (e.g. 3.5 means 3.5%)"""
@@ -54,14 +48,44 @@ class DataMetrics(BaseModel):
     """Average posts per week"""
 
 
+class DataPost(BaseModel):
+    """Simplified post from live scrape"""
+
+    id: str
+    """Post unique identifier"""
+
+    caption: Optional[str] = None
+    """Post caption"""
+
+    comments_count: Optional[int] = None
+    """Comment count"""
+
+    likes_count: Optional[int] = None
+    """Like count"""
+
+    media_url: Optional[str] = None
+    """Primary media URL"""
+
+    platform_id: str
+    """Platform-specific post ID"""
+
+    posted_at: datetime
+    """Post timestamp"""
+
+    type: Literal["image", "video", "carousel", "reel", "story"]
+    """Type of post"""
+
+    url: str
+    """Post URL"""
+
+
 class Data(BaseModel):
-    """Full profile details"""
+    """Live scraped profile data"""
 
     id: str
     """Profile unique identifier"""
 
     activity: DataActivity
-    """Profile activity information"""
 
     avatar_url: Optional[str] = None
     """Avatar URL"""
@@ -82,10 +106,9 @@ class Data(BaseModel):
     """Display name"""
 
     external_url: Optional[str] = None
-    """External website URL from bio"""
+    """External website URL"""
 
     growth: DataGrowth
-    """Profile growth statistics"""
 
     is_business: bool
     """Whether this is a business account"""
@@ -97,7 +120,6 @@ class Data(BaseModel):
     """Whether the account is verified"""
 
     metrics: DataMetrics
-    """Profile performance metrics"""
 
     platform: Literal["instagram"]
     """Social media platform"""
@@ -105,23 +127,19 @@ class Data(BaseModel):
     pronouns: Optional[List[str]] = None
     """Listed pronouns"""
 
+    scraped_at: datetime
+    """When this data was scraped"""
+
     url: str
     """Profile URL"""
 
     username: str
     """Profile username"""
 
-
-class NotFound(BaseModel):
-    platform: Literal["instagram"]
-    """Social media platform"""
-
-    username: str
+    posts: Optional[List[DataPost]] = None
+    """Recent posts (only included when include_posts=true)"""
 
 
-class ProfileLookupResponse(BaseModel):
-    data: List[Data]
-    """Profiles that were found"""
-
-    not_found: List[NotFound]
-    """Profiles that were not found"""
+class InstagramGetProfileResponse(BaseModel):
+    data: Data
+    """Live scraped profile data"""

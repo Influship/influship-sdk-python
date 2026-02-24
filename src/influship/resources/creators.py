@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import List, Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -51,7 +51,7 @@ class CreatorsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        include: str | Omit = omit,
+        include: List[Literal["profiles"]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -76,7 +76,7 @@ class CreatorsResource(SyncAPIResource):
         Args:
           id: Creator unique identifier
 
-          include: Comma-separated list of additional data to include (e.g., "profiles")
+          include: Additional data to include in response
 
           extra_headers: Send extra headers
 
@@ -104,7 +104,7 @@ class CreatorsResource(SyncAPIResource):
         self,
         *,
         q: str,
-        limit: str | Omit = omit,
+        limit: int | Omit = omit,
         platform: Literal["instagram"] | Omit = omit,
         scope: Literal["creator_only", "matched_platforms", "all_platforms"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -322,7 +322,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        include: str | Omit = omit,
+        include: List[Literal["profiles"]],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -347,7 +347,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         Args:
           id: Creator unique identifier
 
-          include: Comma-separated list of additional data to include (e.g., "profiles")
+          include: Additional data to include in response
 
           extra_headers: Send extra headers
 
@@ -375,7 +375,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         self,
         *,
         q: str,
-        limit: str | Omit = omit,
+        limit: int | Omit = omit,
         platform: Literal["instagram"] | Omit = omit,
         scope: Literal["creator_only", "matched_platforms", "all_platforms"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

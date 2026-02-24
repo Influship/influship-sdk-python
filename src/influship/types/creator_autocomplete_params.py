@@ -11,7 +11,7 @@ class CreatorAutocompleteParams(TypedDict, total=False):
     q: Required[str]
     """Search query (min 2 characters)"""
 
-    limit: str
+    limit: int
     """Maximum results to return"""
 
     platform: Literal["instagram"]

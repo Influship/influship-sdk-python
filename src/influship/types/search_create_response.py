@@ -5,7 +5,7 @@ from typing import List, Optional
 from .._models import BaseModel
 from .shared.profile_summary import ProfileSummary
 
-__all__ = ["SearchQueryResponse", "Data", "DataCreator", "DataMatch"]
+__all__ = ["SearchCreateResponse", "Data", "DataCreator", "DataMatch"]
 
 
 class DataCreator(BaseModel):
@@ -41,14 +41,14 @@ class Data(BaseModel):
     match: DataMatch
     """Search match information"""
 
-    primary_profile: ProfileSummary
-    """Primary profile (largest audience)"""
+    primary_profile: Optional[ProfileSummary] = None
+    """Abbreviated profile information"""
 
-    relevant_profile: ProfileSummary
-    """Most relevant profile based on search query"""
+    relevant_profile: Optional[ProfileSummary] = None
+    """Abbreviated profile information"""
 
 
-class SearchQueryResponse(BaseModel):
+class SearchCreateResponse(BaseModel):
     data: List[Data]
 
     has_more: bool
@@ -56,6 +56,3 @@ class SearchQueryResponse(BaseModel):
 
     next_cursor: Optional[str] = None
     """Cursor for the next page"""
-
-    total: Optional[int] = None
-    """Total number of results"""

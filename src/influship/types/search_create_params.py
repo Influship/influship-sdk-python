@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["SearchQueryParams", "Filters", "FiltersEngagementRate", "FiltersFollowers"]
+__all__ = ["SearchCreateParams", "Filters", "FiltersEngagementRate", "FiltersFollowers"]
 
 
-class SearchQueryParams(TypedDict, total=False):
+class SearchCreateParams(TypedDict, total=False):
     query: Required[str]
     """Natural language search query"""
 

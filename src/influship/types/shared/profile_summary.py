@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -13,11 +14,11 @@ class ProfileSummary(BaseModel):
     id: str
     """Profile unique identifier"""
 
-    engagement_rate: float
-    """Engagement rate as percentage"""
+    engagement_rate: Optional[float] = None
+    """Engagement rate as a percentage, null if unknown (e.g. 3.5 means 3.5%)"""
 
-    followers: int
-    """Follower count"""
+    followers: Optional[int] = None
+    """Follower count (null if unknown)"""
 
     is_verified: bool
     """Whether the account is verified"""

@@ -41,11 +41,11 @@ client = Influship(
     api_key=os.environ.get("INFLUSHIP_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.search.query(
+search = client.search.create(
     query="sustainable fashion creators with engaged audiences",
     limit=25,
 )
-print(response.data)
+print(search.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -68,11 +68,11 @@ client = AsyncInfluship(
 
 
 async def main() -> None:
-    response = await client.search.query(
+    search = await client.search.create(
         query="sustainable fashion creators with engaged audiences",
         limit=25,
     )
-    print(response.data)
+    print(search.data)
 
 
 asyncio.run(main())
@@ -105,11 +105,11 @@ async def main() -> None:
         api_key=os.environ.get("INFLUSHIP_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.search.query(
+        search = await client.search.create(
             query="sustainable fashion creators with engaged audiences",
             limit=25,
         )
-        print(response.data)
+        print(search.data)
 
 
 asyncio.run(main())
@@ -124,6 +124,69 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Pagination
+
+List methods in the Influship API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from influship import Influship
+
+client = Influship()
+
+all_posts = []
+# Automatically fetches more pages as needed.
+for post in client.posts.list():
+    # Do something with post here
+    all_posts.append(post)
+print(all_posts)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from influship import AsyncInfluship
+
+client = AsyncInfluship()
+
+
+async def main() -> None:
+    all_posts = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for post in client.posts.list():
+        all_posts.append(post)
+    print(all_posts)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.posts.list()
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.data)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.posts.list()
+
+print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
+for post in first_page.data:
+    print(post.id)
+
+# Remove `await` for non-async usage.
+```
+
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -133,11 +196,11 @@ from influship import Influship
 
 client = Influship()
 
-response = client.search.query(
+search = client.search.create(
     query="fitness influencers with 100k+ followers who post workout videos",
     filters={},
 )
-print(response.filters)
+print(search.filters)
 ```
 
 ## Handling errors
@@ -156,7 +219,7 @@ from influship import Influship
 client = Influship()
 
 try:
-    client.search.query(
+    client.search.create(
         query="fitness influencers in Los Angeles",
         limit=10,
     )
@@ -202,7 +265,7 @@ client = Influship(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).search.query(
+client.with_options(max_retries=5).search.create(
     query="fitness influencers in Los Angeles",
     limit=10,
 )
@@ -228,7 +291,7 @@ client = Influship(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).search.query(
+client.with_options(timeout=5.0).search.create(
     query="fitness influencers in Los Angeles",
     limit=10,
 )
@@ -272,13 +335,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from influship import Influship
 
 client = Influship()
-response = client.search.with_raw_response.query(
+response = client.search.with_raw_response.create(
     query="fitness influencers in Los Angeles",
     limit=10,
 )
 print(response.headers.get('X-My-Header'))
 
-search = response.parse()  # get the object that `search.query()` would have returned
+search = response.parse()  # get the object that `search.create()` would have returned
 print(search.data)
 ```
 
@@ -293,7 +356,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.search.with_streaming_response.query(
+with client.search.with_streaming_response.create(
     query="fitness influencers in Los Angeles",
     limit=10,
 ) as response:

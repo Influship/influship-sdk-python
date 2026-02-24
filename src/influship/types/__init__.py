@@ -5,13 +5,13 @@ from __future__ import annotations
 from .shared import ProfileSummary as ProfileSummary
 from .post_list_params import PostListParams as PostListParams
 from .post_list_response import PostListResponse as PostListResponse
-from .search_query_params import SearchQueryParams as SearchQueryParams
 from .creator_match_params import CreatorMatchParams as CreatorMatchParams
 from .profile_get_response import ProfileGetResponse as ProfileGetResponse
+from .search_create_params import SearchCreateParams as SearchCreateParams
 from .health_check_response import HealthCheckResponse as HealthCheckResponse
 from .profile_lookup_params import ProfileLookupParams as ProfileLookupParams
-from .search_query_response import SearchQueryResponse as SearchQueryResponse
 from .creator_match_response import CreatorMatchResponse as CreatorMatchResponse
+from .search_create_response import SearchCreateResponse as SearchCreateResponse
 from .creator_retrieve_params import CreatorRetrieveParams as CreatorRetrieveParams
 from .profile_lookup_response import ProfileLookupResponse as ProfileLookupResponse
 from .creator_lookalike_params import CreatorLookalikeParams as CreatorLookalikeParams

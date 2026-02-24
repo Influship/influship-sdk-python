@@ -38,7 +38,7 @@ class Data(BaseModel):
     creator: DataCreator
     """Basic creator information"""
 
-    primary_profile: ProfileSummary
+    primary_profile: Optional[ProfileSummary] = None
     """Abbreviated profile information"""
 
     similarity: DataSimilarity
@@ -53,6 +53,3 @@ class CreatorLookalikeResponse(BaseModel):
 
     next_cursor: Optional[str] = None
     """Cursor for the next page"""
-
-    total: Optional[int] = None
-    """Total number of results"""
