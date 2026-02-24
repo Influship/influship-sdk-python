@@ -854,7 +854,7 @@ class TestInfluship:
         respx_mock.post("/v1/search").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.search.with_streaming_response.query(
+            client.search.with_streaming_response.create(
                 query="fitness influencers with 100k+ followers who post workout videos"
             ).__enter__()
 
@@ -866,7 +866,7 @@ class TestInfluship:
         respx_mock.post("/v1/search").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.search.with_streaming_response.query(
+            client.search.with_streaming_response.create(
                 query="fitness influencers with 100k+ followers who post workout videos"
             ).__enter__()
         assert _get_open_connections(client) == 0
@@ -897,7 +897,7 @@ class TestInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.query(
+        response = client.search.with_raw_response.create(
             query="fitness influencers with 100k+ followers who post workout videos"
         )
 
@@ -923,7 +923,7 @@ class TestInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.query(
+        response = client.search.with_raw_response.create(
             query="fitness influencers with 100k+ followers who post workout videos",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -949,7 +949,7 @@ class TestInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.query(
+        response = client.search.with_raw_response.create(
             query="fitness influencers with 100k+ followers who post workout videos",
             extra_headers={"x-stainless-retry-count": "42"},
         )
@@ -1768,7 +1768,7 @@ class TestAsyncInfluship:
         respx_mock.post("/v1/search").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.search.with_streaming_response.query(
+            await async_client.search.with_streaming_response.create(
                 query="fitness influencers with 100k+ followers who post workout videos"
             ).__aenter__()
 
@@ -1782,7 +1782,7 @@ class TestAsyncInfluship:
         respx_mock.post("/v1/search").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.search.with_streaming_response.query(
+            await async_client.search.with_streaming_response.create(
                 query="fitness influencers with 100k+ followers who post workout videos"
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
@@ -1813,7 +1813,7 @@ class TestAsyncInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.query(
+        response = await client.search.with_raw_response.create(
             query="fitness influencers with 100k+ followers who post workout videos"
         )
 
@@ -1839,7 +1839,7 @@ class TestAsyncInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.query(
+        response = await client.search.with_raw_response.create(
             query="fitness influencers with 100k+ followers who post workout videos",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
@@ -1865,7 +1865,7 @@ class TestAsyncInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.query(
+        response = await client.search.with_raw_response.create(
             query="fitness influencers with 100k+ followers who post workout videos",
             extra_headers={"x-stainless-retry-count": "42"},
         )

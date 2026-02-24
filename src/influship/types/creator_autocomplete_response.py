@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["CreatorAutocompleteResponse", "Data", "DataResult", "DataResultPlatform"]
+__all__ = ["CreatorAutocompleteResponse", "Data", "DataPlatform"]
 
 
-class DataResultPlatform(BaseModel):
+class DataPlatform(BaseModel):
     display_name: Optional[str] = None
 
     match_field: str
@@ -23,7 +23,7 @@ class DataResultPlatform(BaseModel):
     username: str
 
 
-class DataResult(BaseModel):
+class Data(BaseModel):
     id: str
     """Creator ID"""
 
@@ -33,18 +33,10 @@ class DataResult(BaseModel):
     name: str
     """Creator name"""
 
-    platforms: List[DataResultPlatform]
+    platforms: List[DataPlatform]
     """Matching platforms"""
 
 
-class Data(BaseModel):
-    count: int
-    """Number of results"""
-
-    ok: bool
-
-    results: List[DataResult]
-
-
 class CreatorAutocompleteResponse(BaseModel):
-    data: Data
+    data: List[Data]
+    """Autocomplete results"""

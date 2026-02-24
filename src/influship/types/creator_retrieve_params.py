@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import List
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["CreatorRetrieveParams"]
 
 
 class CreatorRetrieveParams(TypedDict, total=False):
-    include: str
-    """Comma-separated list of additional data to include (e.g., "profiles")"""
+    include: Required[List[Literal["profiles"]]]
+    """Additional data to include in response"""

@@ -8,7 +8,7 @@ import httpx
 
 from ..types import post_list_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -17,7 +17,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncCursor, AsyncCursor
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.post_list_response import PostListResponse
 
 __all__ = ["PostsResource", "AsyncPostsResource"]
@@ -48,7 +49,7 @@ class PostsResource(SyncAPIResource):
         *,
         creator_id: str | Omit = omit,
         cursor: str | Omit = omit,
-        limit: str | Omit = omit,
+        limit: int | Omit = omit,
         platform: Literal["instagram"] | Omit = omit,
         sort: Literal["recent", "top_engagement", "most_likes", "most_views", "most_comments"] | Omit = omit,
         username: str | Omit = omit,
@@ -58,7 +59,7 @@ class PostsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PostListResponse:
+    ) -> SyncCursor[PostListResponse]:
         """
         Retrieve posts for a creator or profile with engagement metrics and media data.
 
@@ -98,8 +99,9 @@ class PostsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             "/v1/posts",
+            page=SyncCursor[PostListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -117,7 +119,7 @@ class PostsResource(SyncAPIResource):
                     post_list_params.PostListParams,
                 ),
             ),
-            cast_to=PostListResponse,
+            model=PostListResponse,
         )
 
 
@@ -141,12 +143,12 @@ class AsyncPostsResource(AsyncAPIResource):
         """
         return AsyncPostsResourceWithStreamingResponse(self)
 
-    async def list(
+    def list(
         self,
         *,
         creator_id: str | Omit = omit,
         cursor: str | Omit = omit,
-        limit: str | Omit = omit,
+        limit: int | Omit = omit,
         platform: Literal["instagram"] | Omit = omit,
         sort: Literal["recent", "top_engagement", "most_likes", "most_views", "most_comments"] | Omit = omit,
         username: str | Omit = omit,
@@ -156,7 +158,7 @@ class AsyncPostsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PostListResponse:
+    ) -> AsyncPaginator[PostListResponse, AsyncCursor[PostListResponse]]:
         """
         Retrieve posts for a creator or profile with engagement metrics and media data.
 
@@ -196,14 +198,15 @@ class AsyncPostsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             "/v1/posts",
+            page=AsyncCursor[PostListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "creator_id": creator_id,
                         "cursor": cursor,
@@ -215,7 +218,7 @@ class AsyncPostsResource(AsyncAPIResource):
                     post_list_params.PostListParams,
                 ),
             ),
-            cast_to=PostListResponse,
+            model=PostListResponse,
         )
 
 

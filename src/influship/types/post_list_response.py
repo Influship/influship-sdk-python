@@ -6,17 +6,17 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PostListResponse", "Data", "DataLocation", "DataMedia", "DataMetrics"]
+__all__ = ["PostListResponse", "Location", "Media", "Metrics"]
 
 
-class DataLocation(BaseModel):
+class Location(BaseModel):
     """Post location information"""
 
     name: Optional[str] = None
     """Location name"""
 
 
-class DataMedia(BaseModel):
+class Media(BaseModel):
     """Post media information"""
 
     duration_seconds: Optional[float] = None
@@ -32,14 +32,14 @@ class DataMedia(BaseModel):
     """Video URL (for video content)"""
 
 
-class DataMetrics(BaseModel):
+class Metrics(BaseModel):
     """Post engagement metrics"""
 
     comments: Optional[int] = None
     """Comment count"""
 
     engagement_rate: Optional[float] = None
-    """Engagement rate for this post"""
+    """Engagement rate for this post as a percentage (e.g. 3.8 means 3.8%)"""
 
     likes: Optional[int] = None
     """Like count"""
@@ -51,7 +51,7 @@ class DataMetrics(BaseModel):
     """View count (for video content)"""
 
 
-class Data(BaseModel):
+class PostListResponse(BaseModel):
     """Full post details"""
 
     id: str
@@ -63,16 +63,16 @@ class Data(BaseModel):
     hashtags: List[str]
     """Hashtags used in the post"""
 
-    location: Optional[DataLocation] = None
+    location: Optional[Location] = None
     """Post location information"""
 
-    media: DataMedia
+    media: Media
     """Post media information"""
 
     mentions: List[str]
     """Usernames mentioned in the post"""
 
-    metrics: DataMetrics
+    metrics: Metrics
     """Post engagement metrics"""
 
     platform: Literal["instagram"]
@@ -92,16 +92,3 @@ class Data(BaseModel):
 
     url: str
     """Post URL"""
-
-
-class PostListResponse(BaseModel):
-    data: List[Data]
-
-    has_more: bool
-    """Whether more results are available"""
-
-    next_cursor: Optional[str] = None
-    """Cursor for the next page of results"""
-
-    total: Optional[int] = None
-    """Total number of results (if available)"""

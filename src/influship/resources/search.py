@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import search_query_params
+from ..types import search_create_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,7 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.search_query_response import SearchQueryResponse
+from ..types.search_create_response import SearchCreateResponse
 
 __all__ = ["SearchResource", "AsyncSearchResource"]
 
@@ -44,12 +44,12 @@ class SearchResource(SyncAPIResource):
         """
         return SearchResourceWithStreamingResponse(self)
 
-    def query(
+    def create(
         self,
         *,
         query: str,
         cursor: str | Omit = omit,
-        filters: search_query_params.Filters | Omit = omit,
+        filters: search_create_params.Filters | Omit = omit,
         limit: int | Omit = omit,
         platforms: List[Literal["instagram"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -58,7 +58,7 @@ class SearchResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SearchQueryResponse:
+    ) -> SearchCreateResponse:
         """Search for creators using natural language queries.
 
         The AI understands intent
@@ -103,12 +103,12 @@ class SearchResource(SyncAPIResource):
                     "limit": limit,
                     "platforms": platforms,
                 },
-                search_query_params.SearchQueryParams,
+                search_create_params.SearchCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SearchQueryResponse,
+            cast_to=SearchCreateResponse,
         )
 
 
@@ -132,12 +132,12 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         return AsyncSearchResourceWithStreamingResponse(self)
 
-    async def query(
+    async def create(
         self,
         *,
         query: str,
         cursor: str | Omit = omit,
-        filters: search_query_params.Filters | Omit = omit,
+        filters: search_create_params.Filters | Omit = omit,
         limit: int | Omit = omit,
         platforms: List[Literal["instagram"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -146,7 +146,7 @@ class AsyncSearchResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SearchQueryResponse:
+    ) -> SearchCreateResponse:
         """Search for creators using natural language queries.
 
         The AI understands intent
@@ -191,12 +191,12 @@ class AsyncSearchResource(AsyncAPIResource):
                     "limit": limit,
                     "platforms": platforms,
                 },
-                search_query_params.SearchQueryParams,
+                search_create_params.SearchCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SearchQueryResponse,
+            cast_to=SearchCreateResponse,
         )
 
 
@@ -204,8 +204,8 @@ class SearchResourceWithRawResponse:
     def __init__(self, search: SearchResource) -> None:
         self._search = search
 
-        self.query = to_raw_response_wrapper(
-            search.query,
+        self.create = to_raw_response_wrapper(
+            search.create,
         )
 
 
@@ -213,8 +213,8 @@ class AsyncSearchResourceWithRawResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
 
-        self.query = async_to_raw_response_wrapper(
-            search.query,
+        self.create = async_to_raw_response_wrapper(
+            search.create,
         )
 
 
@@ -222,8 +222,8 @@ class SearchResourceWithStreamingResponse:
     def __init__(self, search: SearchResource) -> None:
         self._search = search
 
-        self.query = to_streamed_response_wrapper(
-            search.query,
+        self.create = to_streamed_response_wrapper(
+            search.create,
         )
 
 
@@ -231,6 +231,6 @@ class AsyncSearchResourceWithStreamingResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
 
-        self.query = async_to_streamed_response_wrapper(
-            search.query,
+        self.create = async_to_streamed_response_wrapper(
+            search.create,
         )

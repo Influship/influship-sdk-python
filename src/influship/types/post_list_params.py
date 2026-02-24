@@ -14,7 +14,7 @@ class PostListParams(TypedDict, total=False):
     cursor: str
     """Pagination cursor for next page"""
 
-    limit: str
+    limit: int
     """Maximum posts to return"""
 
     platform: Literal["instagram"]

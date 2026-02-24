@@ -10,6 +10,7 @@ import pytest
 from influship import Influship, AsyncInfluship
 from tests.utils import assert_matches_type
 from influship.types import PostListResponse
+from influship.pagination import SyncCursor, AsyncCursor
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +22,7 @@ class TestPosts:
     @parametrize
     def test_method_list(self, client: Influship) -> None:
         post = client.posts.list()
-        assert_matches_type(PostListResponse, post, path=["response"])
+        assert_matches_type(SyncCursor[PostListResponse], post, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -29,12 +30,12 @@ class TestPosts:
         post = client.posts.list(
             creator_id="123e4567-e89b-12d3-a456-426614174000",
             cursor="cursor",
-            limit="12",
+            limit=12,
             platform="instagram",
             sort="recent",
             username="fitness_coach_jane",
         )
-        assert_matches_type(PostListResponse, post, path=["response"])
+        assert_matches_type(SyncCursor[PostListResponse], post, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -44,7 +45,7 @@ class TestPosts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         post = response.parse()
-        assert_matches_type(PostListResponse, post, path=["response"])
+        assert_matches_type(SyncCursor[PostListResponse], post, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -54,7 +55,7 @@ class TestPosts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             post = response.parse()
-            assert_matches_type(PostListResponse, post, path=["response"])
+            assert_matches_type(SyncCursor[PostListResponse], post, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -68,7 +69,7 @@ class TestAsyncPosts:
     @parametrize
     async def test_method_list(self, async_client: AsyncInfluship) -> None:
         post = await async_client.posts.list()
-        assert_matches_type(PostListResponse, post, path=["response"])
+        assert_matches_type(AsyncCursor[PostListResponse], post, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -76,12 +77,12 @@ class TestAsyncPosts:
         post = await async_client.posts.list(
             creator_id="123e4567-e89b-12d3-a456-426614174000",
             cursor="cursor",
-            limit="12",
+            limit=12,
             platform="instagram",
             sort="recent",
             username="fitness_coach_jane",
         )
-        assert_matches_type(PostListResponse, post, path=["response"])
+        assert_matches_type(AsyncCursor[PostListResponse], post, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -91,7 +92,7 @@ class TestAsyncPosts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         post = await response.parse()
-        assert_matches_type(PostListResponse, post, path=["response"])
+        assert_matches_type(AsyncCursor[PostListResponse], post, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -101,6 +102,6 @@ class TestAsyncPosts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             post = await response.parse()
-            assert_matches_type(PostListResponse, post, path=["response"])
+            assert_matches_type(AsyncCursor[PostListResponse], post, path=["response"])
 
         assert cast(Any, response.is_closed) is True
