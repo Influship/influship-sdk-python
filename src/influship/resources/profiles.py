@@ -67,7 +67,7 @@ class ProfilesResource(SyncAPIResource):
         - Growth data (30-day follower growth, monthly rate)
         - Activity data (last post date, posting frequency)
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.1 credits per request ($0.001)
 
         Args:
           platform: Platform name
@@ -116,7 +116,7 @@ class ProfilesResource(SyncAPIResource):
         - `not_found`: Array of profiles that weren't found (consider live scraping
           these)
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.1 credits per profile ($0.001)
 
         Args:
           profiles: Profiles to lookup
@@ -182,7 +182,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         - Growth data (30-day follower growth, monthly rate)
         - Activity data (last post date, posting frequency)
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.1 credits per request ($0.001)
 
         Args:
           platform: Platform name
@@ -231,7 +231,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         - `not_found`: Array of profiles that weren't found (consider live scraping
           these)
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.1 credits per profile ($0.001)
 
         Args:
           profiles: Profiles to lookup

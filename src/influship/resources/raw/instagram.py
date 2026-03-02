@@ -68,7 +68,7 @@ class InstagramResource(SyncAPIResource):
         **Note:** Live scraping is slower than cached data (2-5 seconds) and costs more.
         Use cached endpoints when freshness isn't critical.
 
-        **Pricing**: $0.005 per profile scraped
+        **Pricing**: 0.5 credits per profile scraped ($0.005)
 
         Args:
           username: Username on the platform
@@ -153,7 +153,7 @@ class AsyncInstagramResource(AsyncAPIResource):
         **Note:** Live scraping is slower than cached data (2-5 seconds) and costs more.
         Use cached endpoints when freshness isn't critical.
 
-        **Pricing**: $0.005 per profile scraped
+        **Pricing**: 0.5 credits per profile scraped ($0.005)
 
         Args:
           username: Username on the platform
