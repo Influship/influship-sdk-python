@@ -68,7 +68,7 @@ class YoutubeResource(SyncAPIResource):
         Fetch fresh YouTube channel data including subscriber count, video count, and
         total views.
 
-        **Pricing**: $0.005 per channel
+        **Pricing**: 0.5 credits per profile scraped ($0.005)
 
         Args:
           handle: YouTube channel handle
@@ -132,7 +132,7 @@ class YoutubeResource(SyncAPIResource):
         - Partial success — individual video failures don't block the response
         - Optional timestamped segments for each transcript
 
-        **Pricing**: $0.005 per transcript successfully fetched
+        **Pricing**: 0.5 credits per transcript fetched ($0.005)
 
         Args:
           handle: YouTube channel handle
@@ -190,7 +190,7 @@ class YoutubeResource(SyncAPIResource):
         """Fetch YouTube video transcript/captions.
 
         Returns timestamped segments and full
-        text. Useful for content analysis and brand safety checks.
+        text. Useful for content analysis.
 
         **Supported sources:**
 
@@ -198,7 +198,7 @@ class YoutubeResource(SyncAPIResource):
         - Auto-generated captions
         - Multiple language tracks
 
-        **Pricing**: $0.005 per transcript
+        **Pricing**: 0.5 credits per transcript ($0.005)
 
         Args:
           video_id: YouTube video ID
@@ -244,7 +244,7 @@ class YoutubeResource(SyncAPIResource):
         """
         Search YouTube videos and channels.
 
-        **Pricing**: $0.005 per result returned
+        **Pricing**: 0.5 credits per result returned ($0.005)
 
         Args:
           q: Search query
@@ -321,7 +321,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         Fetch fresh YouTube channel data including subscriber count, video count, and
         total views.
 
-        **Pricing**: $0.005 per channel
+        **Pricing**: 0.5 credits per profile scraped ($0.005)
 
         Args:
           handle: YouTube channel handle
@@ -385,7 +385,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         - Partial success — individual video failures don't block the response
         - Optional timestamped segments for each transcript
 
-        **Pricing**: $0.005 per transcript successfully fetched
+        **Pricing**: 0.5 credits per transcript fetched ($0.005)
 
         Args:
           handle: YouTube channel handle
@@ -443,7 +443,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         """Fetch YouTube video transcript/captions.
 
         Returns timestamped segments and full
-        text. Useful for content analysis and brand safety checks.
+        text. Useful for content analysis.
 
         **Supported sources:**
 
@@ -451,7 +451,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         - Auto-generated captions
         - Multiple language tracks
 
-        **Pricing**: $0.005 per transcript
+        **Pricing**: 0.5 credits per transcript ($0.005)
 
         Args:
           video_id: YouTube video ID
@@ -499,7 +499,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         """
         Search YouTube videos and channels.
 
-        **Pricing**: $0.005 per result returned
+        **Pricing**: 0.5 credits per result returned ($0.005)
 
         Args:
           q: Search query

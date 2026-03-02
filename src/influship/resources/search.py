@@ -72,7 +72,7 @@ class SearchResource(SyncAPIResource):
           with millennial audience")
         - Search by content style ("creators who post cinematic travel videos")
 
-        **Pricing**: $0.01 per creator returned
+        **Pricing**: 25 credits base + 2 credits per creator returned
 
         Args:
           query: Natural language search query
@@ -160,7 +160,7 @@ class AsyncSearchResource(AsyncAPIResource):
           with millennial audience")
         - Search by content style ("creators who post cinematic travel videos")
 
-        **Pricing**: $0.01 per creator returned
+        **Pricing**: 25 credits base + 2 credits per creator returned
 
         Args:
           query: Natural language search query

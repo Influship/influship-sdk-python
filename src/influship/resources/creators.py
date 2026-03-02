@@ -71,7 +71,7 @@ class CreatorsResource(SyncAPIResource):
 
         - `profiles`: Include all linked social profiles with metrics
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.1 credits per request ($0.001)
 
         Args:
           id: Creator unique identifier
@@ -131,7 +131,7 @@ class CreatorsResource(SyncAPIResource):
         - `matched_platforms`: Return only profiles that matched the query
         - `all_platforms`: Return all linked profiles (default)
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.05 credits per request ($0.0005)
 
         Args:
           q: Search query (min 2 characters)
@@ -201,7 +201,7 @@ class CreatorsResource(SyncAPIResource):
         2. Optionally weight seeds to prioritize certain creators
         3. Get ranked results with similarity scores and shared traits
 
-        **Pricing**: $0.02 per creator returned
+        **Pricing**: 1.5 credits per creator returned ($0.015)
 
         Args:
           seeds: Seed creators to find similar creators for
@@ -267,7 +267,7 @@ class CreatorsResource(SyncAPIResource):
         2. Provide up to 100 creators to evaluate
         3. Get detailed scores with explanations and evidence
 
-        **Pricing**: $0.05 per creator evaluated
+        **Pricing**: 1 credit per creator scored ($0.01)
 
         Args:
           creators: Creators to evaluate
@@ -342,7 +342,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
 
         - `profiles`: Include all linked social profiles with metrics
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.1 credits per request ($0.001)
 
         Args:
           id: Creator unique identifier
@@ -402,7 +402,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         - `matched_platforms`: Return only profiles that matched the query
         - `all_platforms`: Return all linked profiles (default)
 
-        **Pricing**: Free (included in your plan)
+        **Pricing**: 0.05 credits per request ($0.0005)
 
         Args:
           q: Search query (min 2 characters)
@@ -472,7 +472,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         2. Optionally weight seeds to prioritize certain creators
         3. Get ranked results with similarity scores and shared traits
 
-        **Pricing**: $0.02 per creator returned
+        **Pricing**: 1.5 credits per creator returned ($0.015)
 
         Args:
           seeds: Seed creators to find similar creators for
@@ -538,7 +538,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         2. Provide up to 100 creators to evaluate
         3. Get detailed scores with explanations and evidence
 
-        **Pricing**: $0.05 per creator evaluated
+        **Pricing**: 1 credit per creator scored ($0.01)
 
         Args:
           creators: Creators to evaluate

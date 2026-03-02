@@ -76,7 +76,7 @@ class PostsResource(SyncAPIResource):
         - `most_views`: Most views first (video content)
         - `most_comments`: Most comments first
 
-        **Pricing**: $0.005 per post returned
+        **Pricing**: 0.05 credits per post returned ($0.0005)
 
         Args:
           creator_id: Creator ID (use this OR platform+username)
@@ -175,7 +175,7 @@ class AsyncPostsResource(AsyncAPIResource):
         - `most_views`: Most views first (video content)
         - `most_comments`: Most comments first
 
-        **Pricing**: $0.005 per post returned
+        **Pricing**: 0.05 credits per post returned ($0.0005)
 
         Args:
           creator_id: Creator ID (use this OR platform+username)
