@@ -27,10 +27,18 @@ __all__ = ["RawResource", "AsyncRawResource"]
 class RawResource(SyncAPIResource):
     @cached_property
     def instagram(self) -> InstagramResource:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return InstagramResource(self._client)
 
     @cached_property
     def youtube(self) -> YoutubeResource:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return YoutubeResource(self._client)
 
     @cached_property
@@ -56,10 +64,18 @@ class RawResource(SyncAPIResource):
 class AsyncRawResource(AsyncAPIResource):
     @cached_property
     def instagram(self) -> AsyncInstagramResource:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return AsyncInstagramResource(self._client)
 
     @cached_property
     def youtube(self) -> AsyncYoutubeResource:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return AsyncYoutubeResource(self._client)
 
     @cached_property
@@ -88,10 +104,18 @@ class RawResourceWithRawResponse:
 
     @cached_property
     def instagram(self) -> InstagramResourceWithRawResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return InstagramResourceWithRawResponse(self._raw.instagram)
 
     @cached_property
     def youtube(self) -> YoutubeResourceWithRawResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return YoutubeResourceWithRawResponse(self._raw.youtube)
 
 
@@ -101,10 +125,18 @@ class AsyncRawResourceWithRawResponse:
 
     @cached_property
     def instagram(self) -> AsyncInstagramResourceWithRawResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return AsyncInstagramResourceWithRawResponse(self._raw.instagram)
 
     @cached_property
     def youtube(self) -> AsyncYoutubeResourceWithRawResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return AsyncYoutubeResourceWithRawResponse(self._raw.youtube)
 
 
@@ -114,10 +146,18 @@ class RawResourceWithStreamingResponse:
 
     @cached_property
     def instagram(self) -> InstagramResourceWithStreamingResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return InstagramResourceWithStreamingResponse(self._raw.instagram)
 
     @cached_property
     def youtube(self) -> YoutubeResourceWithStreamingResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return YoutubeResourceWithStreamingResponse(self._raw.youtube)
 
 
@@ -127,8 +167,16 @@ class AsyncRawResourceWithStreamingResponse:
 
     @cached_property
     def instagram(self) -> AsyncInstagramResourceWithStreamingResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return AsyncInstagramResourceWithStreamingResponse(self._raw.instagram)
 
     @cached_property
     def youtube(self) -> AsyncYoutubeResourceWithStreamingResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
         return AsyncYoutubeResourceWithStreamingResponse(self._raw.youtube)

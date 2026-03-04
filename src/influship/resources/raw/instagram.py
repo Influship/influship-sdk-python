@@ -22,6 +22,11 @@ __all__ = ["InstagramResource", "AsyncInstagramResource"]
 
 
 class InstagramResource(SyncAPIResource):
+    """Fetch fresh data directly from social platforms in real-time.
+
+    Use when you need the most current information or data for profiles not yet in our database.
+    """
+
     @cached_property
     def with_raw_response(self) -> InstagramResourceWithRawResponse:
         """
@@ -107,6 +112,11 @@ class InstagramResource(SyncAPIResource):
 
 
 class AsyncInstagramResource(AsyncAPIResource):
+    """Fetch fresh data directly from social platforms in real-time.
+
+    Use when you need the most current information or data for profiles not yet in our database.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncInstagramResourceWithRawResponse:
         """

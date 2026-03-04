@@ -28,6 +28,10 @@ __all__ = ["CreatorsResource", "AsyncCreatorsResource"]
 
 
 class CreatorsResource(SyncAPIResource):
+    """
+    Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+    """
+
     @cached_property
     def with_raw_response(self) -> CreatorsResourceWithRawResponse:
         """
@@ -299,6 +303,10 @@ class CreatorsResource(SyncAPIResource):
 
 
 class AsyncCreatorsResource(AsyncAPIResource):
+    """
+    Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncCreatorsResourceWithRawResponse:
         """
