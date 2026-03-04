@@ -12,9 +12,6 @@ class SearchCreateParams(TypedDict, total=False):
     query: Required[str]
     """Natural language search query"""
 
-    cursor: str
-    """Pagination cursor for next page"""
-
     filters: Filters
     """Additional filters"""
 

@@ -56,3 +56,9 @@ class SearchCreateResponse(BaseModel):
 
     next_cursor: Optional[str] = None
     """Cursor for the next page"""
+
+    search_id: str
+    """Search ID. Use with GET /v1/search/{id} for free pagination."""
+
+    total: int
+    """Total number of results across all pages"""

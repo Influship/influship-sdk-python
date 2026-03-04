@@ -30,7 +30,6 @@ class TestSearch:
     def test_method_create_with_all_params(self, client: Influship) -> None:
         search = client.search.create(
             query="fitness influencers with 100k+ followers who post workout videos",
-            cursor="cursor",
             filters={
                 "engagement_rate": {
                     "max": 10,
@@ -92,7 +91,6 @@ class TestAsyncSearch:
     async def test_method_create_with_all_params(self, async_client: AsyncInfluship) -> None:
         search = await async_client.search.create(
             query="fitness influencers with 100k+ followers who post workout videos",
-            cursor="cursor",
             filters={
                 "engagement_rate": {
                     "max": 10,
