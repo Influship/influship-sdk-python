@@ -68,7 +68,7 @@ class YoutubeResource(SyncAPIResource):
         Fetch fresh YouTube channel data including subscriber count, video count, and
         total views.
 
-        **Pricing**: 0.5 credits per profile scraped ($0.005)
+        **Pricing**: 0.5 credits per channel scraped ($0.005)
 
         Args:
           handle: YouTube channel handle
@@ -321,7 +321,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         Fetch fresh YouTube channel data including subscriber count, video count, and
         total views.
 
-        **Pricing**: 0.5 credits per profile scraped ($0.005)
+        **Pricing**: 0.5 credits per channel scraped ($0.005)
 
         Args:
           handle: YouTube channel handle
