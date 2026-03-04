@@ -108,30 +108,44 @@ class Influship(SyncAPIClient):
 
     @cached_property
     def health(self) -> HealthResource:
+        """API health and status endpoints"""
         from .resources.health import HealthResource
 
         return HealthResource(self)
 
     @cached_property
     def creators(self) -> CreatorsResource:
+        """
+        Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+        """
         from .resources.creators import CreatorsResource
 
         return CreatorsResource(self)
 
     @cached_property
     def search(self) -> SearchResource:
+        """AI-powered semantic search to find creators using natural language queries.
+
+        Understands intent and context to match creators based on content themes, audience, and style.
+        """
         from .resources.search import SearchResource
 
         return SearchResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
+        """
+        Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+        """
         from .resources.profiles import ProfilesResource
 
         return ProfilesResource(self)
 
     @cached_property
     def posts(self) -> PostsResource:
+        """
+        Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+        """
         from .resources.posts import PostsResource
 
         return PostsResource(self)
@@ -312,30 +326,44 @@ class AsyncInfluship(AsyncAPIClient):
 
     @cached_property
     def health(self) -> AsyncHealthResource:
+        """API health and status endpoints"""
         from .resources.health import AsyncHealthResource
 
         return AsyncHealthResource(self)
 
     @cached_property
     def creators(self) -> AsyncCreatorsResource:
+        """
+        Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+        """
         from .resources.creators import AsyncCreatorsResource
 
         return AsyncCreatorsResource(self)
 
     @cached_property
     def search(self) -> AsyncSearchResource:
+        """AI-powered semantic search to find creators using natural language queries.
+
+        Understands intent and context to match creators based on content themes, audience, and style.
+        """
         from .resources.search import AsyncSearchResource
 
         return AsyncSearchResource(self)
 
     @cached_property
     def profiles(self) -> AsyncProfilesResource:
+        """
+        Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+        """
         from .resources.profiles import AsyncProfilesResource
 
         return AsyncProfilesResource(self)
 
     @cached_property
     def posts(self) -> AsyncPostsResource:
+        """
+        Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+        """
         from .resources.posts import AsyncPostsResource
 
         return AsyncPostsResource(self)
@@ -467,30 +495,44 @@ class InflushipWithRawResponse:
 
     @cached_property
     def health(self) -> health.HealthResourceWithRawResponse:
+        """API health and status endpoints"""
         from .resources.health import HealthResourceWithRawResponse
 
         return HealthResourceWithRawResponse(self._client.health)
 
     @cached_property
     def creators(self) -> creators.CreatorsResourceWithRawResponse:
+        """
+        Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+        """
         from .resources.creators import CreatorsResourceWithRawResponse
 
         return CreatorsResourceWithRawResponse(self._client.creators)
 
     @cached_property
     def search(self) -> search.SearchResourceWithRawResponse:
+        """AI-powered semantic search to find creators using natural language queries.
+
+        Understands intent and context to match creators based on content themes, audience, and style.
+        """
         from .resources.search import SearchResourceWithRawResponse
 
         return SearchResourceWithRawResponse(self._client.search)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
+        """
+        Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+        """
         from .resources.profiles import ProfilesResourceWithRawResponse
 
         return ProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def posts(self) -> posts.PostsResourceWithRawResponse:
+        """
+        Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+        """
         from .resources.posts import PostsResourceWithRawResponse
 
         return PostsResourceWithRawResponse(self._client.posts)
@@ -510,30 +552,44 @@ class AsyncInflushipWithRawResponse:
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithRawResponse:
+        """API health and status endpoints"""
         from .resources.health import AsyncHealthResourceWithRawResponse
 
         return AsyncHealthResourceWithRawResponse(self._client.health)
 
     @cached_property
     def creators(self) -> creators.AsyncCreatorsResourceWithRawResponse:
+        """
+        Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+        """
         from .resources.creators import AsyncCreatorsResourceWithRawResponse
 
         return AsyncCreatorsResourceWithRawResponse(self._client.creators)
 
     @cached_property
     def search(self) -> search.AsyncSearchResourceWithRawResponse:
+        """AI-powered semantic search to find creators using natural language queries.
+
+        Understands intent and context to match creators based on content themes, audience, and style.
+        """
         from .resources.search import AsyncSearchResourceWithRawResponse
 
         return AsyncSearchResourceWithRawResponse(self._client.search)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
+        """
+        Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+        """
         from .resources.profiles import AsyncProfilesResourceWithRawResponse
 
         return AsyncProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def posts(self) -> posts.AsyncPostsResourceWithRawResponse:
+        """
+        Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+        """
         from .resources.posts import AsyncPostsResourceWithRawResponse
 
         return AsyncPostsResourceWithRawResponse(self._client.posts)
@@ -553,30 +609,44 @@ class InflushipWithStreamedResponse:
 
     @cached_property
     def health(self) -> health.HealthResourceWithStreamingResponse:
+        """API health and status endpoints"""
         from .resources.health import HealthResourceWithStreamingResponse
 
         return HealthResourceWithStreamingResponse(self._client.health)
 
     @cached_property
     def creators(self) -> creators.CreatorsResourceWithStreamingResponse:
+        """
+        Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+        """
         from .resources.creators import CreatorsResourceWithStreamingResponse
 
         return CreatorsResourceWithStreamingResponse(self._client.creators)
 
     @cached_property
     def search(self) -> search.SearchResourceWithStreamingResponse:
+        """AI-powered semantic search to find creators using natural language queries.
+
+        Understands intent and context to match creators based on content themes, audience, and style.
+        """
         from .resources.search import SearchResourceWithStreamingResponse
 
         return SearchResourceWithStreamingResponse(self._client.search)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
+        """
+        Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+        """
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
         return ProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def posts(self) -> posts.PostsResourceWithStreamingResponse:
+        """
+        Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+        """
         from .resources.posts import PostsResourceWithStreamingResponse
 
         return PostsResourceWithStreamingResponse(self._client.posts)
@@ -596,30 +666,44 @@ class AsyncInflushipWithStreamedResponse:
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithStreamingResponse:
+        """API health and status endpoints"""
         from .resources.health import AsyncHealthResourceWithStreamingResponse
 
         return AsyncHealthResourceWithStreamingResponse(self._client.health)
 
     @cached_property
     def creators(self) -> creators.AsyncCreatorsResourceWithStreamingResponse:
+        """
+        Retrieve creator profiles and discover new creators through search, autocomplete, and lookalike matching. Creators are cross-platform entities that may have profiles on multiple social networks.
+        """
         from .resources.creators import AsyncCreatorsResourceWithStreamingResponse
 
         return AsyncCreatorsResourceWithStreamingResponse(self._client.creators)
 
     @cached_property
     def search(self) -> search.AsyncSearchResourceWithStreamingResponse:
+        """AI-powered semantic search to find creators using natural language queries.
+
+        Understands intent and context to match creators based on content themes, audience, and style.
+        """
         from .resources.search import AsyncSearchResourceWithStreamingResponse
 
         return AsyncSearchResourceWithStreamingResponse(self._client.search)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
+        """
+        Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+        """
         from .resources.profiles import AsyncProfilesResourceWithStreamingResponse
 
         return AsyncProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def posts(self) -> posts.AsyncPostsResourceWithStreamingResponse:
+        """
+        Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+        """
         from .resources.posts import AsyncPostsResourceWithStreamingResponse
 
         return AsyncPostsResourceWithStreamingResponse(self._client.posts)

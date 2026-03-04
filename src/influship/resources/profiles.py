@@ -25,6 +25,10 @@ __all__ = ["ProfilesResource", "AsyncProfilesResource"]
 
 
 class ProfilesResource(SyncAPIResource):
+    """
+    Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+    """
+
     @cached_property
     def with_raw_response(self) -> ProfilesResourceWithRawResponse:
         """
@@ -140,6 +144,10 @@ class ProfilesResource(SyncAPIResource):
 
 
 class AsyncProfilesResource(AsyncAPIResource):
+    """
+    Access individual social media profiles with detailed metrics, growth data, and activity information. Profiles are platform-specific accounts linked to creators.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncProfilesResourceWithRawResponse:
         """

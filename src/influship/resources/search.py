@@ -25,6 +25,11 @@ __all__ = ["SearchResource", "AsyncSearchResource"]
 
 
 class SearchResource(SyncAPIResource):
+    """AI-powered semantic search to find creators using natural language queries.
+
+    Understands intent and context to match creators based on content themes, audience, and style.
+    """
+
     @cached_property
     def with_raw_response(self) -> SearchResourceWithRawResponse:
         """
@@ -112,6 +117,11 @@ class SearchResource(SyncAPIResource):
 
 
 class AsyncSearchResource(AsyncAPIResource):
+    """AI-powered semantic search to find creators using natural language queries.
+
+    Understands intent and context to match creators based on content themes, audience, and style.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSearchResourceWithRawResponse:
         """

@@ -32,6 +32,11 @@ __all__ = ["YoutubeResource", "AsyncYoutubeResource"]
 
 
 class YoutubeResource(SyncAPIResource):
+    """Fetch fresh data directly from social platforms in real-time.
+
+    Use when you need the most current information or data for profiles not yet in our database.
+    """
+
     @cached_property
     def with_raw_response(self) -> YoutubeResourceWithRawResponse:
         """
@@ -285,6 +290,11 @@ class YoutubeResource(SyncAPIResource):
 
 
 class AsyncYoutubeResource(AsyncAPIResource):
+    """Fetch fresh data directly from social platforms in real-time.
+
+    Use when you need the most current information or data for profiles not yet in our database.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncYoutubeResourceWithRawResponse:
         """

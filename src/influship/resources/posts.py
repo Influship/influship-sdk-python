@@ -25,6 +25,10 @@ __all__ = ["PostsResource", "AsyncPostsResource"]
 
 
 class PostsResource(SyncAPIResource):
+    """
+    Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+    """
+
     @cached_property
     def with_raw_response(self) -> PostsResourceWithRawResponse:
         """
@@ -124,6 +128,10 @@ class PostsResource(SyncAPIResource):
 
 
 class AsyncPostsResource(AsyncAPIResource):
+    """
+    Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPostsResourceWithRawResponse:
         """
