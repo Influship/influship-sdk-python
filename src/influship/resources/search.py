@@ -48,7 +48,6 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         query: str,
-        cursor: str | Omit = omit,
         filters: search_create_params.Filters | Omit = omit,
         limit: int | Omit = omit,
         platforms: List[Literal["instagram"]] | Omit = omit,
@@ -65,6 +64,9 @@ class SearchResource(SyncAPIResource):
         and context to match creators based on content themes, audience demographics,
         and style.
 
+        The response includes a `search_id` that can be used with `GET /v1/search/{id}`
+        to paginate through results for free.
+
         **Use cases:**
 
         - Find creators in a specific niche ("vegan food bloggers in LA")
@@ -76,8 +78,6 @@ class SearchResource(SyncAPIResource):
 
         Args:
           query: Natural language search query
-
-          cursor: Pagination cursor for next page
 
           filters: Additional filters
 
@@ -98,7 +98,6 @@ class SearchResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "query": query,
-                    "cursor": cursor,
                     "filters": filters,
                     "limit": limit,
                     "platforms": platforms,
@@ -136,7 +135,6 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         query: str,
-        cursor: str | Omit = omit,
         filters: search_create_params.Filters | Omit = omit,
         limit: int | Omit = omit,
         platforms: List[Literal["instagram"]] | Omit = omit,
@@ -153,6 +151,9 @@ class AsyncSearchResource(AsyncAPIResource):
         and context to match creators based on content themes, audience demographics,
         and style.
 
+        The response includes a `search_id` that can be used with `GET /v1/search/{id}`
+        to paginate through results for free.
+
         **Use cases:**
 
         - Find creators in a specific niche ("vegan food bloggers in LA")
@@ -164,8 +165,6 @@ class AsyncSearchResource(AsyncAPIResource):
 
         Args:
           query: Natural language search query
-
-          cursor: Pagination cursor for next page
 
           filters: Additional filters
 
@@ -186,7 +185,6 @@ class AsyncSearchResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "query": query,
-                    "cursor": cursor,
                     "filters": filters,
                     "limit": limit,
                     "platforms": platforms,

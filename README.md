@@ -45,7 +45,7 @@ search = client.search.create(
     query="sustainable fashion creators with engaged audiences",
     limit=25,
 )
-print(search.data)
+print(search.search_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -72,7 +72,7 @@ async def main() -> None:
         query="sustainable fashion creators with engaged audiences",
         limit=25,
     )
-    print(search.data)
+    print(search.search_id)
 
 
 asyncio.run(main())
@@ -109,7 +109,7 @@ async def main() -> None:
             query="sustainable fashion creators with engaged audiences",
             limit=25,
         )
-        print(search.data)
+        print(search.search_id)
 
 
 asyncio.run(main())
@@ -342,7 +342,7 @@ response = client.search.with_raw_response.create(
 print(response.headers.get('X-My-Header'))
 
 search = response.parse()  # get the object that `search.create()` would have returned
-print(search.data)
+print(search.search_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/influship/influship-sdk-python/tree/main/src/influship/_response.py) object.
