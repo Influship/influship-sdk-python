@@ -3,19 +3,9 @@
 from typing import List
 
 from ..._models import BaseModel
+from .transcript_segment import TranscriptSegment
 
-__all__ = ["YoutubeGetTranscriptResponse", "Data", "DataTranscript"]
-
-
-class DataTranscript(BaseModel):
-    duration: float
-    """Duration in seconds"""
-
-    start: float
-    """Start time in seconds"""
-
-    text: str
-    """Segment text"""
+__all__ = ["YoutubeGetTranscriptResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -31,7 +21,7 @@ class Data(BaseModel):
     title: str
     """Video title"""
 
-    transcript: List[DataTranscript]
+    transcript: List[TranscriptSegment]
     """Transcript segments"""
 
     url: str

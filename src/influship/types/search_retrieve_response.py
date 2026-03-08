@@ -6,10 +6,10 @@ from .._models import BaseModel
 from .shared.creator_basic import CreatorBasic
 from .shared.profile_summary import ProfileSummary
 
-__all__ = ["SearchCreateResponse", "Data", "DataMatch"]
+__all__ = ["SearchRetrieveResponse", "Match"]
 
 
-class DataMatch(BaseModel):
+class Match(BaseModel):
     """Search match information"""
 
     reasons: List[str]
@@ -19,11 +19,11 @@ class DataMatch(BaseModel):
     """Match relevance score (0-1)"""
 
 
-class Data(BaseModel):
+class SearchRetrieveResponse(BaseModel):
     creator: CreatorBasic
     """Basic creator information"""
 
-    match: DataMatch
+    match: Match
     """Search match information"""
 
     primary_profile: Optional[ProfileSummary] = None
@@ -31,19 +31,3 @@ class Data(BaseModel):
 
     relevant_profile: Optional[ProfileSummary] = None
     """Abbreviated profile information"""
-
-
-class SearchCreateResponse(BaseModel):
-    data: List[Data]
-
-    has_more: bool
-    """Whether more results are available"""
-
-    next_cursor: Optional[str] = None
-    """Cursor for the next page"""
-
-    search_id: str
-    """Search ID. Use with GET /v1/search/{id} for free pagination."""
-
-    total: int
-    """Total number of results across all pages"""

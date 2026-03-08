@@ -17,7 +17,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncCursor, AsyncCursor
+from ..pagination import SyncQueryCursor, AsyncQueryCursor
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.post_list_response import PostListResponse
 
@@ -63,7 +63,7 @@ class PostsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursor[PostListResponse]:
+    ) -> SyncQueryCursor[PostListResponse]:
         """
         Retrieve posts for a creator or profile with engagement metrics and media data.
 
@@ -105,7 +105,7 @@ class PostsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/v1/posts",
-            page=SyncCursor[PostListResponse],
+            page=SyncQueryCursor[PostListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -166,7 +166,7 @@ class AsyncPostsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[PostListResponse, AsyncCursor[PostListResponse]]:
+    ) -> AsyncPaginator[PostListResponse, AsyncQueryCursor[PostListResponse]]:
         """
         Retrieve posts for a creator or profile with engagement metrics and media data.
 
@@ -208,7 +208,7 @@ class AsyncPostsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/v1/posts",
-            page=AsyncCursor[PostListResponse],
+            page=AsyncQueryCursor[PostListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
