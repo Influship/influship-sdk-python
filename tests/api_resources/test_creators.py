@@ -15,6 +15,7 @@ from influship.types import (
     CreatorLookalikeResponse,
     CreatorAutocompleteResponse,
 )
+from influship.pagination import SyncBodyCursor, AsyncBodyCursor
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -119,7 +120,7 @@ class TestCreators:
         creator = client.creators.lookalike(
             seeds=[{}],
         )
-        assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+        assert_matches_type(SyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -147,7 +148,7 @@ class TestCreators:
             },
             limit=25,
         )
-        assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+        assert_matches_type(SyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -159,7 +160,7 @@ class TestCreators:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         creator = response.parse()
-        assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+        assert_matches_type(SyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -171,7 +172,7 @@ class TestCreators:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             creator = response.parse()
-            assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+            assert_matches_type(SyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -333,7 +334,7 @@ class TestAsyncCreators:
         creator = await async_client.creators.lookalike(
             seeds=[{}],
         )
-        assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+        assert_matches_type(AsyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -361,7 +362,7 @@ class TestAsyncCreators:
             },
             limit=25,
         )
-        assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+        assert_matches_type(AsyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -373,7 +374,7 @@ class TestAsyncCreators:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         creator = await response.parse()
-        assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+        assert_matches_type(AsyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -385,7 +386,7 @@ class TestAsyncCreators:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             creator = await response.parse()
-            assert_matches_type(CreatorLookalikeResponse, creator, path=["response"])
+            assert_matches_type(AsyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

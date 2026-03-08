@@ -33,7 +33,7 @@ Methods:
 
 - <code title="get /v1/creators/{id}">client.creators.<a href="./src/influship/resources/creators.py">retrieve</a>(id, \*\*<a href="src/influship/types/creator_retrieve_params.py">params</a>) -> <a href="./src/influship/types/creator_retrieve_response.py">CreatorRetrieveResponse</a></code>
 - <code title="get /v1/creators/autocomplete">client.creators.<a href="./src/influship/resources/creators.py">autocomplete</a>(\*\*<a href="src/influship/types/creator_autocomplete_params.py">params</a>) -> <a href="./src/influship/types/creator_autocomplete_response.py">CreatorAutocompleteResponse</a></code>
-- <code title="post /v1/creators/lookalike">client.creators.<a href="./src/influship/resources/creators.py">lookalike</a>(\*\*<a href="src/influship/types/creator_lookalike_params.py">params</a>) -> <a href="./src/influship/types/creator_lookalike_response.py">CreatorLookalikeResponse</a></code>
+- <code title="post /v1/creators/lookalike">client.creators.<a href="./src/influship/resources/creators.py">lookalike</a>(\*\*<a href="src/influship/types/creator_lookalike_params.py">params</a>) -> <a href="./src/influship/types/creator_lookalike_response.py">SyncBodyCursor[CreatorLookalikeResponse]</a></code>
 - <code title="post /v1/creators/match">client.creators.<a href="./src/influship/resources/creators.py">match</a>(\*\*<a href="src/influship/types/creator_match_params.py">params</a>) -> <a href="./src/influship/types/creator_match_response.py">CreatorMatchResponse</a></code>
 
 # Search
@@ -41,7 +41,7 @@ Methods:
 Types:
 
 ```python
-from influship.types import SearchCreateResponse, SearchRetrieveResponse
+from influship.types import MatchInfo, SearchCreateResponse, SearchRetrieveResponse
 ```
 
 Methods:
