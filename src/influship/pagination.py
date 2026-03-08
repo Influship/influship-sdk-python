@@ -94,7 +94,7 @@ class SyncBodyCursor(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
         if not next_cursor:
             return None
 
-        return PageInfo(params={"cursor": next_cursor})
+        return PageInfo(json={"cursor": next_cursor})
 
 
 class AsyncBodyCursor(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
@@ -123,4 +123,4 @@ class AsyncBodyCursor(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not next_cursor:
             return None
 
-        return PageInfo(params={"cursor": next_cursor})
+        return PageInfo(json={"cursor": next_cursor})

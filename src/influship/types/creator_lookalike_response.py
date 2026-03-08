@@ -6,10 +6,10 @@ from .._models import BaseModel
 from .shared.creator_basic import CreatorBasic
 from .shared.profile_summary import ProfileSummary
 
-__all__ = ["CreatorLookalikeResponse", "Data", "DataSimilarity"]
+__all__ = ["CreatorLookalikeResponse", "Similarity"]
 
 
-class DataSimilarity(BaseModel):
+class Similarity(BaseModel):
     """Similarity information for lookalike match"""
 
     score: float
@@ -19,22 +19,12 @@ class DataSimilarity(BaseModel):
     """Shared traits with seed creators"""
 
 
-class Data(BaseModel):
+class CreatorLookalikeResponse(BaseModel):
     creator: CreatorBasic
     """Basic creator information"""
 
     primary_profile: Optional[ProfileSummary] = None
     """Abbreviated profile information"""
 
-    similarity: DataSimilarity
+    similarity: Similarity
     """Similarity information for lookalike match"""
-
-
-class CreatorLookalikeResponse(BaseModel):
-    data: List[Data]
-
-    has_more: bool
-    """Whether more results are available"""
-
-    next_cursor: Optional[str] = None
-    """Cursor for the next page"""

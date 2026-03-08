@@ -18,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncBodyCursor, AsyncBodyCursor
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.creator_match_response import CreatorMatchResponse
 from ..types.creator_retrieve_response import CreatorRetrieveResponse
 from ..types.creator_lookalike_response import CreatorLookalikeResponse
@@ -38,7 +39,7 @@ class CreatorsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/influship/influship-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/Influship/influship-sdk-python#accessing-raw-response-data-eg-headers
         """
         return CreatorsResourceWithRawResponse(self)
 
@@ -47,7 +48,7 @@ class CreatorsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/influship/influship-sdk-python#with_streaming_response
+        For more information, see https://www.github.com/Influship/influship-sdk-python#with_streaming_response
         """
         return CreatorsResourceWithStreamingResponse(self)
 
@@ -187,7 +188,7 @@ class CreatorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CreatorLookalikeResponse:
+    ) -> SyncBodyCursor[CreatorLookalikeResponse]:
         """
         Find creators similar to provided seed creators using AI-powered similarity
         matching. Analyzes content themes, audience overlap, posting style, and
@@ -224,8 +225,9 @@ class CreatorsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
+        return self._get_api_list(
             "/v1/creators/lookalike",
+            page=SyncBodyCursor[CreatorLookalikeResponse],
             body=maybe_transform(
                 {
                     "seeds": seeds,
@@ -238,7 +240,8 @@ class CreatorsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CreatorLookalikeResponse,
+            model=CreatorLookalikeResponse,
+            method="post",
         )
 
     def match(
@@ -313,7 +316,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/influship/influship-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/Influship/influship-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncCreatorsResourceWithRawResponse(self)
 
@@ -322,7 +325,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/influship/influship-sdk-python#with_streaming_response
+        For more information, see https://www.github.com/Influship/influship-sdk-python#with_streaming_response
         """
         return AsyncCreatorsResourceWithStreamingResponse(self)
 
@@ -449,7 +452,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
             cast_to=CreatorAutocompleteResponse,
         )
 
-    async def lookalike(
+    def lookalike(
         self,
         *,
         seeds: Iterable[creator_lookalike_params.Seed],
@@ -462,7 +465,7 @@ class AsyncCreatorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CreatorLookalikeResponse:
+    ) -> AsyncPaginator[CreatorLookalikeResponse, AsyncBodyCursor[CreatorLookalikeResponse]]:
         """
         Find creators similar to provided seed creators using AI-powered similarity
         matching. Analyzes content themes, audience overlap, posting style, and
@@ -499,9 +502,10 @@ class AsyncCreatorsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._get_api_list(
             "/v1/creators/lookalike",
-            body=await async_maybe_transform(
+            page=AsyncBodyCursor[CreatorLookalikeResponse],
+            body=maybe_transform(
                 {
                     "seeds": seeds,
                     "cursor": cursor,
@@ -513,7 +517,8 @@ class AsyncCreatorsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CreatorLookalikeResponse,
+            model=CreatorLookalikeResponse,
+            method="post",
         )
 
     async def match(
