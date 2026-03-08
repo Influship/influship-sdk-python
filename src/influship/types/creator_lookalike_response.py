@@ -3,25 +3,10 @@
 from typing import List, Optional
 
 from .._models import BaseModel
+from .shared.creator_basic import CreatorBasic
 from .shared.profile_summary import ProfileSummary
 
-__all__ = ["CreatorLookalikeResponse", "Data", "DataCreator", "DataSimilarity"]
-
-
-class DataCreator(BaseModel):
-    """Basic creator information"""
-
-    id: str
-    """Creator unique identifier"""
-
-    avatar_url: Optional[str] = None
-    """Avatar URL"""
-
-    bio: Optional[str] = None
-    """Creator bio"""
-
-    name: str
-    """Creator display name"""
+__all__ = ["CreatorLookalikeResponse", "Data", "DataSimilarity"]
 
 
 class DataSimilarity(BaseModel):
@@ -35,7 +20,7 @@ class DataSimilarity(BaseModel):
 
 
 class Data(BaseModel):
-    creator: DataCreator
+    creator: CreatorBasic
     """Basic creator information"""
 
     primary_profile: Optional[ProfileSummary] = None

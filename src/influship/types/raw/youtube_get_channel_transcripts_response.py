@@ -4,19 +4,9 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+from .transcript_segment import TranscriptSegment
 
-__all__ = ["YoutubeGetChannelTranscriptsResponse", "Data", "DataItem", "DataItemTranscript"]
-
-
-class DataItemTranscript(BaseModel):
-    duration: float
-    """Duration in seconds"""
-
-    start: float
-    """Start time in seconds"""
-
-    text: str
-    """Segment text"""
+__all__ = ["YoutubeGetChannelTranscriptsResponse", "Data", "DataItem"]
 
 
 class DataItem(BaseModel):
@@ -38,7 +28,7 @@ class DataItem(BaseModel):
     title: str
     """Video title"""
 
-    transcript: Optional[List[DataItemTranscript]] = None
+    transcript: Optional[List[TranscriptSegment]] = None
     """Timestamped segments (only if include_segments=true)"""
 
     url: str

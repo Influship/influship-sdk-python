@@ -135,12 +135,16 @@ from influship import Influship
 
 client = Influship()
 
-all_posts = []
+all_searches = []
 # Automatically fetches more pages as needed.
-for post in client.posts.list():
-    # Do something with post here
-    all_posts.append(post)
-print(all_posts)
+for search in client.search.retrieve(
+    id="search_abc123",
+    cursor="eyJvZmZzZXQiOjEwfQ==",
+    limit=10,
+):
+    # Do something with search here
+    all_searches.append(search)
+print(all_searches)
 ```
 
 Or, asynchronously:
@@ -153,11 +157,15 @@ client = AsyncInfluship()
 
 
 async def main() -> None:
-    all_posts = []
+    all_searches = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for post in client.posts.list():
-        all_posts.append(post)
-    print(all_posts)
+    async for search in client.search.retrieve(
+        id="search_abc123",
+        cursor="eyJvZmZzZXQiOjEwfQ==",
+        limit=10,
+    ):
+        all_searches.append(search)
+    print(all_searches)
 
 
 asyncio.run(main())
@@ -166,7 +174,11 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.posts.list()
+first_page = await client.search.retrieve(
+    id="search_abc123",
+    cursor="eyJvZmZzZXQiOjEwfQ==",
+    limit=10,
+)
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
@@ -178,11 +190,15 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.posts.list()
+first_page = await client.search.retrieve(
+    id="search_abc123",
+    cursor="eyJvZmZzZXQiOjEwfQ==",
+    limit=10,
+)
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
-for post in first_page.data:
-    print(post.id)
+for search in first_page.data:
+    print(search.creator)
 
 # Remove `await` for non-async usage.
 ```

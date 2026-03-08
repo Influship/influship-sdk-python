@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from influship.types import ProfileSummary
+from influship.types import CreatorBasic, ProfileSummary
 ```
 
 # Health
@@ -41,19 +41,27 @@ Methods:
 Types:
 
 ```python
-from influship.types import SearchCreateResponse
+from influship.types import SearchCreateResponse, SearchRetrieveResponse
 ```
 
 Methods:
 
 - <code title="post /v1/search">client.search.<a href="./src/influship/resources/search.py">create</a>(\*\*<a href="src/influship/types/search_create_params.py">params</a>) -> <a href="./src/influship/types/search_create_response.py">SearchCreateResponse</a></code>
+- <code title="get /v1/search/{id}">client.search.<a href="./src/influship/resources/search.py">retrieve</a>(id, \*\*<a href="src/influship/types/search_retrieve_params.py">params</a>) -> <a href="./src/influship/types/search_retrieve_response.py">SyncQueryCursor[SearchRetrieveResponse]</a></code>
 
 # Profiles
 
 Types:
 
 ```python
-from influship.types import ProfileGetResponse, ProfileLookupResponse
+from influship.types import (
+    ProfileActivity,
+    ProfileGrowth,
+    ProfileMetrics,
+    ProfileResponseData,
+    ProfileGetResponse,
+    ProfileLookupResponse,
+)
 ```
 
 Methods:
@@ -71,7 +79,7 @@ from influship.types import PostListResponse
 
 Methods:
 
-- <code title="get /v1/posts">client.posts.<a href="./src/influship/resources/posts.py">list</a>(\*\*<a href="src/influship/types/post_list_params.py">params</a>) -> <a href="./src/influship/types/post_list_response.py">SyncCursor[PostListResponse]</a></code>
+- <code title="get /v1/posts">client.posts.<a href="./src/influship/resources/posts.py">list</a>(\*\*<a href="src/influship/types/post_list_params.py">params</a>) -> <a href="./src/influship/types/post_list_response.py">SyncQueryCursor[PostListResponse]</a></code>
 
 # Raw
 
@@ -93,6 +101,7 @@ Types:
 
 ```python
 from influship.types.raw import (
+    TranscriptSegment,
     YoutubeGetChannelResponse,
     YoutubeGetChannelTranscriptsResponse,
     YoutubeGetTranscriptResponse,

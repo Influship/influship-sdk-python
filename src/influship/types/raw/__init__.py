@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .transcript_segment import TranscriptSegment as TranscriptSegment
 from .youtube_search_params import YoutubeSearchParams as YoutubeSearchParams
 from .youtube_search_response import YoutubeSearchResponse as YoutubeSearchResponse
 from .youtube_get_channel_params import YoutubeGetChannelParams as YoutubeGetChannelParams
