@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -93,7 +93,7 @@ class InstagramResource(SyncAPIResource):
         if not username:
             raise ValueError(f"Expected a non-empty value for `username` but received {username!r}")
         return self._get(
-            f"/v1/raw/instagram/profile/{username}",
+            path_template("/v1/raw/instagram/profile/{username}", username=username),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -183,7 +183,7 @@ class AsyncInstagramResource(AsyncAPIResource):
         if not username:
             raise ValueError(f"Expected a non-empty value for `username` but received {username!r}")
         return await self._get(
-            f"/v1/raw/instagram/profile/{username}",
+            path_template("/v1/raw/instagram/profile/{username}", username=username),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
