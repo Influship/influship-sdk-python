@@ -142,11 +142,11 @@ class TestCreators:
                 },
                 "followers": {
                     "max": 500000,
-                    "min": 10000,
+                    "min": 25000,
                 },
                 "verified": True,
             },
-            limit=25,
+            limit=20,
         )
         assert_matches_type(SyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
@@ -180,8 +180,8 @@ class TestCreators:
     @parametrize
     def test_method_match(self, client: Influship) -> None:
         creator = client.creators.match(
-            creators=[{}],
-            intent={"query": "Looking for fitness influencers to promote our new protein bar"},
+            creators=[{}, {}],
+            intent={"query": "Promote our new plant-based protein powder"},
         )
         assert_matches_type(CreatorMatchResponse, creator, path=["response"])
 
@@ -194,11 +194,16 @@ class TestCreators:
                     "creator_id": "123e4567-e89b-12d3-a456-426614174000",
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "creator_id": "123e4567-e89b-12d3-a456-426614174000",
+                    "platform": "instagram",
+                    "username": "fitness_coach_jane",
+                },
             ],
             intent={
-                "query": "Looking for fitness influencers to promote our new protein bar",
-                "context": "Target audience is health-conscious millennials",
+                "query": "Promote our new plant-based protein powder",
+                "context": "Target audience is health-conscious millennials interested in sustainable fitness",
             },
         )
         assert_matches_type(CreatorMatchResponse, creator, path=["response"])
@@ -207,8 +212,8 @@ class TestCreators:
     @parametrize
     def test_raw_response_match(self, client: Influship) -> None:
         response = client.creators.with_raw_response.match(
-            creators=[{}],
-            intent={"query": "Looking for fitness influencers to promote our new protein bar"},
+            creators=[{}, {}],
+            intent={"query": "Promote our new plant-based protein powder"},
         )
 
         assert response.is_closed is True
@@ -220,8 +225,8 @@ class TestCreators:
     @parametrize
     def test_streaming_response_match(self, client: Influship) -> None:
         with client.creators.with_streaming_response.match(
-            creators=[{}],
-            intent={"query": "Looking for fitness influencers to promote our new protein bar"},
+            creators=[{}, {}],
+            intent={"query": "Promote our new plant-based protein powder"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -356,11 +361,11 @@ class TestAsyncCreators:
                 },
                 "followers": {
                     "max": 500000,
-                    "min": 10000,
+                    "min": 25000,
                 },
                 "verified": True,
             },
-            limit=25,
+            limit=20,
         )
         assert_matches_type(AsyncBodyCursor[CreatorLookalikeResponse], creator, path=["response"])
 
@@ -394,8 +399,8 @@ class TestAsyncCreators:
     @parametrize
     async def test_method_match(self, async_client: AsyncInfluship) -> None:
         creator = await async_client.creators.match(
-            creators=[{}],
-            intent={"query": "Looking for fitness influencers to promote our new protein bar"},
+            creators=[{}, {}],
+            intent={"query": "Promote our new plant-based protein powder"},
         )
         assert_matches_type(CreatorMatchResponse, creator, path=["response"])
 
@@ -408,11 +413,16 @@ class TestAsyncCreators:
                     "creator_id": "123e4567-e89b-12d3-a456-426614174000",
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "creator_id": "123e4567-e89b-12d3-a456-426614174000",
+                    "platform": "instagram",
+                    "username": "fitness_coach_jane",
+                },
             ],
             intent={
-                "query": "Looking for fitness influencers to promote our new protein bar",
-                "context": "Target audience is health-conscious millennials",
+                "query": "Promote our new plant-based protein powder",
+                "context": "Target audience is health-conscious millennials interested in sustainable fitness",
             },
         )
         assert_matches_type(CreatorMatchResponse, creator, path=["response"])
@@ -421,8 +431,8 @@ class TestAsyncCreators:
     @parametrize
     async def test_raw_response_match(self, async_client: AsyncInfluship) -> None:
         response = await async_client.creators.with_raw_response.match(
-            creators=[{}],
-            intent={"query": "Looking for fitness influencers to promote our new protein bar"},
+            creators=[{}, {}],
+            intent={"query": "Promote our new plant-based protein powder"},
         )
 
         assert response.is_closed is True
@@ -434,8 +444,8 @@ class TestAsyncCreators:
     @parametrize
     async def test_streaming_response_match(self, async_client: AsyncInfluship) -> None:
         async with async_client.creators.with_streaming_response.match(
-            creators=[{}],
-            intent={"query": "Looking for fitness influencers to promote our new protein bar"},
+            creators=[{}, {}],
+            intent={"query": "Promote our new plant-based protein powder"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

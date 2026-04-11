@@ -22,7 +22,7 @@ class TestSearch:
     @parametrize
     def test_method_create(self, client: Influship) -> None:
         search = client.search.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
         )
         assert_matches_type(SearchCreateResponse, search, path=["response"])
 
@@ -30,19 +30,19 @@ class TestSearch:
     @parametrize
     def test_method_create_with_all_params(self, client: Influship) -> None:
         search = client.search.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
             filters={
                 "engagement_rate": {
                     "max": 10,
-                    "min": 1.5,
+                    "min": 2,
                 },
                 "followers": {
                     "max": 500000,
-                    "min": 10000,
+                    "min": 50000,
                 },
                 "verified": True,
             },
-            limit=25,
+            limit=10,
             platforms=["instagram"],
         )
         assert_matches_type(SearchCreateResponse, search, path=["response"])
@@ -51,7 +51,7 @@ class TestSearch:
     @parametrize
     def test_raw_response_create(self, client: Influship) -> None:
         response = client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
         )
 
         assert response.is_closed is True
@@ -63,7 +63,7 @@ class TestSearch:
     @parametrize
     def test_streaming_response_create(self, client: Influship) -> None:
         with client.search.with_streaming_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -135,7 +135,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_create(self, async_client: AsyncInfluship) -> None:
         search = await async_client.search.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
         )
         assert_matches_type(SearchCreateResponse, search, path=["response"])
 
@@ -143,19 +143,19 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncInfluship) -> None:
         search = await async_client.search.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
             filters={
                 "engagement_rate": {
                     "max": 10,
-                    "min": 1.5,
+                    "min": 2,
                 },
                 "followers": {
                     "max": 500000,
-                    "min": 10000,
+                    "min": 50000,
                 },
                 "verified": True,
             },
-            limit=25,
+            limit=10,
             platforms=["instagram"],
         )
         assert_matches_type(SearchCreateResponse, search, path=["response"])
@@ -164,7 +164,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncInfluship) -> None:
         response = await async_client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
         )
 
         assert response.is_closed is True
@@ -176,7 +176,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncInfluship) -> None:
         async with async_client.search.with_streaming_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
+            query="fitness influencers who post workout videos",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
