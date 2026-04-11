@@ -879,7 +879,7 @@ class TestInfluship:
 
         with pytest.raises(APITimeoutError):
             client.search.with_streaming_response.create(
-                query="fitness influencers with 100k+ followers who post workout videos"
+                query="fitness influencers who post workout videos"
             ).__enter__()
 
         assert _get_open_connections(client) == 0
@@ -891,7 +891,7 @@ class TestInfluship:
 
         with pytest.raises(APIStatusError):
             client.search.with_streaming_response.create(
-                query="fitness influencers with 100k+ followers who post workout videos"
+                query="fitness influencers who post workout videos"
             ).__enter__()
         assert _get_open_connections(client) == 0
 
@@ -921,9 +921,7 @@ class TestInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos"
-        )
+        response = client.search.with_raw_response.create(query="fitness influencers who post workout videos")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -948,8 +946,7 @@ class TestInfluship:
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
         response = client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
-            extra_headers={"x-stainless-retry-count": Omit()},
+            query="fitness influencers who post workout videos", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -974,8 +971,7 @@ class TestInfluship:
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
         response = client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
-            extra_headers={"x-stainless-retry-count": "42"},
+            query="fitness influencers who post workout videos", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1823,7 +1819,7 @@ class TestAsyncInfluship:
 
         with pytest.raises(APITimeoutError):
             await async_client.search.with_streaming_response.create(
-                query="fitness influencers with 100k+ followers who post workout videos"
+                query="fitness influencers who post workout videos"
             ).__aenter__()
 
         assert _get_open_connections(async_client) == 0
@@ -1837,7 +1833,7 @@ class TestAsyncInfluship:
 
         with pytest.raises(APIStatusError):
             await async_client.search.with_streaming_response.create(
-                query="fitness influencers with 100k+ followers who post workout videos"
+                query="fitness influencers who post workout videos"
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
 
@@ -1867,9 +1863,7 @@ class TestAsyncInfluship:
 
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos"
-        )
+        response = await client.search.with_raw_response.create(query="fitness influencers who post workout videos")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1894,8 +1888,7 @@ class TestAsyncInfluship:
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
         response = await client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
-            extra_headers={"x-stainless-retry-count": Omit()},
+            query="fitness influencers who post workout videos", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1920,8 +1913,7 @@ class TestAsyncInfluship:
         respx_mock.post("/v1/search").mock(side_effect=retry_handler)
 
         response = await client.search.with_raw_response.create(
-            query="fitness influencers with 100k+ followers who post workout videos",
-            extra_headers={"x-stainless-retry-count": "42"},
+            query="fitness influencers who post workout videos", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

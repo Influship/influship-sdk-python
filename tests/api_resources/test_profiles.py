@@ -77,7 +77,15 @@ class TestProfiles:
                 {
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "platform": "instagram",
+                    "username": "wellness_guru",
+                },
+                {
+                    "platform": "instagram",
+                    "username": "healthy_eating_tips",
+                },
             ],
         )
         assert_matches_type(ProfileLookupResponse, profile, path=["response"])
@@ -90,7 +98,15 @@ class TestProfiles:
                 {
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "platform": "instagram",
+                    "username": "wellness_guru",
+                },
+                {
+                    "platform": "instagram",
+                    "username": "healthy_eating_tips",
+                },
             ],
         )
 
@@ -107,7 +123,15 @@ class TestProfiles:
                 {
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "platform": "instagram",
+                    "username": "wellness_guru",
+                },
+                {
+                    "platform": "instagram",
+                    "username": "healthy_eating_tips",
+                },
             ],
         ) as response:
             assert not response.is_closed
@@ -184,7 +208,15 @@ class TestAsyncProfiles:
                 {
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "platform": "instagram",
+                    "username": "wellness_guru",
+                },
+                {
+                    "platform": "instagram",
+                    "username": "healthy_eating_tips",
+                },
             ],
         )
         assert_matches_type(ProfileLookupResponse, profile, path=["response"])
@@ -197,7 +229,15 @@ class TestAsyncProfiles:
                 {
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "platform": "instagram",
+                    "username": "wellness_guru",
+                },
+                {
+                    "platform": "instagram",
+                    "username": "healthy_eating_tips",
+                },
             ],
         )
 
@@ -214,7 +254,15 @@ class TestAsyncProfiles:
                 {
                     "platform": "instagram",
                     "username": "fitness_coach_jane",
-                }
+                },
+                {
+                    "platform": "instagram",
+                    "username": "wellness_guru",
+                },
+                {
+                    "platform": "instagram",
+                    "username": "healthy_eating_tips",
+                },
             ],
         ) as response:
             assert not response.is_closed

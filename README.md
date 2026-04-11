@@ -213,8 +213,15 @@ from influship import Influship
 client = Influship()
 
 search = client.search.create(
-    query="fitness influencers with 100k+ followers who post workout videos",
-    filters={},
+    query="fitness influencers who post workout videos",
+    filters={
+        "engagement_rate": {"min": 2},
+        "followers": {
+            "max": 500000,
+            "min": 50000,
+        },
+        "verified": True,
+    },
 )
 print(search.filters)
 ```
