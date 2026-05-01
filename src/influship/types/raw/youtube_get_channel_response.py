@@ -9,20 +9,14 @@ __all__ = ["YoutubeGetChannelResponse", "Data", "DataVideo"]
 
 
 class DataVideo(BaseModel):
-    id: str
-    """Video ID"""
-
-    comments: Optional[int] = None
-    """Comment count"""
-
     duration_seconds: Optional[int] = None
     """Video duration in seconds"""
 
-    likes: Optional[int] = None
-    """Like count"""
+    duration_text: Optional[str] = None
+    """Video duration text (e.g., "30:45")"""
 
-    published_at: datetime
-    """Publish timestamp"""
+    published_text: Optional[str] = None
+    """Relative publish time as displayed by YouTube"""
 
     thumbnail_url: Optional[str] = None
     """Thumbnail URL"""
@@ -33,19 +27,37 @@ class DataVideo(BaseModel):
     url: str
     """Video URL"""
 
-    views: Optional[int] = None
+    video_id: str
+    """YouTube video ID"""
+
+    view_count: Optional[int] = None
     """View count"""
+
+    view_count_text: Optional[str] = None
+    """View count text as displayed by YouTube"""
 
 
 class Data(BaseModel):
     avatar_url: Optional[str] = None
     """Channel avatar URL"""
 
-    description: Optional[str] = None
+    banner_url: Optional[str] = None
+    """Channel banner image URL"""
+
+    channel_id: str
+    """YouTube channel ID"""
+
+    country: Optional[str] = None
+    """Channel country code"""
+
+    description: str
     """Channel description"""
 
-    handle: str
-    """Channel handle"""
+    handle: Optional[str] = None
+    """Channel handle (without @)"""
+
+    keywords: List[str]
+    """Channel keywords / tags"""
 
     name: str
     """Channel name"""
@@ -53,17 +65,20 @@ class Data(BaseModel):
     scraped_at: datetime
     """When this data was scraped"""
 
-    subscribers: int
+    subscribers: Optional[int] = None
     """Subscriber count"""
 
-    videos_count: int
+    subscribers_text: Optional[str] = None
+    """Subscriber count text as displayed by YouTube"""
+
+    videos: List[DataVideo]
+    """Recent videos (empty when include_videos=false)"""
+
+    videos_count: Optional[int] = None
     """Total video count"""
 
-    views_total: int
-    """Total view count"""
-
-    videos: Optional[List[DataVideo]] = None
-    """Recent videos (only included when include_videos=true)"""
+    views_total: Optional[int] = None
+    """Total view count across all videos"""
 
 
 class YoutubeGetChannelResponse(BaseModel):

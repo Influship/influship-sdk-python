@@ -6,140 +6,123 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["InstagramGetProfileResponse", "Data", "DataActivity", "DataGrowth", "DataMetrics", "DataPost"]
+__all__ = [
+    "InstagramGetProfileResponse",
+    "Data",
+    "DataBioLink",
+    "DataPost",
+    "DataPostCarouselItem",
+    "DataRelatedProfile",
+]
 
 
-class DataActivity(BaseModel):
-    last_post_at: Optional[datetime] = None
-    """Timestamp of last post"""
+class DataBioLink(BaseModel):
+    title: str
+
+    url: str
+
+    link_type: Optional[str] = None
 
 
-class DataGrowth(BaseModel):
-    followers_30d_pct: float
-    """Follower growth percentage over 30 days (e.g. 2.5 means +2.5%)"""
+class DataPostCarouselItem(BaseModel):
+    display_url: str
 
+    index: float
 
-class DataMetrics(BaseModel):
-    avg_comments_recent: float
-    """Average comments on recent posts"""
+    is_video: bool
 
-    avg_likes_recent: float
-    """Average likes on recent posts"""
+    thumbnail_url: Optional[str] = None
 
-    avg_views_recent: Optional[float] = None
-    """Average views on recent posts"""
-
-    engagement_rate: float
-    """Engagement rate as a percentage (e.g. 3.5 means 3.5%)"""
-
-    followers: int
-    """Follower count"""
-
-    following: int
-    """Following count"""
-
-    posts: int
-    """Total post count"""
-
-    posts_last_30d: int
-    """Posts in the last 30 days"""
-
-    posts_per_week: float
-    """Average posts per week"""
+    video_url: Optional[str] = None
 
 
 class DataPost(BaseModel):
-    """Simplified post from live scrape"""
-
     id: str
-    """Post unique identifier"""
 
     caption: Optional[str] = None
-    """Post caption"""
 
-    comments_count: Optional[int] = None
-    """Comment count"""
+    comment_count: float
 
-    likes_count: Optional[int] = None
-    """Like count"""
+    display_url: str
 
-    media_url: Optional[str] = None
-    """Primary media URL"""
+    is_video: bool
 
-    platform_id: str
-    """Platform-specific post ID"""
+    like_count: float
 
-    posted_at: datetime
-    """Post timestamp"""
+    post_type: Literal["image", "video", "carousel"]
 
-    type: Literal["image", "video", "carousel", "reel", "story"]
-    """Type of post"""
+    shortcode: str
 
-    url: str
-    """Post URL"""
+    taken_at: Optional[float] = None
+
+    accessibility_caption: Optional[str] = None
+
+    carousel_items: Optional[List[DataPostCarouselItem]] = None
+
+    thumbnail_url: Optional[str] = None
+
+    video_url: Optional[str] = None
+
+    view_count: Optional[float] = None
+
+
+class DataRelatedProfile(BaseModel):
+    full_name: Optional[str] = None
+
+    is_private: bool
+
+    is_verified: bool
+
+    profile_pic_url: Optional[str] = None
+
+    username: str
 
 
 class Data(BaseModel):
-    """Live scraped profile data"""
+    bio_links: List[DataBioLink]
 
-    id: str
-    """Profile unique identifier"""
+    biography: str
 
-    activity: DataActivity
+    category_name: Optional[str] = None
 
-    avatar_url: Optional[str] = None
-    """Avatar URL"""
-
-    bio: Optional[str] = None
-    """Profile bio"""
-
-    category: Optional[str] = None
-    """Account category"""
-
-    creator_id: str
-    """Creator unique identifier"""
-
-    data_updated_at: Optional[datetime] = None
-    """Last data refresh timestamp"""
-
-    display_name: Optional[str] = None
-    """Display name"""
+    engagement_rate: float
 
     external_url: Optional[str] = None
-    """External website URL"""
 
-    growth: DataGrowth
+    follower_count: float
+
+    following_count: float
+
+    full_name: str
+
+    highlight_reel_count: float
 
     is_business: bool
-    """Whether this is a business account"""
 
     is_private: bool
-    """Whether the account is private"""
+
+    is_professional: bool
 
     is_verified: bool
-    """Whether the account is verified"""
 
-    metrics: DataMetrics
+    media_count: float
 
-    platform: Literal["instagram"]
-    """Social media platform"""
+    posts: List[DataPost]
 
-    pronouns: Optional[List[str]] = None
-    """Listed pronouns"""
+    profile_pic_url: str
+
+    pronouns: List[str]
+
+    related_profiles: List[DataRelatedProfile]
 
     scraped_at: datetime
-    """When this data was scraped"""
 
-    url: str
-    """Profile URL"""
+    user_id: str
 
     username: str
-    """Profile username"""
 
-    posts: Optional[List[DataPost]] = None
-    """Recent posts (only included when include_posts=true)"""
+    profile_pic_url_hd: Optional[str] = None
 
 
 class InstagramGetProfileResponse(BaseModel):
     data: Data
-    """Live scraped profile data"""
