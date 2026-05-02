@@ -80,6 +80,9 @@ class PostsResource(SyncAPIResource):
         - `most_views`: Most views first (video content)
         - `most_comments`: Most comments first
 
+        Also callable as the `get_posts` MCP tool — see
+        [the MCP server guide](/guides/mcp-server) for setup.
+
         **Pricing**: 0.05 credits per post returned ($0.0005)
 
         Args:
@@ -182,6 +185,9 @@ class AsyncPostsResource(AsyncAPIResource):
         - `most_likes`: Most likes first
         - `most_views`: Most views first (video content)
         - `most_comments`: Most comments first
+
+        Also callable as the `get_posts` MCP tool — see
+        [the MCP server guide](/guides/mcp-server) for setup.
 
         **Pricing**: 0.05 credits per post returned ($0.0005)
 
