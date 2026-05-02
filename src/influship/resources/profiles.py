@@ -71,6 +71,9 @@ class ProfilesResource(SyncAPIResource):
         - Growth data (30-day follower growth, monthly rate)
         - Activity data (last post date, posting frequency)
 
+        Also callable as the `get_profile` MCP tool — see
+        [the MCP server guide](/guides/mcp-server) for setup.
+
         **Pricing**: 0.1 credits per request ($0.001)
 
         Args:
@@ -119,6 +122,9 @@ class ProfilesResource(SyncAPIResource):
         - `found`: Array of profiles that exist in our database
         - `not_found`: Array of profiles that weren't found (consider live scraping
           these)
+
+        Also callable as the `lookup_profiles` MCP tool — see
+        [the MCP server guide](/guides/mcp-server) for setup.
 
         **Pricing**: 0.1 credits per profile ($0.001)
 
@@ -190,6 +196,9 @@ class AsyncProfilesResource(AsyncAPIResource):
         - Growth data (30-day follower growth, monthly rate)
         - Activity data (last post date, posting frequency)
 
+        Also callable as the `get_profile` MCP tool — see
+        [the MCP server guide](/guides/mcp-server) for setup.
+
         **Pricing**: 0.1 credits per request ($0.001)
 
         Args:
@@ -238,6 +247,9 @@ class AsyncProfilesResource(AsyncAPIResource):
         - `found`: Array of profiles that exist in our database
         - `not_found`: Array of profiles that weren't found (consider live scraping
           these)
+
+        Also callable as the `lookup_profiles` MCP tool — see
+        [the MCP server guide](/guides/mcp-server) for setup.
 
         **Pricing**: 0.1 credits per profile ($0.001)
 
