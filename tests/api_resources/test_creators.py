@@ -28,6 +28,14 @@ class TestCreators:
     def test_method_retrieve(self, client: Influship) -> None:
         creator = client.creators.retrieve(
             id="123e4567-e89b-12d3-a456-426614174000",
+        )
+        assert_matches_type(CreatorRetrieveResponse, creator, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Influship) -> None:
+        creator = client.creators.retrieve(
+            id="123e4567-e89b-12d3-a456-426614174000",
             include=["profiles"],
         )
         assert_matches_type(CreatorRetrieveResponse, creator, path=["response"])
@@ -37,7 +45,6 @@ class TestCreators:
     def test_raw_response_retrieve(self, client: Influship) -> None:
         response = client.creators.with_raw_response.retrieve(
             id="123e4567-e89b-12d3-a456-426614174000",
-            include=["profiles"],
         )
 
         assert response.is_closed is True
@@ -50,7 +57,6 @@ class TestCreators:
     def test_streaming_response_retrieve(self, client: Influship) -> None:
         with client.creators.with_streaming_response.retrieve(
             id="123e4567-e89b-12d3-a456-426614174000",
-            include=["profiles"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -66,7 +72,6 @@ class TestCreators:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.creators.with_raw_response.retrieve(
                 id="",
-                include=["profiles"],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -247,6 +252,14 @@ class TestAsyncCreators:
     async def test_method_retrieve(self, async_client: AsyncInfluship) -> None:
         creator = await async_client.creators.retrieve(
             id="123e4567-e89b-12d3-a456-426614174000",
+        )
+        assert_matches_type(CreatorRetrieveResponse, creator, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncInfluship) -> None:
+        creator = await async_client.creators.retrieve(
+            id="123e4567-e89b-12d3-a456-426614174000",
             include=["profiles"],
         )
         assert_matches_type(CreatorRetrieveResponse, creator, path=["response"])
@@ -256,7 +269,6 @@ class TestAsyncCreators:
     async def test_raw_response_retrieve(self, async_client: AsyncInfluship) -> None:
         response = await async_client.creators.with_raw_response.retrieve(
             id="123e4567-e89b-12d3-a456-426614174000",
-            include=["profiles"],
         )
 
         assert response.is_closed is True
@@ -269,7 +281,6 @@ class TestAsyncCreators:
     async def test_streaming_response_retrieve(self, async_client: AsyncInfluship) -> None:
         async with async_client.creators.with_streaming_response.retrieve(
             id="123e4567-e89b-12d3-a456-426614174000",
-            include=["profiles"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -285,7 +296,6 @@ class TestAsyncCreators:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.creators.with_raw_response.retrieve(
                 id="",
-                include=["profiles"],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

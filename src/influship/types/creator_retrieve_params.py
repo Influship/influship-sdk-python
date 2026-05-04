@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["CreatorRetrieveParams"]
 
 
 class CreatorRetrieveParams(TypedDict, total=False):
-    include: Required[List[Literal["profiles"]]]
+    include: List[Literal["profiles"]]
     """Additional data to include in response"""
