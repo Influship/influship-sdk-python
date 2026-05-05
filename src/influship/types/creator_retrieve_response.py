@@ -17,17 +17,29 @@ class Data(BaseModel):
     ai_summary: Optional[str] = None
     """AI-generated summary of the creator"""
 
+    audience_demographics: Optional[str] = None
+    """Synthesized audience demographic summary"""
+
     avatar_url: Optional[str] = None
     """Avatar URL"""
 
     bio: Optional[str] = None
     """Creator bio"""
 
+    brand_alignment: List[str]
+    """Brand categories this creator is likely to align with"""
+
     content_themes: List[str]
     """Content themes/topics"""
 
+    key_facts: List[str]
+    """Synthesized facts and notable context about the creator"""
+
     name: str
     """Creator display name"""
+
+    vibe_and_aesthetics: Optional[str] = None
+    """Synthesized description of visual style and tone"""
 
     profiles: Optional[List[ProfileSummary]] = None
     """Social profiles (only included when include=profiles)"""
