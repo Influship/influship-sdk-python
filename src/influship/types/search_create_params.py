@@ -12,6 +12,12 @@ class SearchCreateParams(TypedDict, total=False):
     query: Required[str]
     """Natural language search query"""
 
+    creator_kinds: List[Literal["INFLUENCER", "THEME_PAGE"]]
+    """Restrict results to specific creator kinds (e.g.
+
+    INFLUENCER vs THEME_PAGE). Omit for no filter.
+    """
+
     filters: Filters
     """Additional filters"""
 
