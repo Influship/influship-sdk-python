@@ -55,6 +55,7 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         query: str,
+        creator_kinds: List[Literal["INFLUENCER", "THEME_PAGE"]] | Omit = omit,
         filters: search_create_params.Filters | Omit = omit,
         limit: int | Omit = omit,
         platforms: List[Literal["instagram"]] | Omit = omit,
@@ -89,6 +90,9 @@ class SearchResource(SyncAPIResource):
         Args:
           query: Natural language search query
 
+          creator_kinds: Restrict results to specific creator kinds (e.g. INFLUENCER vs THEME_PAGE). Omit
+              for no filter.
+
           filters: Additional filters
 
           limit: Maximum results to return
@@ -108,6 +112,7 @@ class SearchResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "query": query,
+                    "creator_kinds": creator_kinds,
                     "filters": filters,
                     "limit": limit,
                     "platforms": platforms,
@@ -208,6 +213,7 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        creator_kinds: List[Literal["INFLUENCER", "THEME_PAGE"]] | Omit = omit,
         filters: search_create_params.Filters | Omit = omit,
         limit: int | Omit = omit,
         platforms: List[Literal["instagram"]] | Omit = omit,
@@ -242,6 +248,9 @@ class AsyncSearchResource(AsyncAPIResource):
         Args:
           query: Natural language search query
 
+          creator_kinds: Restrict results to specific creator kinds (e.g. INFLUENCER vs THEME_PAGE). Omit
+              for no filter.
+
           filters: Additional filters
 
           limit: Maximum results to return
@@ -261,6 +270,7 @@ class AsyncSearchResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "query": query,
+                    "creator_kinds": creator_kinds,
                     "filters": filters,
                     "limit": limit,
                     "platforms": platforms,
