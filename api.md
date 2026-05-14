@@ -88,12 +88,22 @@ Methods:
 Types:
 
 ```python
-from influship.types.raw import InstagramGetProfileResponse
+from influship.types.raw import (
+    InstagramGetPostResponse,
+    InstagramGetPostsResponse,
+    InstagramGetProfileResponse,
+    InstagramGetTranscriptResponse,
+    InstagramGetTranscriptsResponse,
+)
 ```
 
 Methods:
 
+- <code title="get /v1/raw/instagram/post/{shortcode}">client.raw.instagram.<a href="./src/influship/resources/raw/instagram.py">get_post</a>(shortcode) -> <a href="./src/influship/types/raw/instagram_get_post_response.py">InstagramGetPostResponse</a></code>
+- <code title="post /v1/raw/instagram/posts">client.raw.instagram.<a href="./src/influship/resources/raw/instagram.py">get_posts</a>(\*\*<a href="src/influship/types/raw/instagram_get_posts_params.py">params</a>) -> <a href="./src/influship/types/raw/instagram_get_posts_response.py">InstagramGetPostsResponse</a></code>
 - <code title="get /v1/raw/instagram/profile/{username}">client.raw.instagram.<a href="./src/influship/resources/raw/instagram.py">get_profile</a>(username, \*\*<a href="src/influship/types/raw/instagram_get_profile_params.py">params</a>) -> <a href="./src/influship/types/raw/instagram_get_profile_response.py">InstagramGetProfileResponse</a></code>
+- <code title="get /v1/raw/instagram/transcript/{shortcode}">client.raw.instagram.<a href="./src/influship/resources/raw/instagram.py">get_transcript</a>(shortcode, \*\*<a href="src/influship/types/raw/instagram_get_transcript_params.py">params</a>) -> <a href="./src/influship/types/raw/instagram_get_transcript_response.py">InstagramGetTranscriptResponse</a></code>
+- <code title="post /v1/raw/instagram/transcripts">client.raw.instagram.<a href="./src/influship/resources/raw/instagram.py">get_transcripts</a>(\*\*<a href="src/influship/types/raw/instagram_get_transcripts_params.py">params</a>) -> <a href="./src/influship/types/raw/instagram_get_transcripts_response.py">InstagramGetTranscriptsResponse</a></code>
 
 ## Youtube
 
