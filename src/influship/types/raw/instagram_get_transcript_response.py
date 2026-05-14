@@ -7,9 +7,8 @@ from typing_extensions import Literal
 from ..._models import BaseModel
 
 __all__ = [
-    "InstagramGetProfileResponse",
+    "InstagramGetTranscriptResponse",
     "Data",
-    "DataBioLink",
     "DataPost",
     "DataPostCarouselItem",
     "DataPostDisplayResource",
@@ -18,16 +17,7 @@ __all__ = [
     "DataPostMusicAttribution",
     "DataPostProductMention",
     "DataPostVideoVersion",
-    "DataRelatedProfile",
 ]
-
-
-class DataBioLink(BaseModel):
-    title: str
-
-    url: str
-
-    link_type: Optional[str] = None
 
 
 class DataPostCarouselItem(BaseModel):
@@ -160,63 +150,29 @@ class DataPost(BaseModel):
     view_count: Optional[float] = None
 
 
-class DataRelatedProfile(BaseModel):
-    full_name: Optional[str] = None
-
-    is_private: bool
-
-    is_verified: bool
-
-    profile_pic_url: Optional[str] = None
-
-    username: str
-
-
 class Data(BaseModel):
-    bio_links: List[DataBioLink]
+    full_text: str
 
-    biography: str
+    language: str
 
-    category_name: Optional[str] = None
-
-    engagement_rate: float
-
-    external_url: Optional[str] = None
-
-    follower_count: float
-
-    following_count: float
-
-    full_name: str
-
-    highlight_reel_count: float
-
-    is_business: bool
-
-    is_private: bool
-
-    is_professional: bool
-
-    is_verified: bool
-
-    media_count: float
-
-    posts: List[DataPost]
-
-    profile_pic_url: str
-
-    pronouns: List[str]
-
-    related_profiles: List[DataRelatedProfile]
+    post: DataPost
 
     scraped_at: datetime
 
-    user_id: str
+    shortcode: str
 
-    username: str
+    source: Literal["native", "whisper", "groq"]
 
-    profile_pic_url_hd: Optional[str] = None
+    transcript: str
+
+    word_count: float
+
+    duration_seconds: Optional[float] = None
+
+    model: Optional[str] = None
+
+    provider: Optional[str] = None
 
 
-class InstagramGetProfileResponse(BaseModel):
+class InstagramGetTranscriptResponse(BaseModel):
     data: Data
