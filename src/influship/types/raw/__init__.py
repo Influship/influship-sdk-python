@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .raw_scraper_error import RawScraperError as RawScraperError
 from .transcript_segment import TranscriptSegment as TranscriptSegment
 from .youtube_search_params import YoutubeSearchParams as YoutubeSearchParams
 from .youtube_search_response import YoutubeSearchResponse as YoutubeSearchResponse

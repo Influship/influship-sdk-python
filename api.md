@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from influship.types import CreatorBasic, ProfileSummary
+from influship.types import CreatorBasic, ProfileSummary, RawScraperError
 ```
 
 # Health
@@ -91,7 +91,6 @@ Types:
 from influship.types.raw import (
     InstagramSinglePostResponse,
     InstagramTranscriptResponse,
-    RawScraperError,
     InstagramGetPostResponse,
     InstagramGetPostsResponse,
     InstagramGetProfileResponse,
