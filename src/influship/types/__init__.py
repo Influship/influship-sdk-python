@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .shared import CreatorBasic as CreatorBasic, ProfileSummary as ProfileSummary
+from .shared import CreatorBasic as CreatorBasic, ProfileSummary as ProfileSummary, RawScraperError as RawScraperError
 from .match_info import MatchInfo as MatchInfo
 from .profile_growth import ProfileGrowth as ProfileGrowth
 from .profile_metrics import ProfileMetrics as ProfileMetrics
