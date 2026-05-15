@@ -172,10 +172,6 @@ class DataItemInstagramTranscriptBatchSuccessItemData(BaseModel):
 
     duration_seconds: Optional[float] = None
 
-    model: Optional[str] = None
-
-    provider: Optional[str] = None
-
 
 class DataItemInstagramTranscriptBatchSuccessItem(BaseModel):
     data: DataItemInstagramTranscriptBatchSuccessItemData
