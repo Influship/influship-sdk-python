@@ -161,8 +161,6 @@ class Data(BaseModel):
 
     shortcode: str
 
-    source: Literal["native", "whisper", "groq"]
-
     transcript: str
 
     word_count: float
