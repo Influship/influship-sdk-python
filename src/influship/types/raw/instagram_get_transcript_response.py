@@ -167,10 +167,6 @@ class Data(BaseModel):
 
     duration_seconds: Optional[float] = None
 
-    model: Optional[str] = None
-
-    provider: Optional[str] = None
-
 
 class InstagramGetTranscriptResponse(BaseModel):
     data: Data
