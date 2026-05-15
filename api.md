@@ -89,6 +89,9 @@ Types:
 
 ```python
 from influship.types.raw import (
+    InstagramSinglePostResponse,
+    InstagramTranscriptResponse,
+    RawScraperError,
     InstagramGetPostResponse,
     InstagramGetPostsResponse,
     InstagramGetProfileResponse,

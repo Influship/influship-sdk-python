@@ -7,30 +7,19 @@ from typing_extensions import Literal
 from ..._models import BaseModel
 
 __all__ = [
-    "InstagramGetProfileResponse",
-    "Data",
-    "DataBioLink",
-    "DataPost",
-    "DataPostCarouselItem",
-    "DataPostDisplayResource",
-    "DataPostEngagementVisibility",
-    "DataPostLocation",
-    "DataPostMusicAttribution",
-    "DataPostProductMention",
-    "DataPostVideoVersion",
-    "DataRelatedProfile",
+    "InstagramSinglePostResponse",
+    "Post",
+    "PostCarouselItem",
+    "PostDisplayResource",
+    "PostEngagementVisibility",
+    "PostLocation",
+    "PostMusicAttribution",
+    "PostProductMention",
+    "PostVideoVersion",
 ]
 
 
-class DataBioLink(BaseModel):
-    title: str
-
-    url: str
-
-    link_type: Optional[str] = None
-
-
-class DataPostCarouselItem(BaseModel):
+class PostCarouselItem(BaseModel):
     display_url: str
 
     index: float
@@ -42,7 +31,7 @@ class DataPostCarouselItem(BaseModel):
     video_url: Optional[str] = None
 
 
-class DataPostDisplayResource(BaseModel):
+class PostDisplayResource(BaseModel):
     config_height: float
 
     config_width: float
@@ -50,7 +39,7 @@ class DataPostDisplayResource(BaseModel):
     src: str
 
 
-class DataPostEngagementVisibility(BaseModel):
+class PostEngagementVisibility(BaseModel):
     comments_disabled: Optional[bool] = None
 
     like_and_view_counts_disabled: Optional[bool] = None
@@ -58,7 +47,7 @@ class DataPostEngagementVisibility(BaseModel):
     viewer_can_reshare: Optional[bool] = None
 
 
-class DataPostLocation(BaseModel):
+class PostLocation(BaseModel):
     id: Optional[str] = None
 
     address_json: Optional[Dict[str, object]] = None
@@ -74,7 +63,7 @@ class DataPostLocation(BaseModel):
     slug: Optional[str] = None
 
 
-class DataPostMusicAttribution(BaseModel):
+class PostMusicAttribution(BaseModel):
     artist_name: Optional[str] = None
 
     audio_id: Optional[str] = None
@@ -86,7 +75,7 @@ class DataPostMusicAttribution(BaseModel):
     uses_original_audio: Optional[bool] = None
 
 
-class DataPostProductMention(BaseModel):
+class PostProductMention(BaseModel):
     merchant_username: Optional[str] = None
 
     product_id: Optional[str] = None
@@ -94,7 +83,7 @@ class DataPostProductMention(BaseModel):
     product_name: Optional[str] = None
 
 
-class DataPostVideoVersion(BaseModel):
+class PostVideoVersion(BaseModel):
     url: str
 
     id: Optional[str] = None
@@ -106,7 +95,7 @@ class DataPostVideoVersion(BaseModel):
     width: Optional[float] = None
 
 
-class DataPost(BaseModel):
+class Post(BaseModel):
     id: str
 
     caption: Optional[str] = None
@@ -127,25 +116,25 @@ class DataPost(BaseModel):
 
     accessibility_caption: Optional[str] = None
 
-    carousel_items: Optional[List[DataPostCarouselItem]] = None
+    carousel_items: Optional[List[PostCarouselItem]] = None
 
     coauthor_usernames: Optional[List[str]] = None
 
-    display_resources: Optional[List[DataPostDisplayResource]] = None
+    display_resources: Optional[List[PostDisplayResource]] = None
 
-    engagement_visibility: Optional[DataPostEngagementVisibility] = None
+    engagement_visibility: Optional[PostEngagementVisibility] = None
 
     is_paid_partnership: Optional[bool] = None
 
     is_pinned: Optional[bool] = None
 
-    location: Optional[DataPostLocation] = None
+    location: Optional[PostLocation] = None
 
-    music_attribution: Optional[DataPostMusicAttribution] = None
+    music_attribution: Optional[PostMusicAttribution] = None
 
     owner_username: Optional[str] = None
 
-    product_mentions: Optional[List[DataPostProductMention]] = None
+    product_mentions: Optional[List[PostProductMention]] = None
 
     sponsor_usernames: Optional[List[str]] = None
 
@@ -155,68 +144,12 @@ class DataPost(BaseModel):
 
     video_url: Optional[str] = None
 
-    video_versions: Optional[List[DataPostVideoVersion]] = None
+    video_versions: Optional[List[PostVideoVersion]] = None
 
     view_count: Optional[float] = None
 
 
-class DataRelatedProfile(BaseModel):
-    full_name: Optional[str] = None
-
-    is_private: bool
-
-    is_verified: bool
-
-    profile_pic_url: Optional[str] = None
-
-    username: str
-
-
-class Data(BaseModel):
-    bio_links: List[DataBioLink]
-
-    biography: str
-
-    category_name: Optional[str] = None
-
-    engagement_rate: float
-
-    external_url: Optional[str] = None
-
-    follower_count: float
-
-    following_count: float
-
-    full_name: str
-
-    highlight_reel_count: float
-
-    is_business: bool
-
-    is_private: bool
-
-    is_professional: bool
-
-    is_verified: bool
-
-    media_count: float
-
-    posts: List[DataPost]
-
-    profile_pic_url: str
-
-    pronouns: List[str]
-
-    related_profiles: List[DataRelatedProfile]
+class InstagramSinglePostResponse(BaseModel):
+    post: Post
 
     scraped_at: datetime
-
-    user_id: str
-
-    username: str
-
-    profile_pic_url_hd: Optional[str] = None
-
-
-class InstagramGetProfileResponse(BaseModel):
-    data: Data

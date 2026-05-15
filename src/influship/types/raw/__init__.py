@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .raw_scraper_error import RawScraperError as RawScraperError
 from .transcript_segment import TranscriptSegment as TranscriptSegment
 from .youtube_search_params import YoutubeSearchParams as YoutubeSearchParams
 from .youtube_search_response import YoutubeSearchResponse as YoutubeSearchResponse
@@ -11,8 +12,10 @@ from .instagram_get_post_response import InstagramGetPostResponse as InstagramGe
 from .instagram_get_posts_response import InstagramGetPostsResponse as InstagramGetPostsResponse
 from .instagram_get_profile_params import InstagramGetProfileParams as InstagramGetProfileParams
 from .youtube_get_channel_response import YoutubeGetChannelResponse as YoutubeGetChannelResponse
+from .instagram_transcript_response import InstagramTranscriptResponse as InstagramTranscriptResponse
 from .youtube_get_transcript_params import YoutubeGetTranscriptParams as YoutubeGetTranscriptParams
 from .instagram_get_profile_response import InstagramGetProfileResponse as InstagramGetProfileResponse
+from .instagram_single_post_response import InstagramSinglePostResponse as InstagramSinglePostResponse
 from .instagram_get_transcript_params import InstagramGetTranscriptParams as InstagramGetTranscriptParams
 from .youtube_get_transcript_response import YoutubeGetTranscriptResponse as YoutubeGetTranscriptResponse
 from .instagram_get_transcripts_params import InstagramGetTranscriptsParams as InstagramGetTranscriptsParams
