@@ -48,6 +48,14 @@ from .profiles import (
     ProfilesResourceWithStreamingResponse,
     AsyncProfilesResourceWithStreamingResponse,
 )
+from .creator_emails import (
+    CreatorEmailsResource,
+    AsyncCreatorEmailsResource,
+    CreatorEmailsResourceWithRawResponse,
+    AsyncCreatorEmailsResourceWithRawResponse,
+    CreatorEmailsResourceWithStreamingResponse,
+    AsyncCreatorEmailsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "HealthResource",
@@ -74,6 +82,12 @@ __all__ = [
     "AsyncProfilesResourceWithRawResponse",
     "ProfilesResourceWithStreamingResponse",
     "AsyncProfilesResourceWithStreamingResponse",
+    "CreatorEmailsResource",
+    "AsyncCreatorEmailsResource",
+    "CreatorEmailsResourceWithRawResponse",
+    "AsyncCreatorEmailsResourceWithRawResponse",
+    "CreatorEmailsResourceWithStreamingResponse",
+    "AsyncCreatorEmailsResourceWithStreamingResponse",
     "PostsResource",
     "AsyncPostsResource",
     "PostsResourceWithRawResponse",

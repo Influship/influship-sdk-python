@@ -69,6 +69,18 @@ Methods:
 - <code title="get /v1/profiles/{platform}/{username}">client.profiles.<a href="./src/influship/resources/profiles.py">get</a>(username, \*, platform) -> <a href="./src/influship/types/profile_get_response.py">ProfileGetResponse</a></code>
 - <code title="post /v1/profiles/lookup">client.profiles.<a href="./src/influship/resources/profiles.py">lookup</a>(\*\*<a href="src/influship/types/profile_lookup_params.py">params</a>) -> <a href="./src/influship/types/profile_lookup_response.py">ProfileLookupResponse</a></code>
 
+# CreatorEmails
+
+Types:
+
+```python
+from influship.types import CreatorEmailLookupResponse
+```
+
+Methods:
+
+- <code title="post /v1/creator-emails/lookup">client.creator_emails.<a href="./src/influship/resources/creator_emails.py">lookup</a>(\*\*<a href="src/influship/types/creator_email_lookup_params.py">params</a>) -> <a href="./src/influship/types/creator_email_lookup_response.py">CreatorEmailLookupResponse</a></code>
+
 # Posts
 
 Types:
