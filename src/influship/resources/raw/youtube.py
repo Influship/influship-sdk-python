@@ -76,7 +76,10 @@ class YoutubeResource(SyncAPIResource):
         **Pricing**: 0.5 credits per channel scraped ($0.005)
 
         Args:
-          handle: YouTube channel handle
+          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
+              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
+              surrounding share tokens and trailing paths are ignored. A value that is not a
+              channel handle returns a 400 validation error.
 
           include_videos: Include recent videos in response
 
@@ -140,7 +143,10 @@ class YoutubeResource(SyncAPIResource):
         **Pricing**: 0.5 credits per transcript fetched ($0.005)
 
         Args:
-          handle: YouTube channel handle
+          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
+              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
+              surrounding share tokens and trailing paths are ignored. A value that is not a
+              channel handle returns a 400 validation error.
 
           include_segments: Include timestamped transcript segments in response
 
@@ -334,7 +340,10 @@ class AsyncYoutubeResource(AsyncAPIResource):
         **Pricing**: 0.5 credits per channel scraped ($0.005)
 
         Args:
-          handle: YouTube channel handle
+          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
+              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
+              surrounding share tokens and trailing paths are ignored. A value that is not a
+              channel handle returns a 400 validation error.
 
           include_videos: Include recent videos in response
 
@@ -398,7 +407,10 @@ class AsyncYoutubeResource(AsyncAPIResource):
         **Pricing**: 0.5 credits per transcript fetched ($0.005)
 
         Args:
-          handle: YouTube channel handle
+          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
+              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
+              surrounding share tokens and trailing paths are ignored. A value that is not a
+              channel handle returns a 400 validation error.
 
           include_segments: Include timestamped transcript segments in response
 
