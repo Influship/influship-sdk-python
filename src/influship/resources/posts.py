@@ -75,10 +75,14 @@ class PostsResource(SyncAPIResource):
         **Sort options:**
 
         - `recent`: Most recent posts first (default)
-        - `top_engagement`: Highest engagement rate first
+        - `top_engagement`: Highest view-based engagement rate first, calculated as
+          (likes + comments) / views. Posts without measurable views sort last
         - `most_likes`: Most likes first
         - `most_views`: Most views first (video content)
         - `most_comments`: Most comments first
+
+        Pagination uses an opaque keyset cursor. Pass `next_cursor` back with the same
+        `sort` value; cursors cannot be reused across sort orders.
 
         Also callable as the `get_posts` MCP tool — see
         [the MCP server guide](/guides/mcp-server) for setup.
@@ -88,7 +92,8 @@ class PostsResource(SyncAPIResource):
         Args:
           creator_id: Creator ID (use this OR platform+username)
 
-          cursor: Pagination cursor for next page
+          cursor: Opaque keyset cursor from next_cursor. A cursor is bound to the sort order that
+              produced it; using it with another sort returns 400.
 
           limit: Maximum posts to return
 
@@ -181,10 +186,14 @@ class AsyncPostsResource(AsyncAPIResource):
         **Sort options:**
 
         - `recent`: Most recent posts first (default)
-        - `top_engagement`: Highest engagement rate first
+        - `top_engagement`: Highest view-based engagement rate first, calculated as
+          (likes + comments) / views. Posts without measurable views sort last
         - `most_likes`: Most likes first
         - `most_views`: Most views first (video content)
         - `most_comments`: Most comments first
+
+        Pagination uses an opaque keyset cursor. Pass `next_cursor` back with the same
+        `sort` value; cursors cannot be reused across sort orders.
 
         Also callable as the `get_posts` MCP tool — see
         [the MCP server guide](/guides/mcp-server) for setup.
@@ -194,7 +203,8 @@ class AsyncPostsResource(AsyncAPIResource):
         Args:
           creator_id: Creator ID (use this OR platform+username)
 
-          cursor: Pagination cursor for next page
+          cursor: Opaque keyset cursor from next_cursor. A cursor is bound to the sort order that
+              produced it; using it with another sort returns 400.
 
           limit: Maximum posts to return
 
