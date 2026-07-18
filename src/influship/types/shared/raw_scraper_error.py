@@ -9,7 +9,9 @@ __all__ = ["RawScraperError"]
 
 
 class RawScraperError(BaseModel):
-    error: Literal["not_found", "private", "rate_limited", "blocked", "invalid_input", "timeout", "unknown"]
+    error: Literal[
+        "not_found", "private", "rate_limited", "blocked", "invalid_input", "timeout", "upstream_unavailable", "unknown"
+    ]
 
     message: str
 
