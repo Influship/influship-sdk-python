@@ -14,6 +14,13 @@ class Data(BaseModel):
     creator: CreatorBasic
     """Basic creator information"""
 
+    location_unverified: Optional[bool] = None
+    """
+    True when the query required a country but this creator location is unverified;
+    false when the known location satisfies it; null when the query set no geography
+    requirement. Known mismatches are excluded from results.
+    """
+
     match: MatchInfo
     """Search match information"""
 
