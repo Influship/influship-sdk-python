@@ -118,6 +118,8 @@ class InstagramResource(SyncAPIResource):
 
         This
         returns one item per requested shortcode with per-item success or error details.
+        Transient upstream recovery is handled automatically within the request
+        deadline.
 
         **Note:** Batch post lookup is capped at 20 shortcodes per request. API-key and
         OAuth calls are charged only for successful items; x402 and MPP use the
@@ -406,6 +408,8 @@ class AsyncInstagramResource(AsyncAPIResource):
 
         This
         returns one item per requested shortcode with per-item success or error details.
+        Transient upstream recovery is handled automatically within the request
+        deadline.
 
         **Note:** Batch post lookup is capped at 20 shortcodes per request. API-key and
         OAuth calls are charged only for successful items; x402 and MPP use the
