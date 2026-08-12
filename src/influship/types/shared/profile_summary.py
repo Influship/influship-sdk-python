@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -13,6 +14,9 @@ class ProfileSummary(BaseModel):
 
     id: str
     """Profile unique identifier"""
+
+    data_updated_at: Optional[datetime] = None
+    """When the stored public profile data was last refreshed"""
 
     engagement_rate: Optional[float] = None
     """Engagement rate as a percentage, null if unknown (e.g. 3.5 means 3.5%)"""
