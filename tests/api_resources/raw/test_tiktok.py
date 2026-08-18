@@ -78,7 +78,7 @@ class TestTiktok:
     def test_method_get_video_with_all_params(self, client: Influship) -> None:
         tiktok = client.raw.tiktok.get_video(
             url="https://www.tiktok.com/@creator/video/7517114944362499342",
-            region="GB",
+            region="US",
         )
         assert_matches_type(TiktokGetVideoResponse, tiktok, path=["response"])
 
@@ -156,7 +156,7 @@ class TestTiktok:
         tiktok = client.raw.tiktok.list_profile_videos(
             username="creator",
             cursor="x",
-            region="GB",
+            region="US",
             sort_by="latest",
         )
         assert_matches_type(TiktokListProfileVideosResponse, tiktok, path=["response"])
@@ -299,7 +299,7 @@ class TestAsyncTiktok:
     async def test_method_get_video_with_all_params(self, async_client: AsyncInfluship) -> None:
         tiktok = await async_client.raw.tiktok.get_video(
             url="https://www.tiktok.com/@creator/video/7517114944362499342",
-            region="GB",
+            region="US",
         )
         assert_matches_type(TiktokGetVideoResponse, tiktok, path=["response"])
 
@@ -377,7 +377,7 @@ class TestAsyncTiktok:
         tiktok = await async_client.raw.tiktok.list_profile_videos(
             username="creator",
             cursor="x",
-            region="GB",
+            region="US",
             sort_by="latest",
         )
         assert_matches_type(TiktokListProfileVideosResponse, tiktok, path=["response"])
