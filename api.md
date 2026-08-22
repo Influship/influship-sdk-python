@@ -129,7 +129,9 @@ from influship.types.raw import (
     YoutubeGetChannelResponse,
     YoutubeGetChannelTranscriptsResponse,
     YoutubeGetTranscriptResponse,
+    YoutubeGetVideoResponse,
     YoutubeSearchResponse,
+    YoutubeTypeaheadResponse,
 )
 ```
 
@@ -138,7 +140,9 @@ Methods:
 - <code title="get /v1/raw/youtube/channel/{handle}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_channel</a>(handle, \*\*<a href="src/influship/types/raw/youtube_get_channel_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_channel_response.py">YoutubeGetChannelResponse</a></code>
 - <code title="get /v1/raw/youtube/channel-transcripts/{handle}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_channel_transcripts</a>(handle, \*\*<a href="src/influship/types/raw/youtube_get_channel_transcripts_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_channel_transcripts_response.py">YoutubeGetChannelTranscriptsResponse</a></code>
 - <code title="get /v1/raw/youtube/transcript/{video_id}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_transcript</a>(video_id, \*\*<a href="src/influship/types/raw/youtube_get_transcript_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_transcript_response.py">YoutubeGetTranscriptResponse</a></code>
+- <code title="get /v1/raw/youtube/video/{video_id}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_video</a>(video_id) -> <a href="./src/influship/types/raw/youtube_get_video_response.py">YoutubeGetVideoResponse</a></code>
 - <code title="get /v1/raw/youtube/search">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">search</a>(\*\*<a href="src/influship/types/raw/youtube_search_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_search_response.py">YoutubeSearchResponse</a></code>
+- <code title="get /v1/raw/youtube/typeahead">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">typeahead</a>(\*\*<a href="src/influship/types/raw/youtube_typeahead_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_typeahead_response.py">YoutubeTypeaheadResponse</a></code>
 
 ## Tiktok
 

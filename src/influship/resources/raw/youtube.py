@@ -18,12 +18,15 @@ from ..._response import (
 )
 from ...types.raw import (
     youtube_search_params,
+    youtube_typeahead_params,
     youtube_get_channel_params,
     youtube_get_transcript_params,
     youtube_get_channel_transcripts_params,
 )
 from ..._base_client import make_request_options
 from ...types.raw.youtube_search_response import YoutubeSearchResponse
+from ...types.raw.youtube_get_video_response import YoutubeGetVideoResponse
+from ...types.raw.youtube_typeahead_response import YoutubeTypeaheadResponse
 from ...types.raw.youtube_get_channel_response import YoutubeGetChannelResponse
 from ...types.raw.youtube_get_transcript_response import YoutubeGetTranscriptResponse
 from ...types.raw.youtube_get_channel_transcripts_response import YoutubeGetChannelTranscriptsResponse
@@ -76,10 +79,8 @@ class YoutubeResource(SyncAPIResource):
         **Pricing**: 0.5 credits per channel scraped ($0.005)
 
         Args:
-          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
-              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
-              surrounding share tokens and trailing paths are ignored. A value that is not a
-              channel handle returns a 400 validation error.
+          handle: YouTube channel handle or channel ID. Accepts a bare handle, an @handle, a
+              UC-prefixed channel ID, or the corresponding full channel URL.
 
           include_videos: Include recent videos in response
 
@@ -143,10 +144,8 @@ class YoutubeResource(SyncAPIResource):
         **Pricing**: 0.5 credits per transcript fetched ($0.005)
 
         Args:
-          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
-              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
-              surrounding share tokens and trailing paths are ignored. A value that is not a
-              channel handle returns a 400 validation error.
+          handle: YouTube channel handle or channel ID. Accepts a bare handle, an @handle, a
+              UC-prefixed channel ID, or the corresponding full channel URL.
 
           include_segments: Include timestamped transcript segments in response
 
@@ -238,13 +237,56 @@ class YoutubeResource(SyncAPIResource):
             cast_to=YoutubeGetTranscriptResponse,
         )
 
+    def get_video(
+        self,
+        video_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> YoutubeGetVideoResponse:
+        """
+        Fetch fresh video metadata including description, exact publish timestamp when
+        available, views, likes, comments, tags, categories, and channel identity.
+
+        **Pricing**: 0.5 credits per video fetched ($0.005)
+
+        Args:
+          video_id: YouTube video ID
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not video_id:
+            raise ValueError(f"Expected a non-empty value for `video_id` but received {video_id!r}")
+        return self._get(
+            path_template("/v1/raw/youtube/video/{video_id}", video_id=video_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=YoutubeGetVideoResponse,
+        )
+
     def search(
         self,
         *,
         q: str,
+        content_type: Literal["all", "videos"] | Omit = omit,
         country_code: str | Omit = omit,
+        cursor: str | Omit = omit,
+        duration: Literal["any", "short", "medium", "long"] | Omit = omit,
         language_code: str | Omit = omit,
         limit: int | Omit = omit,
+        sort_by: Literal["relevance", "popular"] | Omit = omit,
+        upload_date: Literal["any", "last_hour", "today", "this_week", "this_month", "this_year"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -252,19 +294,33 @@ class YoutubeResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> YoutubeSearchResponse:
-        """
-        Search YouTube videos and channels.
+        """Search YouTube videos and channels.
 
-        **Pricing**: 0.5 credits per result returned ($0.005)
+        Each request fetches one page.
+
+        Pass `next_cursor` back as `cursor` to fetch and
+        bill the next page.
+
+        **Pricing**: 0.5 credits per fetched page ($0.005)
 
         Args:
           q: Search query
 
+          content_type: Return all result types or only videos
+
           country_code: Country code for localized results (ISO 3166-1 alpha-2)
+
+          cursor: Opaque cursor from next_cursor to fetch the next result page
+
+          duration: Filter videos by YouTube duration band
 
           language_code: Language code for results
 
           limit: Maximum number of results to return
+
+          sort_by: Order results by relevance or view popularity
+
+          upload_date: Only return results uploaded within the selected window
 
           extra_headers: Send extra headers
 
@@ -284,14 +340,67 @@ class YoutubeResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "q": q,
+                        "content_type": content_type,
                         "country_code": country_code,
+                        "cursor": cursor,
+                        "duration": duration,
                         "language_code": language_code,
                         "limit": limit,
+                        "sort_by": sort_by,
+                        "upload_date": upload_date,
                     },
                     youtube_search_params.YoutubeSearchParams,
                 ),
             ),
             cast_to=YoutubeSearchResponse,
+        )
+
+    def typeahead(
+        self,
+        *,
+        q: str,
+        country_code: str | Omit = omit,
+        language_code: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> YoutubeTypeaheadResponse:
+        """
+        Get localized YouTube search suggestions for a partial query.
+
+        **Pricing**: 0.5 credits per request ($0.005)
+
+        Args:
+          q: Partial search query
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v1/raw/youtube/typeahead",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "q": q,
+                        "country_code": country_code,
+                        "language_code": language_code,
+                    },
+                    youtube_typeahead_params.YoutubeTypeaheadParams,
+                ),
+            ),
+            cast_to=YoutubeTypeaheadResponse,
         )
 
 
@@ -340,10 +449,8 @@ class AsyncYoutubeResource(AsyncAPIResource):
         **Pricing**: 0.5 credits per channel scraped ($0.005)
 
         Args:
-          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
-              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
-              surrounding share tokens and trailing paths are ignored. A value that is not a
-              channel handle returns a 400 validation error.
+          handle: YouTube channel handle or channel ID. Accepts a bare handle, an @handle, a
+              UC-prefixed channel ID, or the corresponding full channel URL.
 
           include_videos: Include recent videos in response
 
@@ -407,10 +514,8 @@ class AsyncYoutubeResource(AsyncAPIResource):
         **Pricing**: 0.5 credits per transcript fetched ($0.005)
 
         Args:
-          handle: YouTube channel handle. Accepts a bare handle (`techreviews`), an `@handle`
-              (`@techreviews`), or a full channel URL (`https://youtube.com/@techreviews`);
-              surrounding share tokens and trailing paths are ignored. A value that is not a
-              channel handle returns a 400 validation error.
+          handle: YouTube channel handle or channel ID. Accepts a bare handle, an @handle, a
+              UC-prefixed channel ID, or the corresponding full channel URL.
 
           include_segments: Include timestamped transcript segments in response
 
@@ -504,13 +609,56 @@ class AsyncYoutubeResource(AsyncAPIResource):
             cast_to=YoutubeGetTranscriptResponse,
         )
 
+    async def get_video(
+        self,
+        video_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> YoutubeGetVideoResponse:
+        """
+        Fetch fresh video metadata including description, exact publish timestamp when
+        available, views, likes, comments, tags, categories, and channel identity.
+
+        **Pricing**: 0.5 credits per video fetched ($0.005)
+
+        Args:
+          video_id: YouTube video ID
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not video_id:
+            raise ValueError(f"Expected a non-empty value for `video_id` but received {video_id!r}")
+        return await self._get(
+            path_template("/v1/raw/youtube/video/{video_id}", video_id=video_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=YoutubeGetVideoResponse,
+        )
+
     async def search(
         self,
         *,
         q: str,
+        content_type: Literal["all", "videos"] | Omit = omit,
         country_code: str | Omit = omit,
+        cursor: str | Omit = omit,
+        duration: Literal["any", "short", "medium", "long"] | Omit = omit,
         language_code: str | Omit = omit,
         limit: int | Omit = omit,
+        sort_by: Literal["relevance", "popular"] | Omit = omit,
+        upload_date: Literal["any", "last_hour", "today", "this_week", "this_month", "this_year"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -518,19 +666,33 @@ class AsyncYoutubeResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> YoutubeSearchResponse:
-        """
-        Search YouTube videos and channels.
+        """Search YouTube videos and channels.
 
-        **Pricing**: 0.5 credits per result returned ($0.005)
+        Each request fetches one page.
+
+        Pass `next_cursor` back as `cursor` to fetch and
+        bill the next page.
+
+        **Pricing**: 0.5 credits per fetched page ($0.005)
 
         Args:
           q: Search query
 
+          content_type: Return all result types or only videos
+
           country_code: Country code for localized results (ISO 3166-1 alpha-2)
+
+          cursor: Opaque cursor from next_cursor to fetch the next result page
+
+          duration: Filter videos by YouTube duration band
 
           language_code: Language code for results
 
           limit: Maximum number of results to return
+
+          sort_by: Order results by relevance or view popularity
+
+          upload_date: Only return results uploaded within the selected window
 
           extra_headers: Send extra headers
 
@@ -550,14 +712,67 @@ class AsyncYoutubeResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "q": q,
+                        "content_type": content_type,
                         "country_code": country_code,
+                        "cursor": cursor,
+                        "duration": duration,
                         "language_code": language_code,
                         "limit": limit,
+                        "sort_by": sort_by,
+                        "upload_date": upload_date,
                     },
                     youtube_search_params.YoutubeSearchParams,
                 ),
             ),
             cast_to=YoutubeSearchResponse,
+        )
+
+    async def typeahead(
+        self,
+        *,
+        q: str,
+        country_code: str | Omit = omit,
+        language_code: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> YoutubeTypeaheadResponse:
+        """
+        Get localized YouTube search suggestions for a partial query.
+
+        **Pricing**: 0.5 credits per request ($0.005)
+
+        Args:
+          q: Partial search query
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v1/raw/youtube/typeahead",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "q": q,
+                        "country_code": country_code,
+                        "language_code": language_code,
+                    },
+                    youtube_typeahead_params.YoutubeTypeaheadParams,
+                ),
+            ),
+            cast_to=YoutubeTypeaheadResponse,
         )
 
 
@@ -574,8 +789,14 @@ class YoutubeResourceWithRawResponse:
         self.get_transcript = to_raw_response_wrapper(
             youtube.get_transcript,
         )
+        self.get_video = to_raw_response_wrapper(
+            youtube.get_video,
+        )
         self.search = to_raw_response_wrapper(
             youtube.search,
+        )
+        self.typeahead = to_raw_response_wrapper(
+            youtube.typeahead,
         )
 
 
@@ -592,8 +813,14 @@ class AsyncYoutubeResourceWithRawResponse:
         self.get_transcript = async_to_raw_response_wrapper(
             youtube.get_transcript,
         )
+        self.get_video = async_to_raw_response_wrapper(
+            youtube.get_video,
+        )
         self.search = async_to_raw_response_wrapper(
             youtube.search,
+        )
+        self.typeahead = async_to_raw_response_wrapper(
+            youtube.typeahead,
         )
 
 
@@ -610,8 +837,14 @@ class YoutubeResourceWithStreamingResponse:
         self.get_transcript = to_streamed_response_wrapper(
             youtube.get_transcript,
         )
+        self.get_video = to_streamed_response_wrapper(
+            youtube.get_video,
+        )
         self.search = to_streamed_response_wrapper(
             youtube.search,
+        )
+        self.typeahead = to_streamed_response_wrapper(
+            youtube.typeahead,
         )
 
 
@@ -628,6 +861,12 @@ class AsyncYoutubeResourceWithStreamingResponse:
         self.get_transcript = async_to_streamed_response_wrapper(
             youtube.get_transcript,
         )
+        self.get_video = async_to_streamed_response_wrapper(
+            youtube.get_video,
+        )
         self.search = async_to_streamed_response_wrapper(
             youtube.search,
+        )
+        self.typeahead = async_to_streamed_response_wrapper(
+            youtube.typeahead,
         )
