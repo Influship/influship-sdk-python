@@ -66,3 +66,11 @@ class MatchInfo(BaseModel):
 
     score: float
     """Match relevance score (0-1)"""
+
+    ranking_source: Optional[Literal["reranked", "retrieval_fallback"]] = None
+    """
+    Whether this individual result was covered by AI reranking or conservatively
+    reconciled from retrieval. Treat absence as reranked for responses from older
+    servers during rolling deployment. Do not present `score` as an AI fit score for
+    retrieval_fallback results.
+    """
