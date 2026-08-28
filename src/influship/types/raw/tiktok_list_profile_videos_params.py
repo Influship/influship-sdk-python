@@ -11,8 +11,8 @@ class TiktokListProfileVideosParams(TypedDict, total=False):
     cursor: str
     """Opaque cursor from the previous response"""
 
-    region: str
-    """Two-letter region code"""
+    region: Literal["US"]
+    """TikTok resolution region (US only)"""
 
     sort_by: Literal["latest", "popular"]
     """Video ordering"""

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["TiktokGetVideoParams"]
 
@@ -11,5 +11,5 @@ class TiktokGetVideoParams(TypedDict, total=False):
     url: Required[str]
     """HTTPS TikTok video or share URL"""
 
-    region: str
-    """Two-letter region code"""
+    region: Literal["US"]
+    """TikTok resolution region (US only)"""
