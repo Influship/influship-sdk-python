@@ -99,7 +99,7 @@ class TiktokResource(SyncAPIResource):
         self,
         *,
         url: str,
-        region: str | Omit = omit,
+        region: Literal["US"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -116,7 +116,7 @@ class TiktokResource(SyncAPIResource):
         Args:
           url: HTTPS TikTok video or share URL
 
-          region: Two-letter region code
+          region: TikTok resolution region (US only)
 
           extra_headers: Send extra headers
 
@@ -189,7 +189,7 @@ class TiktokResource(SyncAPIResource):
         username: str,
         *,
         cursor: str | Omit = omit,
-        region: str | Omit = omit,
+        region: Literal["US"] | Omit = omit,
         sort_by: Literal["latest", "popular"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -210,7 +210,7 @@ class TiktokResource(SyncAPIResource):
 
           cursor: Opaque cursor from the previous response
 
-          region: Two-letter region code
+          region: TikTok resolution region (US only)
 
           sort_by: Video ordering
 
@@ -359,7 +359,7 @@ class AsyncTiktokResource(AsyncAPIResource):
         self,
         *,
         url: str,
-        region: str | Omit = omit,
+        region: Literal["US"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -376,7 +376,7 @@ class AsyncTiktokResource(AsyncAPIResource):
         Args:
           url: HTTPS TikTok video or share URL
 
-          region: Two-letter region code
+          region: TikTok resolution region (US only)
 
           extra_headers: Send extra headers
 
@@ -451,7 +451,7 @@ class AsyncTiktokResource(AsyncAPIResource):
         username: str,
         *,
         cursor: str | Omit = omit,
-        region: str | Omit = omit,
+        region: Literal["US"] | Omit = omit,
         sort_by: Literal["latest", "popular"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -472,7 +472,7 @@ class AsyncTiktokResource(AsyncAPIResource):
 
           cursor: Opaque cursor from the previous response
 
-          region: Two-letter region code
+          region: TikTok resolution region (US only)
 
           sort_by: Video ordering
 
