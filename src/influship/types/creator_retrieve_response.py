@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 
 from .._models import BaseModel
 from .shared.profile_summary import ProfileSummary
@@ -16,6 +17,12 @@ class Data(BaseModel):
 
     ai_summary: Optional[str] = None
     """AI-generated summary of the creator"""
+
+    analysis_fact_count: Optional[int] = None
+    """Number of stored creator facts available to the last synthesis run"""
+
+    analysis_updated_at: Optional[datetime] = None
+    """When the synthesized creator analysis was last generated"""
 
     audience_demographics: Optional[str] = None
     """Synthesized audience demographic summary"""

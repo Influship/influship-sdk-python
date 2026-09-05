@@ -35,13 +35,14 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import raw, posts, health, search, creators, profiles
+    from .resources import raw, posts, health, search, creators, profiles, creator_emails
     from .resources.posts import PostsResource, AsyncPostsResource
     from .resources.health import HealthResource, AsyncHealthResource
     from .resources.search import SearchResource, AsyncSearchResource
     from .resources.raw.raw import RawResource, AsyncRawResource
     from .resources.creators import CreatorsResource, AsyncCreatorsResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
+    from .resources.creator_emails import CreatorEmailsResource, AsyncCreatorEmailsResource
 
 __all__ = [
     "Timeout",
@@ -153,6 +154,16 @@ class Influship(SyncAPIClient):
         from .resources.profiles import ProfilesResource
 
         return ProfilesResource(self)
+
+    @cached_property
+    def creator_emails(self) -> CreatorEmailsResource:
+        """Look up known creator email addresses by creator ID or social username.
+
+        Empty or unresolved results are not billable.
+        """
+        from .resources.creator_emails import CreatorEmailsResource
+
+        return CreatorEmailsResource(self)
 
     @cached_property
     def posts(self) -> PostsResource:
@@ -382,6 +393,16 @@ class AsyncInfluship(AsyncAPIClient):
         return AsyncProfilesResource(self)
 
     @cached_property
+    def creator_emails(self) -> AsyncCreatorEmailsResource:
+        """Look up known creator email addresses by creator ID or social username.
+
+        Empty or unresolved results are not billable.
+        """
+        from .resources.creator_emails import AsyncCreatorEmailsResource
+
+        return AsyncCreatorEmailsResource(self)
+
+    @cached_property
     def posts(self) -> AsyncPostsResource:
         """
         Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
@@ -551,6 +572,16 @@ class InflushipWithRawResponse:
         return ProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
+    def creator_emails(self) -> creator_emails.CreatorEmailsResourceWithRawResponse:
+        """Look up known creator email addresses by creator ID or social username.
+
+        Empty or unresolved results are not billable.
+        """
+        from .resources.creator_emails import CreatorEmailsResourceWithRawResponse
+
+        return CreatorEmailsResourceWithRawResponse(self._client.creator_emails)
+
+    @cached_property
     def posts(self) -> posts.PostsResourceWithRawResponse:
         """
         Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
@@ -606,6 +637,16 @@ class AsyncInflushipWithRawResponse:
         from .resources.profiles import AsyncProfilesResourceWithRawResponse
 
         return AsyncProfilesResourceWithRawResponse(self._client.profiles)
+
+    @cached_property
+    def creator_emails(self) -> creator_emails.AsyncCreatorEmailsResourceWithRawResponse:
+        """Look up known creator email addresses by creator ID or social username.
+
+        Empty or unresolved results are not billable.
+        """
+        from .resources.creator_emails import AsyncCreatorEmailsResourceWithRawResponse
+
+        return AsyncCreatorEmailsResourceWithRawResponse(self._client.creator_emails)
 
     @cached_property
     def posts(self) -> posts.AsyncPostsResourceWithRawResponse:
@@ -665,6 +706,16 @@ class InflushipWithStreamedResponse:
         return ProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
+    def creator_emails(self) -> creator_emails.CreatorEmailsResourceWithStreamingResponse:
+        """Look up known creator email addresses by creator ID or social username.
+
+        Empty or unresolved results are not billable.
+        """
+        from .resources.creator_emails import CreatorEmailsResourceWithStreamingResponse
+
+        return CreatorEmailsResourceWithStreamingResponse(self._client.creator_emails)
+
+    @cached_property
     def posts(self) -> posts.PostsResourceWithStreamingResponse:
         """
         Retrieve and analyze social media posts with engagement metrics, media content, and performance data.
@@ -720,6 +771,16 @@ class AsyncInflushipWithStreamedResponse:
         from .resources.profiles import AsyncProfilesResourceWithStreamingResponse
 
         return AsyncProfilesResourceWithStreamingResponse(self._client.profiles)
+
+    @cached_property
+    def creator_emails(self) -> creator_emails.AsyncCreatorEmailsResourceWithStreamingResponse:
+        """Look up known creator email addresses by creator ID or social username.
+
+        Empty or unresolved results are not billable.
+        """
+        from .resources.creator_emails import AsyncCreatorEmailsResourceWithStreamingResponse
+
+        return AsyncCreatorEmailsResourceWithStreamingResponse(self._client.creator_emails)
 
     @cached_property
     def posts(self) -> posts.AsyncPostsResourceWithStreamingResponse:

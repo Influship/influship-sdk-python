@@ -73,8 +73,12 @@ class InstagramResource(SyncAPIResource):
         product mentions, music attribution, location, display resources, and video
         versions.
 
-        **Note:** These fields are only guaranteed on this raw single-post lookup for
-        now. Regular cached post-list endpoints may not include them yet.
+        **Note:** These fields are only guaranteed on this raw single-post lookup.
+        Cached post-list endpoints may not include them.
+
+        Returns fresh `video_url` (single best stream) and `video_versions[]`
+        (multi-bitrate). These are signed Instagram CDN URLs valid for ~24h — download
+        promptly. For carousels with embedded videos, see `carousel_items[].video_url`.
 
         **Pricing**: 1 credit per post scraped ($0.01)
 
@@ -114,9 +118,15 @@ class InstagramResource(SyncAPIResource):
 
         This
         returns one item per requested shortcode with per-item success or error details.
+        Transient upstream recovery is handled automatically within the request
+        deadline.
 
-        **Note:** Batch post lookup is capped at 20 shortcodes per request and is
-        charged for every requested shortcode.
+        **Note:** Batch post lookup is capped at 20 shortcodes per request. API-key and
+        OAuth calls are charged only for successful items; x402 and MPP use the
+        advertised request price.
+
+        Returns fresh `video_url` and `video_versions[]` per post (signed IG CDN URLs,
+        ~24h validity). Batch up to 20 posts at 1 credit ($0.01) each.
 
         **Pricing**: 1 credit per post scraped ($0.01)
 
@@ -166,6 +176,13 @@ class InstagramResource(SyncAPIResource):
 
         **Note:** Live scraping is slower than cached data (2-5 seconds) and costs more.
         Use cached endpoints when freshness isn't critical.
+
+        The profile response returns an empty `posts[]` array unless
+        `include_posts=true`. When posts are included, `post_limit` accepts 1-50 and
+        defaults to 12. The array contains the recent posts available in Instagram's
+        source response, up to that limit. Video posts include a fresh `video_url`. This
+        is the cheapest bulk-download path: 0.5 credits ($0.005) per profile call vs 1
+        credit per individual raw-post call.
 
         **Pricing**: 0.5 credits per profile scraped ($0.005)
 
@@ -218,12 +235,7 @@ class InstagramResource(SyncAPIResource):
     ) -> InstagramGetTranscriptResponse:
         """
         Transcribe an Instagram video post by shortcode and return the raw post-page
-        data used for transcription. For now this raw endpoint retranscribes every
-        request and piggybacks the post plus transcript into our database when the owner
-        account exists.
-
-        **Note:** Cached transcript reads are a planned follow-up; public pricing stays
-        the same for live and cached transcript delivery.
+        data used for transcription.
 
         **Pricing**: 5 credits per transcript ($0.05)
 
@@ -273,10 +285,9 @@ class InstagramResource(SyncAPIResource):
         item per requested shortcode with per-item success or error details. Successful
         items include the raw post-page data used for transcription.
 
-        **Note:** Batch transcription is capped at 10 shortcodes per request,
-        retranscribes every request for now, and is charged for every requested
-        shortcode. Cached transcript reads are a planned follow-up; public pricing stays
-        the same for live and cached transcript delivery.
+        **Note:** Batch transcription is capped at 10 shortcodes per request. API-key
+        and OAuth calls are charged only for successful items; x402 and MPP use the
+        advertised request price.
 
         **Pricing**: 5 credits per transcript ($0.05)
 
@@ -352,8 +363,12 @@ class AsyncInstagramResource(AsyncAPIResource):
         product mentions, music attribution, location, display resources, and video
         versions.
 
-        **Note:** These fields are only guaranteed on this raw single-post lookup for
-        now. Regular cached post-list endpoints may not include them yet.
+        **Note:** These fields are only guaranteed on this raw single-post lookup.
+        Cached post-list endpoints may not include them.
+
+        Returns fresh `video_url` (single best stream) and `video_versions[]`
+        (multi-bitrate). These are signed Instagram CDN URLs valid for ~24h — download
+        promptly. For carousels with embedded videos, see `carousel_items[].video_url`.
 
         **Pricing**: 1 credit per post scraped ($0.01)
 
@@ -393,9 +408,15 @@ class AsyncInstagramResource(AsyncAPIResource):
 
         This
         returns one item per requested shortcode with per-item success or error details.
+        Transient upstream recovery is handled automatically within the request
+        deadline.
 
-        **Note:** Batch post lookup is capped at 20 shortcodes per request and is
-        charged for every requested shortcode.
+        **Note:** Batch post lookup is capped at 20 shortcodes per request. API-key and
+        OAuth calls are charged only for successful items; x402 and MPP use the
+        advertised request price.
+
+        Returns fresh `video_url` and `video_versions[]` per post (signed IG CDN URLs,
+        ~24h validity). Batch up to 20 posts at 1 credit ($0.01) each.
 
         **Pricing**: 1 credit per post scraped ($0.01)
 
@@ -448,6 +469,13 @@ class AsyncInstagramResource(AsyncAPIResource):
         **Note:** Live scraping is slower than cached data (2-5 seconds) and costs more.
         Use cached endpoints when freshness isn't critical.
 
+        The profile response returns an empty `posts[]` array unless
+        `include_posts=true`. When posts are included, `post_limit` accepts 1-50 and
+        defaults to 12. The array contains the recent posts available in Instagram's
+        source response, up to that limit. Video posts include a fresh `video_url`. This
+        is the cheapest bulk-download path: 0.5 credits ($0.005) per profile call vs 1
+        credit per individual raw-post call.
+
         **Pricing**: 0.5 credits per profile scraped ($0.005)
 
         Args:
@@ -499,12 +527,7 @@ class AsyncInstagramResource(AsyncAPIResource):
     ) -> InstagramGetTranscriptResponse:
         """
         Transcribe an Instagram video post by shortcode and return the raw post-page
-        data used for transcription. For now this raw endpoint retranscribes every
-        request and piggybacks the post plus transcript into our database when the owner
-        account exists.
-
-        **Note:** Cached transcript reads are a planned follow-up; public pricing stays
-        the same for live and cached transcript delivery.
+        data used for transcription.
 
         **Pricing**: 5 credits per transcript ($0.05)
 
@@ -554,10 +577,9 @@ class AsyncInstagramResource(AsyncAPIResource):
         item per requested shortcode with per-item success or error details. Successful
         items include the raw post-page data used for transcription.
 
-        **Note:** Batch transcription is capped at 10 shortcodes per request,
-        retranscribes every request for now, and is charged for every requested
-        shortcode. Cached transcript reads are a planned follow-up; public pricing stays
-        the same for live and cached transcript delivery.
+        **Note:** Batch transcription is capped at 10 shortcodes per request. API-key
+        and OAuth calls are charged only for successful items; x402 and MPP use the
+        advertised request price.
 
         **Pricing**: 5 credits per transcript ($0.05)
 

@@ -101,6 +101,9 @@ class Data(BaseModel):
     estimated_results: Optional[float] = None
     """Estimated total results count"""
 
+    next_cursor: Optional[str] = None
+    """Opaque cursor for the next page, or null when no next page is available"""
+
     query: str
     """The search query"""
 

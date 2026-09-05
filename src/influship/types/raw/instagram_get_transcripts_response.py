@@ -5,7 +5,7 @@ from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
-from .raw_scraper_error import RawScraperError
+from ..shared.raw_scraper_error import RawScraperError
 from .instagram_transcript_response import InstagramTranscriptResponse
 
 __all__ = [

@@ -8,6 +8,14 @@ from .raw import (
     RawResourceWithStreamingResponse,
     AsyncRawResourceWithStreamingResponse,
 )
+from .tiktok import (
+    TiktokResource,
+    AsyncTiktokResource,
+    TiktokResourceWithRawResponse,
+    AsyncTiktokResourceWithRawResponse,
+    TiktokResourceWithStreamingResponse,
+    AsyncTiktokResourceWithStreamingResponse,
+)
 from .youtube import (
     YoutubeResource,
     AsyncYoutubeResource,
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncYoutubeResourceWithRawResponse",
     "YoutubeResourceWithStreamingResponse",
     "AsyncYoutubeResourceWithStreamingResponse",
+    "TiktokResource",
+    "AsyncTiktokResource",
+    "TiktokResourceWithRawResponse",
+    "AsyncTiktokResourceWithRawResponse",
+    "TiktokResourceWithStreamingResponse",
+    "AsyncTiktokResourceWithStreamingResponse",
     "RawResource",
     "AsyncRawResource",
     "RawResourceWithRawResponse",
