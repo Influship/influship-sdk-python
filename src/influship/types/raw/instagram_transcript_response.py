@@ -154,8 +154,6 @@ class InstagramTranscriptResponse(BaseModel):
 
     language: str
 
-    post: Post
-
     scraped_at: datetime
 
     shortcode: str
@@ -165,3 +163,5 @@ class InstagramTranscriptResponse(BaseModel):
     word_count: float
 
     duration_seconds: Optional[float] = None
+
+    post: Optional[Post] = None

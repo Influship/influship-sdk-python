@@ -12,7 +12,11 @@ class PostListParams(TypedDict, total=False):
     """Creator ID (use this OR platform+username)"""
 
     cursor: str
-    """Pagination cursor for next page"""
+    """Opaque keyset cursor from next_cursor.
+
+    A cursor is bound to the sort order that produced it; using it with another sort
+    returns 400.
+    """
 
     limit: int
     """Maximum posts to return"""

@@ -11,6 +11,8 @@ from influship import Influship, AsyncInfluship
 from tests.utils import assert_matches_type
 from influship.types.raw import (
     YoutubeSearchResponse,
+    YoutubeGetVideoResponse,
+    YoutubeTypeaheadResponse,
     YoutubeGetChannelResponse,
     YoutubeGetTranscriptResponse,
     YoutubeGetChannelTranscriptsResponse,
@@ -181,6 +183,48 @@ class TestYoutube:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_get_video(self, client: Influship) -> None:
+        youtube = client.raw.youtube.get_video(
+            "dQw4w9WgXcQ",
+        )
+        assert_matches_type(YoutubeGetVideoResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_video(self, client: Influship) -> None:
+        response = client.raw.youtube.with_raw_response.get_video(
+            "dQw4w9WgXcQ",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        youtube = response.parse()
+        assert_matches_type(YoutubeGetVideoResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_video(self, client: Influship) -> None:
+        with client.raw.youtube.with_streaming_response.get_video(
+            "dQw4w9WgXcQ",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            youtube = response.parse()
+            assert_matches_type(YoutubeGetVideoResponse, youtube, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_get_video(self, client: Influship) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `video_id` but received ''"):
+            client.raw.youtube.with_raw_response.get_video(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_search(self, client: Influship) -> None:
         youtube = client.raw.youtube.search(
             q="fitness workout",
@@ -192,9 +236,14 @@ class TestYoutube:
     def test_method_search_with_all_params(self, client: Influship) -> None:
         youtube = client.raw.youtube.search(
             q="fitness workout",
+            content_type="videos",
             country_code="US",
+            cursor="x",
+            duration="long",
             language_code="en",
             limit=20,
+            sort_by="popular",
+            upload_date="this_week",
         )
         assert_matches_type(YoutubeSearchResponse, youtube, path=["response"])
 
@@ -221,6 +270,50 @@ class TestYoutube:
 
             youtube = response.parse()
             assert_matches_type(YoutubeSearchResponse, youtube, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_typeahead(self, client: Influship) -> None:
+        youtube = client.raw.youtube.typeahead(
+            q="x",
+        )
+        assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_typeahead_with_all_params(self, client: Influship) -> None:
+        youtube = client.raw.youtube.typeahead(
+            q="x",
+            country_code="xx",
+            language_code="xx",
+        )
+        assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_typeahead(self, client: Influship) -> None:
+        response = client.raw.youtube.with_raw_response.typeahead(
+            q="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        youtube = response.parse()
+        assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_typeahead(self, client: Influship) -> None:
+        with client.raw.youtube.with_streaming_response.typeahead(
+            q="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            youtube = response.parse()
+            assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -389,6 +482,48 @@ class TestAsyncYoutube:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_get_video(self, async_client: AsyncInfluship) -> None:
+        youtube = await async_client.raw.youtube.get_video(
+            "dQw4w9WgXcQ",
+        )
+        assert_matches_type(YoutubeGetVideoResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_video(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.youtube.with_raw_response.get_video(
+            "dQw4w9WgXcQ",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        youtube = await response.parse()
+        assert_matches_type(YoutubeGetVideoResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_video(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.youtube.with_streaming_response.get_video(
+            "dQw4w9WgXcQ",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            youtube = await response.parse()
+            assert_matches_type(YoutubeGetVideoResponse, youtube, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_get_video(self, async_client: AsyncInfluship) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `video_id` but received ''"):
+            await async_client.raw.youtube.with_raw_response.get_video(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_search(self, async_client: AsyncInfluship) -> None:
         youtube = await async_client.raw.youtube.search(
             q="fitness workout",
@@ -400,9 +535,14 @@ class TestAsyncYoutube:
     async def test_method_search_with_all_params(self, async_client: AsyncInfluship) -> None:
         youtube = await async_client.raw.youtube.search(
             q="fitness workout",
+            content_type="videos",
             country_code="US",
+            cursor="x",
+            duration="long",
             language_code="en",
             limit=20,
+            sort_by="popular",
+            upload_date="this_week",
         )
         assert_matches_type(YoutubeSearchResponse, youtube, path=["response"])
 
@@ -429,5 +569,49 @@ class TestAsyncYoutube:
 
             youtube = await response.parse()
             assert_matches_type(YoutubeSearchResponse, youtube, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_typeahead(self, async_client: AsyncInfluship) -> None:
+        youtube = await async_client.raw.youtube.typeahead(
+            q="x",
+        )
+        assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_typeahead_with_all_params(self, async_client: AsyncInfluship) -> None:
+        youtube = await async_client.raw.youtube.typeahead(
+            q="x",
+            country_code="xx",
+            language_code="xx",
+        )
+        assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_typeahead(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.youtube.with_raw_response.typeahead(
+            q="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        youtube = await response.parse()
+        assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_typeahead(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.youtube.with_streaming_response.typeahead(
+            q="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            youtube = await response.parse()
+            assert_matches_type(YoutubeTypeaheadResponse, youtube, path=["response"])
 
         assert cast(Any, response.is_closed) is True

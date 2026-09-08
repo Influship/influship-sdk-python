@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .tiktok import (
+    TiktokResource,
+    AsyncTiktokResource,
+    TiktokResourceWithRawResponse,
+    AsyncTiktokResourceWithRawResponse,
+    TiktokResourceWithStreamingResponse,
+    AsyncTiktokResourceWithStreamingResponse,
+)
 from .youtube import (
     YoutubeResource,
     AsyncYoutubeResource,
@@ -42,6 +50,14 @@ class RawResource(SyncAPIResource):
         return YoutubeResource(self._client)
 
     @cached_property
+    def tiktok(self) -> TiktokResource:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
+        return TiktokResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> RawResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -77,6 +93,14 @@ class AsyncRawResource(AsyncAPIResource):
         Use when you need the most current information or data for profiles not yet in our database.
         """
         return AsyncYoutubeResource(self._client)
+
+    @cached_property
+    def tiktok(self) -> AsyncTiktokResource:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
+        return AsyncTiktokResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncRawResourceWithRawResponse:
@@ -118,6 +142,14 @@ class RawResourceWithRawResponse:
         """
         return YoutubeResourceWithRawResponse(self._raw.youtube)
 
+    @cached_property
+    def tiktok(self) -> TiktokResourceWithRawResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
+        return TiktokResourceWithRawResponse(self._raw.tiktok)
+
 
 class AsyncRawResourceWithRawResponse:
     def __init__(self, raw: AsyncRawResource) -> None:
@@ -138,6 +170,14 @@ class AsyncRawResourceWithRawResponse:
         Use when you need the most current information or data for profiles not yet in our database.
         """
         return AsyncYoutubeResourceWithRawResponse(self._raw.youtube)
+
+    @cached_property
+    def tiktok(self) -> AsyncTiktokResourceWithRawResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
+        return AsyncTiktokResourceWithRawResponse(self._raw.tiktok)
 
 
 class RawResourceWithStreamingResponse:
@@ -160,6 +200,14 @@ class RawResourceWithStreamingResponse:
         """
         return YoutubeResourceWithStreamingResponse(self._raw.youtube)
 
+    @cached_property
+    def tiktok(self) -> TiktokResourceWithStreamingResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
+        return TiktokResourceWithStreamingResponse(self._raw.tiktok)
+
 
 class AsyncRawResourceWithStreamingResponse:
     def __init__(self, raw: AsyncRawResource) -> None:
@@ -180,3 +228,11 @@ class AsyncRawResourceWithStreamingResponse:
         Use when you need the most current information or data for profiles not yet in our database.
         """
         return AsyncYoutubeResourceWithStreamingResponse(self._raw.youtube)
+
+    @cached_property
+    def tiktok(self) -> AsyncTiktokResourceWithStreamingResponse:
+        """Fetch fresh data directly from social platforms in real-time.
+
+        Use when you need the most current information or data for profiles not yet in our database.
+        """
+        return AsyncTiktokResourceWithStreamingResponse(self._raw.tiktok)

@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from influship.types import CreatorBasic, ProfileSummary
+from influship.types import CreatorBasic, ProfileSummary, RawScraperError
 ```
 
 # Health
@@ -69,6 +69,18 @@ Methods:
 - <code title="get /v1/profiles/{platform}/{username}">client.profiles.<a href="./src/influship/resources/profiles.py">get</a>(username, \*, platform) -> <a href="./src/influship/types/profile_get_response.py">ProfileGetResponse</a></code>
 - <code title="post /v1/profiles/lookup">client.profiles.<a href="./src/influship/resources/profiles.py">lookup</a>(\*\*<a href="src/influship/types/profile_lookup_params.py">params</a>) -> <a href="./src/influship/types/profile_lookup_response.py">ProfileLookupResponse</a></code>
 
+# CreatorEmails
+
+Types:
+
+```python
+from influship.types import CreatorEmailLookupResponse
+```
+
+Methods:
+
+- <code title="post /v1/creator-emails/lookup">client.creator_emails.<a href="./src/influship/resources/creator_emails.py">lookup</a>(\*\*<a href="src/influship/types/creator_email_lookup_params.py">params</a>) -> <a href="./src/influship/types/creator_email_lookup_response.py">CreatorEmailLookupResponse</a></code>
+
 # Posts
 
 Types:
@@ -91,7 +103,6 @@ Types:
 from influship.types.raw import (
     InstagramSinglePostResponse,
     InstagramTranscriptResponse,
-    RawScraperError,
     InstagramGetPostResponse,
     InstagramGetPostsResponse,
     InstagramGetProfileResponse,
@@ -118,7 +129,9 @@ from influship.types.raw import (
     YoutubeGetChannelResponse,
     YoutubeGetChannelTranscriptsResponse,
     YoutubeGetTranscriptResponse,
+    YoutubeGetVideoResponse,
     YoutubeSearchResponse,
+    YoutubeTypeaheadResponse,
 )
 ```
 
@@ -127,4 +140,31 @@ Methods:
 - <code title="get /v1/raw/youtube/channel/{handle}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_channel</a>(handle, \*\*<a href="src/influship/types/raw/youtube_get_channel_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_channel_response.py">YoutubeGetChannelResponse</a></code>
 - <code title="get /v1/raw/youtube/channel-transcripts/{handle}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_channel_transcripts</a>(handle, \*\*<a href="src/influship/types/raw/youtube_get_channel_transcripts_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_channel_transcripts_response.py">YoutubeGetChannelTranscriptsResponse</a></code>
 - <code title="get /v1/raw/youtube/transcript/{video_id}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_transcript</a>(video_id, \*\*<a href="src/influship/types/raw/youtube_get_transcript_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_get_transcript_response.py">YoutubeGetTranscriptResponse</a></code>
+- <code title="get /v1/raw/youtube/video/{video_id}">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">get_video</a>(video_id) -> <a href="./src/influship/types/raw/youtube_get_video_response.py">YoutubeGetVideoResponse</a></code>
 - <code title="get /v1/raw/youtube/search">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">search</a>(\*\*<a href="src/influship/types/raw/youtube_search_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_search_response.py">YoutubeSearchResponse</a></code>
+- <code title="get /v1/raw/youtube/typeahead">client.raw.youtube.<a href="./src/influship/resources/raw/youtube.py">typeahead</a>(\*\*<a href="src/influship/types/raw/youtube_typeahead_params.py">params</a>) -> <a href="./src/influship/types/raw/youtube_typeahead_response.py">YoutubeTypeaheadResponse</a></code>
+
+## Tiktok
+
+Types:
+
+```python
+from influship.types.raw import (
+    Profile,
+    Transcript,
+    Video,
+    TiktokGetProfileResponse,
+    TiktokGetVideoResponse,
+    TiktokGetVideoTranscriptResponse,
+    TiktokListProfileVideosResponse,
+    TiktokListVideoCommentsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/raw/tiktok/profile/{username}">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_profile</a>(username) -> <a href="./src/influship/types/raw/tiktok_get_profile_response.py">TiktokGetProfileResponse</a></code>
+- <code title="get /v1/raw/tiktok/video">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_video</a>(\*\*<a href="src/influship/types/raw/tiktok_get_video_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_video_response.py">TiktokGetVideoResponse</a></code>
+- <code title="get /v1/raw/tiktok/video/transcript">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_video_transcript</a>(\*\*<a href="src/influship/types/raw/tiktok_get_video_transcript_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_video_transcript_response.py">TiktokGetVideoTranscriptResponse</a></code>
+- <code title="get /v1/raw/tiktok/profile/{username}/videos">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_profile_videos</a>(username, \*\*<a href="src/influship/types/raw/tiktok_list_profile_videos_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_profile_videos_response.py">TiktokListProfileVideosResponse</a></code>
+- <code title="get /v1/raw/tiktok/video/comments">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_video_comments</a>(\*\*<a href="src/influship/types/raw/tiktok_list_video_comments_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_video_comments_response.py">TiktokListVideoCommentsResponse</a></code>

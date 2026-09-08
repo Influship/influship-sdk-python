@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PostListResponse", "Location", "Media", "Metrics"]
+__all__ = ["PostListResponse", "Location", "Media", "MediaCarouselItem", "Metrics"]
 
 
 class Location(BaseModel):
@@ -16,20 +16,40 @@ class Location(BaseModel):
     """Location name"""
 
 
+class MediaCarouselItem(BaseModel):
+    index: int
+    """Zero-based position in the carousel."""
+
+    is_video: bool
+    """True if this item is a video."""
+
+    thumbnail_url: Optional[str] = None
+    """Thumbnail URL for this item. Cover frame for videos."""
+
+
 class Media(BaseModel):
     """Post media information"""
 
+    carousel_items: Optional[List[MediaCarouselItem]] = None
+    """Per-item structure for carousel posts.
+
+    Null for non-carousel posts. Per-item video_url is intentionally omitted (would
+    be stale). For fresh video URLs, call GET /v1/raw/instagram/post/{shortcode}.
+    """
+
     duration_seconds: Optional[float] = None
-    """Video duration in seconds"""
+    """Video duration in seconds. Null for non-video posts."""
 
     thumbnail_url: Optional[str] = None
-    """Thumbnail URL"""
+    """Thumbnail URL. For videos, this is the cover frame."""
 
     url: Optional[str] = None
-    """Media URL"""
+    """Cover/primary image URL for image and carousel posts.
 
-    video_url: Optional[str] = None
-    """Video URL (for video content)"""
+    Null for video posts — call GET /v1/raw/instagram/post/{shortcode} for a fresh,
+    downloadable video URL. Note: returned image URLs are Instagram CDN URLs and may
+    expire; a future change will migrate to persistent R2-hosted URLs.
+    """
 
 
 class Metrics(BaseModel):

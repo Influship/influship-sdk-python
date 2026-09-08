@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .shared import CreatorBasic as CreatorBasic, ProfileSummary as ProfileSummary
+from .shared import CreatorBasic as CreatorBasic, ProfileSummary as ProfileSummary, RawScraperError as RawScraperError
 from .match_info import MatchInfo as MatchInfo
 from .profile_growth import ProfileGrowth as ProfileGrowth
 from .profile_metrics import ProfileMetrics as ProfileMetrics
@@ -25,4 +25,6 @@ from .search_retrieve_response import SearchRetrieveResponse as SearchRetrieveRe
 from .creator_retrieve_response import CreatorRetrieveResponse as CreatorRetrieveResponse
 from .creator_lookalike_response import CreatorLookalikeResponse as CreatorLookalikeResponse
 from .creator_autocomplete_params import CreatorAutocompleteParams as CreatorAutocompleteParams
+from .creator_email_lookup_params import CreatorEmailLookupParams as CreatorEmailLookupParams
 from .creator_autocomplete_response import CreatorAutocompleteResponse as CreatorAutocompleteResponse
+from .creator_email_lookup_response import CreatorEmailLookupResponse as CreatorEmailLookupResponse
