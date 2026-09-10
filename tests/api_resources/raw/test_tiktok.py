@@ -10,11 +10,20 @@ import pytest
 from influship import Influship, AsyncInfluship
 from tests.utils import assert_matches_type
 from influship.types.raw import (
+    TiktokGetMusicResponse,
     TiktokGetVideoResponse,
+    TiktokGetVideosResponse,
     TiktokGetProfileResponse,
+    TiktokSearchUsersResponse,
+    TiktokSearchVideosResponse,
+    TiktokListMusicVideosResponse,
+    TiktokGetVideoCaptionsResponse,
+    TiktokListHashtagVideosResponse,
     TiktokListProfileVideosResponse,
     TiktokListVideoCommentsResponse,
     TiktokGetVideoTranscriptResponse,
+    TiktokListCommentRepliesResponse,
+    TiktokGetVideoTranscriptsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -22,6 +31,40 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 class TestTiktok:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_music(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.get_music(
+            music_id="496",
+        )
+        assert_matches_type(TiktokGetMusicResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_music(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.get_music(
+            music_id="496",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokGetMusicResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_music(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.get_music(
+            music_id="496",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokGetMusicResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -110,6 +153,40 @@ class TestTiktok:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_get_video_captions(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.get_video_captions(
+            url="https://example.com",
+        )
+        assert_matches_type(TiktokGetVideoCaptionsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_video_captions(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.get_video_captions(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokGetVideoCaptionsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_video_captions(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.get_video_captions(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokGetVideoCaptionsResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_get_video_transcript(self, client: Influship) -> None:
         tiktok = client.raw.tiktok.get_video_transcript(
             url="https://www.tiktok.com/@creator/video/7517114944362499342",
@@ -139,6 +216,216 @@ class TestTiktok:
 
             tiktok = response.parse()
             assert_matches_type(TiktokGetVideoTranscriptResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_video_transcripts(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.get_video_transcripts(
+            urls=["https://example.com"],
+        )
+        assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_video_transcripts_with_all_params(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.get_video_transcripts(
+            urls=["https://example.com"],
+            mode="auto",
+        )
+        assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_video_transcripts(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.get_video_transcripts(
+            urls=["https://example.com"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_video_transcripts(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.get_video_transcripts(
+            urls=["https://example.com"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_videos(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.get_videos(
+            urls=["https://example.com"],
+        )
+        assert_matches_type(TiktokGetVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_videos(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.get_videos(
+            urls=["https://example.com"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokGetVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_videos(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.get_videos(
+            urls=["https://example.com"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokGetVideosResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_comment_replies(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+        )
+        assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_comment_replies_with_all_params(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+            cursor="x",
+        )
+        assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_comment_replies(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_comment_replies(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_hashtag_videos(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.list_hashtag_videos(
+            hashtag="hashtag",
+        )
+        assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_hashtag_videos_with_all_params(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.list_hashtag_videos(
+            hashtag="hashtag",
+            cursor="x",
+        )
+        assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_hashtag_videos(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.list_hashtag_videos(
+            hashtag="hashtag",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_hashtag_videos(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.list_hashtag_videos(
+            hashtag="hashtag",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_music_videos(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.list_music_videos(
+            music_id="496",
+        )
+        assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_music_videos_with_all_params(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.list_music_videos(
+            music_id="496",
+            cursor="x",
+        )
+        assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_music_videos(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.list_music_videos(
+            music_id="496",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_music_videos(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.list_music_videos(
+            music_id="496",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -238,11 +525,131 @@ class TestTiktok:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_search_users(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.search_users(
+            query="query",
+        )
+        assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_search_users_with_all_params(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.search_users(
+            query="query",
+            cursor="x",
+        )
+        assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_search_users(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.search_users(
+            query="query",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_search_users(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.search_users(
+            query="query",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_search_videos(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.search_videos(
+            query="query",
+        )
+        assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_search_videos_with_all_params(self, client: Influship) -> None:
+        tiktok = client.raw.tiktok.search_videos(
+            query="query",
+            cursor="x",
+        )
+        assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_search_videos(self, client: Influship) -> None:
+        response = client.raw.tiktok.with_raw_response.search_videos(
+            query="query",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = response.parse()
+        assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_search_videos(self, client: Influship) -> None:
+        with client.raw.tiktok.with_streaming_response.search_videos(
+            query="query",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = response.parse()
+            assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncTiktok:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_music(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.get_music(
+            music_id="496",
+        )
+        assert_matches_type(TiktokGetMusicResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_music(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.get_music(
+            music_id="496",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokGetMusicResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_music(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.get_music(
+            music_id="496",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokGetMusicResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -331,6 +738,40 @@ class TestAsyncTiktok:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_get_video_captions(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.get_video_captions(
+            url="https://example.com",
+        )
+        assert_matches_type(TiktokGetVideoCaptionsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_video_captions(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.get_video_captions(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokGetVideoCaptionsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_video_captions(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.get_video_captions(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokGetVideoCaptionsResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_get_video_transcript(self, async_client: AsyncInfluship) -> None:
         tiktok = await async_client.raw.tiktok.get_video_transcript(
             url="https://www.tiktok.com/@creator/video/7517114944362499342",
@@ -360,6 +801,216 @@ class TestAsyncTiktok:
 
             tiktok = await response.parse()
             assert_matches_type(TiktokGetVideoTranscriptResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_video_transcripts(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.get_video_transcripts(
+            urls=["https://example.com"],
+        )
+        assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_video_transcripts_with_all_params(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.get_video_transcripts(
+            urls=["https://example.com"],
+            mode="auto",
+        )
+        assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_video_transcripts(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.get_video_transcripts(
+            urls=["https://example.com"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_video_transcripts(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.get_video_transcripts(
+            urls=["https://example.com"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokGetVideoTranscriptsResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_videos(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.get_videos(
+            urls=["https://example.com"],
+        )
+        assert_matches_type(TiktokGetVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_videos(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.get_videos(
+            urls=["https://example.com"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokGetVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_videos(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.get_videos(
+            urls=["https://example.com"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokGetVideosResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_comment_replies(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+        )
+        assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_comment_replies_with_all_params(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+            cursor="x",
+        )
+        assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_comment_replies(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_comment_replies(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.list_comment_replies(
+            comment_id="7517114944362499343",
+            url="https://www.tiktok.com/@creator/video/7517114944362499342",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokListCommentRepliesResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_hashtag_videos(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.list_hashtag_videos(
+            hashtag="hashtag",
+        )
+        assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_hashtag_videos_with_all_params(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.list_hashtag_videos(
+            hashtag="hashtag",
+            cursor="x",
+        )
+        assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_hashtag_videos(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.list_hashtag_videos(
+            hashtag="hashtag",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_hashtag_videos(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.list_hashtag_videos(
+            hashtag="hashtag",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokListHashtagVideosResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_music_videos(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.list_music_videos(
+            music_id="496",
+        )
+        assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_music_videos_with_all_params(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.list_music_videos(
+            music_id="496",
+            cursor="x",
+        )
+        assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_music_videos(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.list_music_videos(
+            music_id="496",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_music_videos(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.list_music_videos(
+            music_id="496",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokListMusicVideosResponse, tiktok, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -456,5 +1107,91 @@ class TestAsyncTiktok:
 
             tiktok = await response.parse()
             assert_matches_type(TiktokListVideoCommentsResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_search_users(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.search_users(
+            query="query",
+        )
+        assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_search_users_with_all_params(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.search_users(
+            query="query",
+            cursor="x",
+        )
+        assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_search_users(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.search_users(
+            query="query",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_search_users(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.search_users(
+            query="query",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokSearchUsersResponse, tiktok, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_search_videos(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.search_videos(
+            query="query",
+        )
+        assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_search_videos_with_all_params(self, async_client: AsyncInfluship) -> None:
+        tiktok = await async_client.raw.tiktok.search_videos(
+            query="query",
+            cursor="x",
+        )
+        assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_search_videos(self, async_client: AsyncInfluship) -> None:
+        response = await async_client.raw.tiktok.with_raw_response.search_videos(
+            query="query",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        tiktok = await response.parse()
+        assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_search_videos(self, async_client: AsyncInfluship) -> None:
+        async with async_client.raw.tiktok.with_streaming_response.search_videos(
+            query="query",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            tiktok = await response.parse()
+            assert_matches_type(TiktokSearchVideosResponse, tiktok, path=["response"])
 
         assert cast(Any, response.is_closed) is True

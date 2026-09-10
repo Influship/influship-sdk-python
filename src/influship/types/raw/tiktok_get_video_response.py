@@ -1,18 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from datetime import datetime
-
-from .video import Video
 from ..._models import BaseModel
+from .video_response import VideoResponse
 
-__all__ = ["TiktokGetVideoResponse", "Data"]
-
-
-class Data(BaseModel):
-    scraped_at: datetime
-
-    video: Video
+__all__ = ["TiktokGetVideoResponse"]
 
 
 class TiktokGetVideoResponse(BaseModel):
-    data: Data
+    data: VideoResponse

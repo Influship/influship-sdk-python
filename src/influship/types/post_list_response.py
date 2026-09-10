@@ -47,8 +47,8 @@ class Media(BaseModel):
     """Cover/primary image URL for image and carousel posts.
 
     Null for video posts — call GET /v1/raw/instagram/post/{shortcode} for a fresh,
-    downloadable video URL. Note: returned image URLs are Instagram CDN URLs and may
-    expire; a future change will migrate to persistent R2-hosted URLs.
+    downloadable video URL. Returned image URLs may expire; download promptly.
+    Persistent hosted media URLs are on the roadmap.
     """
 
 

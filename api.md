@@ -150,21 +150,43 @@ Types:
 
 ```python
 from influship.types.raw import (
+    BatchFailure,
     Profile,
     Transcript,
+    TranscriptBatchSuccess,
     Video,
+    VideoBatchSuccess,
+    VideoResponse,
+    TiktokGetMusicResponse,
     TiktokGetProfileResponse,
     TiktokGetVideoResponse,
+    TiktokGetVideoCaptionsResponse,
     TiktokGetVideoTranscriptResponse,
+    TiktokGetVideoTranscriptsResponse,
+    TiktokGetVideosResponse,
+    TiktokListCommentRepliesResponse,
+    TiktokListHashtagVideosResponse,
+    TiktokListMusicVideosResponse,
     TiktokListProfileVideosResponse,
     TiktokListVideoCommentsResponse,
+    TiktokSearchUsersResponse,
+    TiktokSearchVideosResponse,
 )
 ```
 
 Methods:
 
+- <code title="get /v1/raw/tiktok/music">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_music</a>(\*\*<a href="src/influship/types/raw/tiktok_get_music_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_music_response.py">TiktokGetMusicResponse</a></code>
 - <code title="get /v1/raw/tiktok/profile/{username}">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_profile</a>(username) -> <a href="./src/influship/types/raw/tiktok_get_profile_response.py">TiktokGetProfileResponse</a></code>
 - <code title="get /v1/raw/tiktok/video">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_video</a>(\*\*<a href="src/influship/types/raw/tiktok_get_video_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_video_response.py">TiktokGetVideoResponse</a></code>
+- <code title="get /v1/raw/tiktok/video/captions">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_video_captions</a>(\*\*<a href="src/influship/types/raw/tiktok_get_video_captions_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_video_captions_response.py">TiktokGetVideoCaptionsResponse</a></code>
 - <code title="get /v1/raw/tiktok/video/transcript">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_video_transcript</a>(\*\*<a href="src/influship/types/raw/tiktok_get_video_transcript_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_video_transcript_response.py">TiktokGetVideoTranscriptResponse</a></code>
+- <code title="post /v1/raw/tiktok/video/transcripts">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_video_transcripts</a>(\*\*<a href="src/influship/types/raw/tiktok_get_video_transcripts_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_video_transcripts_response.py">TiktokGetVideoTranscriptsResponse</a></code>
+- <code title="post /v1/raw/tiktok/videos">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">get_videos</a>(\*\*<a href="src/influship/types/raw/tiktok_get_videos_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_get_videos_response.py">TiktokGetVideosResponse</a></code>
+- <code title="get /v1/raw/tiktok/video/comment/replies">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_comment_replies</a>(\*\*<a href="src/influship/types/raw/tiktok_list_comment_replies_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_comment_replies_response.py">TiktokListCommentRepliesResponse</a></code>
+- <code title="get /v1/raw/tiktok/hashtag/videos">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_hashtag_videos</a>(\*\*<a href="src/influship/types/raw/tiktok_list_hashtag_videos_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_hashtag_videos_response.py">TiktokListHashtagVideosResponse</a></code>
+- <code title="get /v1/raw/tiktok/music/videos">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_music_videos</a>(\*\*<a href="src/influship/types/raw/tiktok_list_music_videos_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_music_videos_response.py">TiktokListMusicVideosResponse</a></code>
 - <code title="get /v1/raw/tiktok/profile/{username}/videos">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_profile_videos</a>(username, \*\*<a href="src/influship/types/raw/tiktok_list_profile_videos_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_profile_videos_response.py">TiktokListProfileVideosResponse</a></code>
 - <code title="get /v1/raw/tiktok/video/comments">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">list_video_comments</a>(\*\*<a href="src/influship/types/raw/tiktok_list_video_comments_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_list_video_comments_response.py">TiktokListVideoCommentsResponse</a></code>
+- <code title="get /v1/raw/tiktok/search/users">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">search_users</a>(\*\*<a href="src/influship/types/raw/tiktok_search_users_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_search_users_response.py">TiktokSearchUsersResponse</a></code>
+- <code title="get /v1/raw/tiktok/search/videos">client.raw.tiktok.<a href="./src/influship/resources/raw/tiktok.py">search_videos</a>(\*\*<a href="src/influship/types/raw/tiktok_search_videos_params.py">params</a>) -> <a href="./src/influship/types/raw/tiktok_search_videos_response.py">TiktokSearchVideosResponse</a></code>
